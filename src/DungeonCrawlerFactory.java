@@ -29,7 +29,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .bbox(new HitBox(BoundingShape.box(48,66)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
-                .with(new HPComponent(100))
+                .with(new HPComponent(30))
                 .with(new PlayerComponent())
                 .build();
     }

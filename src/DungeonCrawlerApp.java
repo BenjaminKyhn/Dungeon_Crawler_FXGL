@@ -405,6 +405,13 @@ public class DungeonCrawlerApp extends GameApplication {
     protected void initUI() {
         var hp = new HPIndicator(player.getComponent(HPComponent.class));
         addUINode(hp);
+
+        var heart = texture("heart.png", 44, 40);
+        var heart2 = texture("heart.png", 44, 40);
+        var heart3 = texture("heart.png", 44, 40);
+        addUINode(heart, 15, 15);
+        addUINode(heart2, 62, 15);
+        addUINode(heart3, 109, 15);
     }
 
     public void onPlayerDied() {
