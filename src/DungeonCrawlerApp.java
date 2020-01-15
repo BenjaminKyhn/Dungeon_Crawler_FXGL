@@ -34,6 +34,14 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     @Override
+    protected void onPreInit() {
+        getSettings().setGlobalSoundVolume(0.2);
+        getSettings().setGlobalMusicVolume(0.2);
+
+        loopBGM("06 Russell Shaw - Storm the Dungeon.mp3");
+    }
+
+    @Override
     protected void initGame() {
         FXGL.getGameWorld().addEntityFactory(new DungeonCrawlerFactory());
         getGameScene().setBackgroundColor(Color.BLACK);
@@ -425,6 +433,15 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.setLevelFromMap("dungeon2.tmx");
         player.setPosition(1600,1600);
         weapon.setPosition(1648,1600);
+        getGameWorld().spawn("enemy", 256, 256);
+        getGameWorld().spawn("goblin", 320, 320);
+        getGameWorld().spawn("enemy", 1472, 256);
+        getGameWorld().spawn("goblin", 1600, 256);
+        getGameWorld().spawn("enemy", 256, 1600);
+        getGameWorld().spawn("goblin", 256, 1728);
+        getGameWorld().spawn("enemy", 1472, 1600);
+        getGameWorld().spawn("goblin", 1600, 1728);
+
     }
 
     public static void main(String[] args) {
