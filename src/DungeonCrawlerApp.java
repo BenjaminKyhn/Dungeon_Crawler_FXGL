@@ -52,24 +52,18 @@ public class DungeonCrawlerApp extends GameApplication {
         //Add all the levels to the Dungeon Level ArrayList
         levels.add(new Level_01());
         levels.add(new Level_02());
-        System.out.println(getCurrentLevel());
 
         FXGL.getGameWorld().addEntityFactory(new DungeonCrawlerFactory());
         getGameScene().setBackgroundColor(Color.BLACK);
-        FXGL.setLevelFromMap("dungeon1.tmx");
+        FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
 
-        player = getGameWorld().spawn("player", 150, 150);
-        weapon = getGameWorld().spawn("weapon", 198, 150);
+        player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+        weapon = getGameWorld().spawn("weapon", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
 
-        getGameWorld().spawn("enemy", 448, 384);
-        getGameWorld().spawn("goblin", 192, 384);
-        getGameWorld().spawn("enemy", 320, 896);
-        getGameWorld().spawn("goblin", 640, 1088);
-        getGameWorld().spawn("goblin", 1152, 1024);
+        getCurrentLevel().spawnEnemies();
 
 //        getGameScene().getViewport().setBounds(-250, 0, 3000, getAppHeight()); //sets a boundary for the camera
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2); //adds a camera and binds it to the player
-
     }
 
     @Override

@@ -26,6 +26,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.PLAYER)
                 .from(data)
+                //TODO: Fix hitboxes for players, weapon and enemies to match the sprites
                 .bbox(new HitBox(BoundingShape.box(48,66)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
