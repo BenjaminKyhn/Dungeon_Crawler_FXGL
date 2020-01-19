@@ -9,6 +9,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DungeonCrawlerApp extends GameApplication {
@@ -22,6 +25,9 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean topWallTouched;
     private boolean rightWallTouched;
     private boolean leftWallTouched;
+    private String level = "level_01";
+    private int levelNumber = 1;
+    private List<DungeonLevel> levels = new ArrayList<>();
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -43,6 +49,11 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        //Add all the levels to the Dungeon Level ArrayList
+        levels.add(new Level_01());
+        levels.add(new Level_02());
+        System.out.println(getCurrentLevel());
+
         FXGL.getGameWorld().addEntityFactory(new DungeonCrawlerFactory());
         getGameScene().setBackgroundColor(Color.BLACK);
         FXGL.setLevelFromMap("dungeon1.tmx");
@@ -146,75 +157,43 @@ public class DungeonCrawlerApp extends GameApplication {
             }
         }, KeyCode.S);
 
-//        FXGL.getInput().addAction(new UserAction("Attack") {
-//            @Override
-//            protected void onActionBegin() {
-//                if (weaponFacingRight && !isAttacking) {
-//                    weapon.getComponent(WeaponComponent.class).attackRight();
-//                    isAttacking = true;
-//                }
-//                if (!weaponFacingRight && !isAttacking) {
-//                    weapon.getComponent(WeaponComponent.class).attackLeft();
-//                    isAttacking = true;
-//                }
-//            }
-//
-//            protected void onActionEnd() {
-//                if (weaponFacingRight) {
-//                    weapon.getComponent(WeaponComponent.class).undoAttackRight();
-//                    isAttacking = false;
-//
-//                }
-//                if (!weaponFacingRight) {
-//                    weapon.getComponent(WeaponComponent.class).undoAttackLeft();
-//                    isAttacking = false;
-//                }
-//            }
-//        }, KeyCode.SPACE);
-//    }
+        FXGL.getInput().addAction(new UserAction("Attack") {
+            @Override
+            protected void onActionBegin() {
+                /** Switch for handling random swing sounds */
+                int randomSwingSound = (int) (Math.random() * 3);
+                switch (randomSwingSound) {
+                    case 0:
+                        play("swing.wav");
+                        break;
+                    case 1:
+                        play("swing2.wav");
+                        break;
+                    case 2:
+                        play("swing3.wav");
+                        break;
+                }
 
-            FXGL.getInput().addAction(new UserAction("Attack") {
-        @Override
-        protected void onActionBegin() {
-            /** Switch for handling random swing sounds */
-            int randomSwingSound = (int)(Math.random()*3);
-            switch (randomSwingSound){
-                case 0: play("swing.wav"); break;
-                case 1: play("swing2.wav"); break;
-                case 2: play("swing3.wav"); break;
+                /** Directional attacking */
+                if (weaponFacingRight && !isAttacking) {
+                    weapon.getComponent(WeaponComponent.class).attackRight();
+                    isAttacking = true;
+                    runOnce(() -> {
+                        weapon.getComponent(WeaponComponent.class).undoAttackRight();
+                        isAttacking = false;
+                    }, Duration.seconds(0.1));
+                }
+                if (!weaponFacingRight && !isAttacking) {
+                    weapon.getComponent(WeaponComponent.class).attackLeft();
+                    isAttacking = true;
+                    runOnce(() -> {
+                        weapon.getComponent(WeaponComponent.class).undoAttackLeft();
+                        isAttacking = false;
+                    }, Duration.seconds(0.1));
+                }
             }
-
-            /** Directional attacking */
-            if (weaponFacingRight && !isAttacking) {
-                weapon.getComponent(WeaponComponent.class).attackRight();
-                isAttacking = true;
-                runOnce(()->{
-                    weapon.getComponent(WeaponComponent.class).undoAttackRight();
-                    isAttacking = false;
-                }, Duration.seconds(0.1));
-            }
-            if (!weaponFacingRight && !isAttacking) {
-                weapon.getComponent(WeaponComponent.class).attackLeft();
-                isAttacking = true;
-                runOnce(()->{
-                    weapon.getComponent(WeaponComponent.class).undoAttackLeft();
-                    isAttacking = false;
-                }, Duration.seconds(0.1));
-            }
-        }
-    }, MouseButton.PRIMARY);
-
-//        FXGL.getInput().addAction(new UserAction("Juggle") {
-//            @Override
-//            protected void onAction() {
-//                if (weaponFacingRight && !isAttacking) {
-//                    weapon.getComponent(WeaponComponent.class).juggle();
-//                }
-//                if (!weaponFacingRight && !isAttacking) {
-//                }
-//            }
-//        }, KeyCode.F);
-}
+        }, MouseButton.PRIMARY);
+    }
 
     public static boolean isMoving() {
         return isMoving;
@@ -380,11 +359,11 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollision(Entity weapon, Entity enemy) {
                 if (isAttacking) {
-                    if (enemy.hasComponent(EnemyComponent.class)){
+                    if (enemy.hasComponent(EnemyComponent.class)) {
                         enemy.getComponent(EnemyComponent.class).onHit();
                     }
 
-                    if (enemy.hasComponent(GoblinComponent.class)){
+                    if (enemy.hasComponent(GoblinComponent.class)) {
                         enemy.getComponent(GoblinComponent.class).onHit();
 
                     }
@@ -409,10 +388,50 @@ public class DungeonCrawlerApp extends GameApplication {
         var heart = texture("heart.png", 44, 40);
         var heart2 = texture("heart.png", 44, 40);
         var heart3 = texture("heart.png", 44, 40);
+
         addUINode(heart, 15, 15);
         addUINode(heart2, 62, 15);
         addUINode(heart3, 109, 15);
+
+        if (player.getComponent(PlayerComponent.class).getHp() < 20) {
+            heart = texture("heart.png", 44, 40);
+            heart2 = texture("heart_empty.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
+        }
+
+        if (player.getComponent(PlayerComponent.class).getHp() < 30) {
+            heart = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
+        }
+
+        if (player.getComponent(PlayerComponent.class).getHp() > 29) {
+            heart = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
+        }
     }
+
+//    @Override
+//    protected void onUpdate(double tpf) {
+//        if (player.getComponent(PlayerComponent.class).getHp() < 20){
+//            heart = texture("heart.png", 44, 40);
+//            heart2 = texture("heart_empty.png", 44, 40);
+//            heart3 = texture("heart_empty.png", 44, 40);
+//        }
+//
+//        if (player.getComponent(PlayerComponent.class).getHp() < 30){
+//            heart = texture("heart.png", 44, 40);
+//            heart2 = texture("heart.png", 44, 40);
+//            heart3 = texture("heart_empty.png", 44, 40);
+//        }
+//
+//        if (player.getComponent(PlayerComponent.class).getHp() > 29){
+//            heart = texture("heart.png", 44, 40);
+//            heart2 = texture("heart.png", 44, 40);
+//            heart3 = texture("heart.png", 44, 40);
+//        }
+//    }
 
     public void onPlayerDied() {
         getDisplay().showMessageBox("YOU DIED", () -> {
@@ -434,21 +453,36 @@ public class DungeonCrawlerApp extends GameApplication {
         }
     }
 
-    private void nextLevel() {
+//    private void nextLevel() {
+//        player.setZ(Integer.MAX_VALUE);
+//        weapon.setZ(Integer.MAX_VALUE);
+//        FXGL.setLevelFromMap("dungeon2.tmx");
+//        player.setPosition(1600, 1600);
+//        weapon.setPosition(1648, 1600);
+//        getGameWorld().spawn("enemy", 256, 256);
+//        getGameWorld().spawn("goblin", 320, 320);
+//        getGameWorld().spawn("enemy", 1472, 256);
+//        getGameWorld().spawn("goblin", 1600, 256);
+//        getGameWorld().spawn("enemy", 256, 1600);
+//        getGameWorld().spawn("goblin", 256, 1728);
+//        getGameWorld().spawn("enemy", 1472, 1600);
+//        getGameWorld().spawn("goblin", 1600, 1728);
+//    }
+
+    private DungeonLevel getCurrentLevel() {
+        return levels.get(levelNumber - 1); //right now we don't have level 1
+    }
+
+    public void nextLevel() {
+        levelNumber += 1;
+        //Add above line after creating class Level_01
+        //TODO: add method for removing enemies from world (and setting enemy.dead = true)
         player.setZ(Integer.MAX_VALUE);
         weapon.setZ(Integer.MAX_VALUE);
-        FXGL.setLevelFromMap("dungeon2.tmx");
-        player.setPosition(1600,1600);
-        weapon.setPosition(1648,1600);
-        getGameWorld().spawn("enemy", 256, 256);
-        getGameWorld().spawn("goblin", 320, 320);
-        getGameWorld().spawn("enemy", 1472, 256);
-        getGameWorld().spawn("goblin", 1600, 256);
-        getGameWorld().spawn("enemy", 256, 1600);
-        getGameWorld().spawn("goblin", 256, 1728);
-        getGameWorld().spawn("enemy", 1472, 1600);
-        getGameWorld().spawn("goblin", 1600, 1728);
-
+        player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+        weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+        FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
+        getCurrentLevel().spawnEnemies();
     }
 
     public static void main(String[] args) {

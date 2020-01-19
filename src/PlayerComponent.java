@@ -104,4 +104,8 @@ public class PlayerComponent extends Component {
     public void restoreHP() {
         hp.setValue(hp.getMaxHP());
     }
+
+    public int getHp() {
+        return hp.getValue();
+    }
 }
