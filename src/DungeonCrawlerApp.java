@@ -49,19 +49,23 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        //Add all the levels to the Dungeon Level ArrayList
+        /** Add all the levels to the Dungeon Level ArrayList */
         levels.add(new Level_01());
         levels.add(new Level_02());
 
+        /** Load map */
         FXGL.getGameWorld().addEntityFactory(new DungeonCrawlerFactory());
         getGameScene().setBackgroundColor(Color.BLACK);
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
 
+        /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
         weapon = getGameWorld().spawn("weapon", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
 
+        /** Spawn initial enemies */
         getCurrentLevel().spawnEnemies();
 
+        /** Add a camera that follows the player */
 //        getGameScene().getViewport().setBounds(-250, 0, 3000, getAppHeight()); //sets a boundary for the camera
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2); //adds a camera and binds it to the player
     }
@@ -71,10 +75,6 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Left") {
             @Override
             protected void onActionBegin() {
-//                if (isAttacking && weaponFacingRight){
-//                    weapon.getComponent(WeaponComponent.class).undoAttackRight();
-//                    weapon.getComponent(WeaponComponent.class).attackLeft();
-//                }
                 if (weaponFacingRight) {
                     weapon.getComponent(WeaponComponent.class).faceLeft();
                     weaponFacingRight = false;
@@ -97,10 +97,6 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Right") {
             @Override
             protected void onActionBegin() {
-//                if (isAttacking && !weaponFacingRight){
-//                    weapon.getComponent(WeaponComponent.class).undoAttackLeft();
-//                    weapon.getComponent(WeaponComponent.class).attackRight();
-//                }
                 if (!weaponFacingRight) {
                     weapon.getComponent(WeaponComponent.class).faceRight();
                     weaponFacingRight = true;
