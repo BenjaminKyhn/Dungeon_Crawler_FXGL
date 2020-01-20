@@ -27,6 +27,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean rightWallTouched;
     private boolean leftWallTouched;
     private boolean doorTouched;
+    private boolean doorOpened;
     private String level = "level_01";
     private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
@@ -71,6 +72,11 @@ public class DungeonCrawlerApp extends GameApplication {
         /** Add a camera that follows the player */
 //        getGameScene().getViewport().setBounds(-250, 0, 3000, getAppHeight()); //sets a boundary for the camera
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0); //adds a camera and binds it to the player
+    }
+
+    @Override
+    public void onUpdate(double tpf) {
+        openDoor();
     }
 
     @Override
@@ -465,22 +471,6 @@ public class DungeonCrawlerApp extends GameApplication {
         }
     }
 
-//    private void nextLevel() {
-//        player.setZ(Integer.MAX_VALUE);
-//        weapon.setZ(Integer.MAX_VALUE);
-//        FXGL.setLevelFromMap("dungeon2.tmx");
-//        player.setPosition(1600, 1600);
-//        weapon.setPosition(1648, 1600);
-//        getGameWorld().spawn("enemy", 256, 256);
-//        getGameWorld().spawn("goblin", 320, 320);
-//        getGameWorld().spawn("enemy", 1472, 256);
-//        getGameWorld().spawn("goblin", 1600, 256);
-//        getGameWorld().spawn("enemy", 256, 1600);
-//        getGameWorld().spawn("goblin", 256, 1728);
-//        getGameWorld().spawn("enemy", 1472, 1600);
-//        getGameWorld().spawn("goblin", 1600, 1728);
-//    }
-
     private DungeonLevel getCurrentLevel() {
         return levels.get(levelNumber - 1); //right now we don't have level 1
     }
@@ -491,6 +481,14 @@ public class DungeonCrawlerApp extends GameApplication {
 
     private void despawnMobs(){
         getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY);
+    }
+
+    private void openDoor() {
+        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened){
+//            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
+            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
+            doorOpened = true;
+        }
     }
 
     private void cleanupLevel() {
