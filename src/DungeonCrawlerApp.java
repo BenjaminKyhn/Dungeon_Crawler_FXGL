@@ -77,14 +77,14 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Left") {
             @Override
             protected void onActionBegin() {
-                if (weaponFacingRight) {
+                if (weaponFacingRight && !levelComplete) {
                     weapon.getComponent(WeaponComponent.class).faceLeft();
                     weaponFacingRight = false;
                 }
             }
 
             protected void onAction() {
-                if (leftWallTouched) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (leftWallTouched || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).left();
                 weapon.getComponent(WeaponComponent.class).left();
@@ -99,14 +99,14 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Right") {
             @Override
             protected void onActionBegin() {
-                if (!weaponFacingRight) {
+                if (!weaponFacingRight && !levelComplete) {
                     weapon.getComponent(WeaponComponent.class).faceRight();
                     weaponFacingRight = true;
                 }
             }
 
             protected void onAction() {
-                if (rightWallTouched) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (rightWallTouched || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
 
                 player.getComponent(PlayerComponent.class).right();
@@ -122,7 +122,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Up") {
             @Override
             protected void onAction() {
-                if (topWallTouched) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (topWallTouched  || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).up();
                 weapon.getComponent(WeaponComponent.class).up();
@@ -137,7 +137,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Down") {
             @Override
             protected void onAction() {
-                if (bottomWallTouched) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (bottomWallTouched  || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).down();
                 weapon.getComponent(WeaponComponent.class).down();
@@ -152,36 +152,38 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Attack") {
             @Override
             protected void onActionBegin() {
-                /** Switch for handling random swing sounds */
-                int randomSwingSound = (int) (Math.random() * 3);
-                switch (randomSwingSound) {
-                    case 0:
-                        play("swing.wav");
-                        break;
-                    case 1:
-                        play("swing2.wav");
-                        break;
-                    case 2:
-                        play("swing3.wav");
-                        break;
-                }
+                if (!levelComplete){
+                    /** Switch for handling random swing sounds */
+                    int randomSwingSound = (int) (Math.random() * 3);
+                    switch (randomSwingSound) {
+                        case 0:
+                            play("swing.wav");
+                            break;
+                        case 1:
+                            play("swing2.wav");
+                            break;
+                        case 2:
+                            play("swing3.wav");
+                            break;
+                    }
 
-                /** Directional attacking */
-                if (weaponFacingRight && !isAttacking) {
-                    weapon.getComponent(WeaponComponent.class).attackRight();
-                    isAttacking = true;
-                    runOnce(() -> {
-                        weapon.getComponent(WeaponComponent.class).undoAttackRight();
-                        isAttacking = false;
-                    }, Duration.seconds(0.1));
-                }
-                if (!weaponFacingRight && !isAttacking) {
-                    weapon.getComponent(WeaponComponent.class).attackLeft();
-                    isAttacking = true;
-                    runOnce(() -> {
-                        weapon.getComponent(WeaponComponent.class).undoAttackLeft();
-                        isAttacking = false;
-                    }, Duration.seconds(0.1));
+                    /** Directional attacking */
+                    if (weaponFacingRight && !isAttacking) {
+                        weapon.getComponent(WeaponComponent.class).attackRight();
+                        isAttacking = true;
+                        runOnce(() -> {
+                            weapon.getComponent(WeaponComponent.class).undoAttackRight();
+                            isAttacking = false;
+                        }, Duration.seconds(0.1));
+                    }
+                    if (!weaponFacingRight && !isAttacking) {
+                        weapon.getComponent(WeaponComponent.class).attackLeft();
+                        isAttacking = true;
+                        runOnce(() -> {
+                            weapon.getComponent(WeaponComponent.class).undoAttackLeft();
+                            isAttacking = false;
+                        }, Duration.seconds(0.1));
+                    }
                 }
             }
         }, MouseButton.PRIMARY);
