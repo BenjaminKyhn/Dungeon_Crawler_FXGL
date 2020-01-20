@@ -47,7 +47,7 @@ public class GoblinComponent extends Component{
         /**
          * Target the player
          */
-        if (moveTimer.elapsed(Duration.seconds(1.5)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY())) {
+        if (moveTimer.elapsed(Duration.seconds(1.5)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead) right();
@@ -60,7 +60,7 @@ public class GoblinComponent extends Component{
             }, Duration.seconds(1));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1.5)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY())) {
+        if (moveTimer.elapsed(Duration.seconds(1.5)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead) left();
@@ -73,7 +73,7 @@ public class GoblinComponent extends Component{
             }, Duration.seconds(1));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1.5)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX())) {
+        if (moveTimer.elapsed(Duration.seconds(1.5)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead) up();
@@ -86,7 +86,7 @@ public class GoblinComponent extends Component{
             }, Duration.seconds(1));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1.5)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX())) {
+        if (moveTimer.elapsed(Duration.seconds(1.5)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead) down();
@@ -100,7 +100,7 @@ public class GoblinComponent extends Component{
         }
 
         /** Random movement when outside of aggro range */
-        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640)){
+        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.levelComplete){
             int randomMovement = (int) (Math.random() * 4);
             switch (randomMovement) {
                 case 0:

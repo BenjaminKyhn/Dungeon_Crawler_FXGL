@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DungeonCrawlerFactory implements EntityFactory {
@@ -119,17 +121,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
     public Entity neBottomwWall(SpawnData data){
         return entityBuilder()
                 .type(DungeonCrawlerType.BOTTOMWALL)
-                .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
-                .with(new PhysicsComponent())
-                .with(new CollidableComponent(true))
-                .build();
-    }
-
-    @Spawns("pillar")
-    public Entity newPillar(SpawnData data){
-        return entityBuilder()
-                .type(DungeonCrawlerType.PILLAR)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())

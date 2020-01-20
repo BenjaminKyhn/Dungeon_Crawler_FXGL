@@ -4,6 +4,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -28,6 +29,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private String level = "level_01";
     private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
+    public static boolean levelComplete = false;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -365,7 +367,13 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.STAIRS) {
             @Override
             protected void onCollision(Entity player, Entity stairs) {
-                nextLevel();
+                if (!levelComplete){
+                    levelComplete = true;
+//                    System.out.println(levelComplete);
+//                    levelNumber++;
+                    runOnce(() -> {cleanupLevel(); nextLevel();
+                    }, Duration.seconds(2));
+                }
             }
         });
     }
@@ -463,10 +471,32 @@ public class DungeonCrawlerApp extends GameApplication {
         return levels.get(levelNumber - 1); //right now we don't have level 1
     }
 
+    public boolean isLevelComplete() {
+        return levelComplete;
+    }
+
+    private void despawnMobs(){
+        getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY);
+    }
+
+    private void cleanupLevel() {
+        getGameWorld().getEntitiesByType(
+                DungeonCrawlerType.ENEMY,
+                DungeonCrawlerType.STAIRS,
+                DungeonCrawlerType.DOOR,
+                DungeonCrawlerType.RIGHTWALL,
+                DungeonCrawlerType.LEFTWALL,
+                DungeonCrawlerType.TOPWALL,
+                DungeonCrawlerType.BOTTOMWALL,
+                DungeonCrawlerType.HPFOUNTAIN,
+                DungeonCrawlerType.MPFOUNTAIN)
+                .forEach(Entity::removeFromWorld);
+
+        levelComplete = false;
+    }
+
     public void nextLevel() {
         levelNumber += 1;
-        //Add above line after creating class Level_01
-        //TODO: add method for removing enemies from world (and setting enemy.dead = true)
         player.setZ(Integer.MAX_VALUE);
         weapon.setZ(Integer.MAX_VALUE);
         player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
