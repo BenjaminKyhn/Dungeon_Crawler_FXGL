@@ -70,7 +70,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Add a camera that follows the player */
 //        getGameScene().getViewport().setBounds(-250, 0, 3000, getAppHeight()); //sets a boundary for the camera
-        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2); //adds a camera and binds it to the player
+        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0); //adds a camera and binds it to the player
     }
 
     @Override
