@@ -207,7 +207,7 @@ public class EnemyComponent extends Component {
 
             double zeroOpacity = 0.2;
             double fullOpacity = 0.0;
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 runOnce(() -> {
                     entity.getViewComponent().setOpacity(0.0);
                 }, Duration.seconds(fullOpacity));
@@ -224,7 +224,7 @@ public class EnemyComponent extends Component {
         /** Damage time 1 sec */
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(1));
+        }, Duration.seconds(0.6));
 
         /** When mob is dead */
         if (hp.getValue() == 0) {
