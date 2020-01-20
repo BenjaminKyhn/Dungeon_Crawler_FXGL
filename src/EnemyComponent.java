@@ -43,7 +43,6 @@ public class EnemyComponent extends Component {
         entity.getViewComponent().addChild(texture);
     }
 
-
     @Override
     public void onUpdate(double tpf) {
         /**

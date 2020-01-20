@@ -26,6 +26,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean topWallTouched;
     private boolean rightWallTouched;
     private boolean leftWallTouched;
+    private boolean doorTouched;
     private String level = "level_01";
     private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
@@ -122,7 +123,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Up") {
             @Override
             protected void onAction() {
-                if (topWallTouched  || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (topWallTouched || doorTouched || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).up();
                 weapon.getComponent(WeaponComponent.class).up();
@@ -245,6 +246,19 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollisionEnd(Entity player, Entity wall) {
                 bottomWallTouched = false;
+            }
+        });
+
+        /** Adds unitCollision to door and player unit. The door is treated functionally like a top wall*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.DOOR) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity door) {
+                doorTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity door) {
+                doorTouched = false;
             }
         });
 
@@ -371,8 +385,6 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity stairs) {
                 if (!levelComplete){
                     levelComplete = true;
-//                    System.out.println(levelComplete);
-//                    levelNumber++;
                     runOnce(() -> {cleanupLevel(); nextLevel();
                     }, Duration.seconds(2));
                 }

@@ -143,7 +143,8 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.DOOR)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .viewWithBBox(texture("door.png"))
+//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new CollidableComponent(true))
                 .build();
     }
