@@ -63,4 +63,36 @@ public class Level_02 extends DungeonLevel {
         getGameWorld().spawn("enemy", 1472, 1600);
         getGameWorld().spawn("goblin", 1600, 1728);
     }
+
+    public void spawnGoblins(){
+        getGameWorld().spawn("goblin", 768, 768);
+        getGameWorld().spawn("goblin", 896, 758);
+        getGameWorld().spawn("goblin", 1024, 768);
+        getGameWorld().spawn("goblin", 1152, 768);
+        getGameWorld().spawn("goblin", 768, 896);
+        getGameWorld().spawn("goblin", 896, 896);
+        getGameWorld().spawn("goblin", 1024, 896);
+        getGameWorld().spawn("goblin", 1152, 896);
+        getGameWorld().spawn("goblin", 768, 1024);
+        getGameWorld().spawn("goblin", 896, 1024);
+        getGameWorld().spawn("goblin", 1024, 1024);
+        getGameWorld().spawn("goblin", 1152, 1024);
+        getGameWorld().spawn("goblin", 768, 1152);
+        getGameWorld().spawn("goblin", 896, 1152);
+        getGameWorld().spawn("goblin", 1024, 1152);
+        getGameWorld().spawn("goblin", 1152, 1152);
+
+        getGameWorld().spawn("goblin", 832, 832);
+        getGameWorld().spawn("goblin", 964, 832);
+        getGameWorld().spawn("goblin", 1088, 832);
+        getGameWorld().spawn("goblin", 1216, 832);
+        getGameWorld().spawn("goblin", 832, 964);
+        getGameWorld().spawn("goblin", 964, 964);
+        getGameWorld().spawn("goblin", 1088, 964);
+        getGameWorld().spawn("goblin", 1216, 964);
+        getGameWorld().spawn("goblin", 832, 1088);
+        getGameWorld().spawn("goblin", 964, 1088);
+        getGameWorld().spawn("goblin", 1088, 1088);
+        getGameWorld().spawn("goblin", 1216, 1088);
+    }
 }

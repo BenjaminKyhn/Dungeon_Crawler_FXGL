@@ -29,7 +29,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private String level = "level_01";
-    private int levelNumber = 1;
+    private int levelNumber = 2;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
 
@@ -483,8 +483,10 @@ public class DungeonCrawlerApp extends GameApplication {
         if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened){
 //            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
             getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
-            play("dooropen.wav");
+            play("dooropen2.wav");
             doorOpened = true;
+            Level_02 level_02 = new Level_02();
+            level_02.spawnGoblins();
         }
     }
 
