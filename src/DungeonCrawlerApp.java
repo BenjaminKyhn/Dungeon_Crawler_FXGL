@@ -460,8 +460,8 @@ public class DungeonCrawlerApp extends GameApplication {
 
     private void respawn() {
         if (player != null) {
-            player.setPosition(150, 150);
-            weapon.setPosition(198, 150);
+            player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+            weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
             player.getComponent(PlayerComponent.class).restoreHP();
         }
         if (!weaponFacingRight) {
@@ -479,14 +479,11 @@ public class DungeonCrawlerApp extends GameApplication {
         return levelComplete;
     }
 
-    private void despawnMobs(){
-        getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY);
-    }
-
     private void openDoor() {
         if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened){
 //            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
             getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
+            play("dooropen.wav");
             doorOpened = true;
         }
     }
