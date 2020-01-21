@@ -29,7 +29,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
-    private int levelNumber = 2;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
 
@@ -56,6 +56,7 @@ public class DungeonCrawlerApp extends GameApplication {
         /** Add all the levels to the Dungeon Level ArrayList */
         levels.add(new Level_01());
         levels.add(new Level_02());
+        levels.add(new Level_03());
 
         /** Load map */
         FXGL.getGameWorld().addEntityFactory(new DungeonCrawlerFactory());
@@ -482,15 +483,15 @@ public class DungeonCrawlerApp extends GameApplication {
 
     private void showStairs() {
         if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && doorOpened && !stairsDiscovered){
-                getGameWorld().spawn("stairs", 832, 832);
+                getGameWorld().spawn("stairs", 1216, 704);
                 stairsDiscovered = true;
         }
     }
 
     private void openDoor() {
-        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened){
-//            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
-            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
+        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened && getCurrentLevel().equals(levels.get(1))){
+            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
+//            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
             play("dooropen2.wav");
             doorOpened = true;
             Level_02 level_02 = new Level_02();
@@ -511,6 +512,8 @@ public class DungeonCrawlerApp extends GameApplication {
                 DungeonCrawlerType.MPFOUNTAIN)
                 .forEach(Entity::removeFromWorld);
 
+        doorOpened = false;
+        stairsDiscovered = false;
         levelComplete = false;
     }
 
