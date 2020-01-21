@@ -28,7 +28,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean leftWallTouched;
     private boolean doorTouched;
     private boolean doorOpened;
-    private String level = "level_01";
+    private boolean stairsDiscovered;
     private int levelNumber = 2;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
@@ -77,6 +77,7 @@ public class DungeonCrawlerApp extends GameApplication {
     @Override
     public void onUpdate(double tpf) {
         openDoor();
+        showStairs();
     }
 
     @Override
@@ -477,6 +478,13 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public boolean isLevelComplete() {
         return levelComplete;
+    }
+
+    private void showStairs() {
+        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && doorOpened && !stairsDiscovered){
+                getGameWorld().spawn("stairs", 832, 832);
+                stairsDiscovered = true;
+        }
     }
 
     private void openDoor() {

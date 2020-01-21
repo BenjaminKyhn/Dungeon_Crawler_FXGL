@@ -133,7 +133,9 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.STAIRS)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .viewWithBBox(texture("stairs.png"))
+//                .bbox(new HitBox(BoundingShape.box(64,64)))
+//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new CollidableComponent(true))
                 .build();
     }
@@ -144,7 +146,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .type(DungeonCrawlerType.DOOR)
                 .from(data)
                 .viewWithBBox(texture("door.png"))
-//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new CollidableComponent(true))
                 .build();
     }
