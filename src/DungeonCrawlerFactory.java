@@ -98,13 +98,13 @@ public class DungeonCrawlerFactory implements EntityFactory {
 
     @Spawns("button")
     public Entity newButton(SpawnData data) {
-        var keyEntity = FXGL.getGameWorld().create("keyCode", new SpawnData(data.getX(), data.getY() - 50).put("key", "E"));
+        var keyEntity = FXGL.getGameWorld().create("keyCode", new SpawnData(data.getX() + 20, data.getY() + 20).put("key", "E"));
         keyEntity.getViewComponent().opacityProperty().setValue(0);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.BUTTON)
                 .from(data)
-                .viewWithBBox(new Rectangle(20, 20, Color.GREEN))
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new CollidableComponent(true))
                 .with("keyEntity", keyEntity)
                 .build();

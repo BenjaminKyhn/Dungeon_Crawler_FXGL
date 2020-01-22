@@ -1,7 +1,10 @@
+import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.SpawnData;
+import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import javafx.geometry.Rectangle2D;
@@ -91,6 +94,7 @@ public class DungeonCrawlerApp extends GameApplication {
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
                             player.getComponent(PlayerComponent.class).restoreHP();
+                            play("SP_HEAL.wav");
                         });
             }
         }, KeyCode.E);
@@ -410,6 +414,37 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
             }
         });
+
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity btn){
+                Entity keyEntity = btn.getObject("keyEntity");
+
+                if (!keyEntity.isActive()){
+                    getGameWorld().addEntity(keyEntity);
+                }
+
+                keyEntity.getViewComponent().opacityProperty().setValue(1);
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity btn){
+                Entity keyEntity = btn.getObject("keyEntity");
+
+                keyEntity.getViewComponent().opacityProperty().setValue(0);
+            }
+        });
+
+//        onCollisionBegin(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON, (player, prompt) -> {
+//            String key = prompt.getString("key");
+//
+//            var entity = getGameWorld().create("keyCode", new SpawnData(prompt.getX(), prompt.getY()).put("key", key));
+//            spawnWithScale(entity, Duration.seconds(1), Interpolators.ELASTIC.EASE_OUT());
+//
+//            runOnce(() -> {
+//                despawnWithScale(entity, Duration.seconds(1), Interpolators.ELASTIC.EASE_IN());
+//            }, Duration.seconds(2.5));
+//        });
     }
 
     @Override
