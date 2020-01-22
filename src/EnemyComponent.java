@@ -27,10 +27,10 @@ public class EnemyComponent extends Component {
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
     public EnemyComponent() {
-        Image image = image("enemy2times.png");
+        Image image = image("enemy3times.png");
 
-        animIdle = new AnimationChannel(image, 8, 64, 64, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 64, 64, Duration.seconds(1), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
