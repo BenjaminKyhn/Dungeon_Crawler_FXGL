@@ -220,7 +220,7 @@ public class EnemyComponent extends Component {
 
         isBeingDamaged = true;
 
-        /** Damage time 1 sec */
+        /** Damage time 0.6 sec */
         runOnce(() -> {
             isBeingDamaged = false;
         }, Duration.seconds(0.6));

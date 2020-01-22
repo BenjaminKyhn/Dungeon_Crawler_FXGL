@@ -7,6 +7,7 @@ import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -44,6 +45,8 @@ public class DungeonCrawlerApp extends GameApplication {
         gameSettings.setVersion("0.1");
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
+//        gameSettings.setMenuEnabled(true);
+        gameSettings.setDeveloperMenuEnabled(true);
     }
 
     @Override
@@ -82,6 +85,24 @@ public class DungeonCrawlerApp extends GameApplication {
     public void onUpdate(double tpf) {
         openDoor();
         showStairs();
+        updateUI();
+    }
+
+    private void updateUI() {
+        if (player.getComponent(PlayerComponent.class).getHp() < 20) {
+            heart2 = texture("heart_empty.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart2, 109, 15);
+        } else if (player.getComponent(PlayerComponent.class).getHp() < 30) {
+            heart = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart3, 109, 15);
+        } else if (player.getComponent(PlayerComponent.class).getHp() > 29) {
+            heart = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
+        }
     }
 
     @Override
@@ -162,7 +183,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Down") {
             @Override
             protected void onAction() {
-                if (bottomWallTouched  || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (bottomWallTouched || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).down();
                 weapon.getComponent(WeaponComponent.class).down();
@@ -177,7 +198,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Attack") {
             @Override
             protected void onActionBegin() {
-                if (!levelComplete){
+                if (!levelComplete) {
                     /** Switch for handling random swing sounds */
                     int randomSwingSound = (int) (Math.random() * 3);
                     switch (randomSwingSound) {
@@ -407,9 +428,11 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.STAIRS) {
             @Override
             protected void onCollision(Entity player, Entity stairs) {
-                if (!levelComplete){
+                if (!levelComplete) {
                     levelComplete = true;
-                    runOnce(() -> {cleanupLevel(); nextLevel();
+                    runOnce(() -> {
+                        cleanupLevel();
+                        nextLevel();
                     }, Duration.seconds(2));
                 }
             }
@@ -417,10 +440,10 @@ public class DungeonCrawlerApp extends GameApplication {
 
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON) {
             @Override
-            protected void onCollisionBegin(Entity player, Entity btn){
+            protected void onCollisionBegin(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");
 
-                if (!keyEntity.isActive()){
+                if (!keyEntity.isActive()) {
                     getGameWorld().addEntity(keyEntity);
                 }
 
@@ -428,7 +451,7 @@ public class DungeonCrawlerApp extends GameApplication {
             }
 
             @Override
-            protected void onCollisionEnd(Entity player, Entity btn){
+            protected void onCollisionEnd(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");
 
                 keyEntity.getViewComponent().opacityProperty().setValue(0);
@@ -447,36 +470,22 @@ public class DungeonCrawlerApp extends GameApplication {
 //        });
     }
 
+    Texture heart;
+    Texture heart2;
+    Texture heart3;
+
     @Override
     protected void initUI() {
-        var hp = new HPIndicator(player.getComponent(HPComponent.class));
+        HPIndicator hp = new HPIndicator(player.getComponent(HPComponent.class));
         addUINode(hp);
 
-        var heart = texture("heart.png", 44, 40);
-        var heart2 = texture("heart.png", 44, 40);
-        var heart3 = texture("heart.png", 44, 40);
+        heart = texture("heart.png", 44, 40);
+        heart2 = texture("heart.png", 44, 40);
+        heart3 = texture("heart.png", 44, 40);
 
         addUINode(heart, 15, 15);
         addUINode(heart2, 62, 15);
         addUINode(heart3, 109, 15);
-
-        if (player.getComponent(PlayerComponent.class).getHp() < 20) {
-            heart = texture("heart.png", 44, 40);
-            heart2 = texture("heart_empty.png", 44, 40);
-            heart3 = texture("heart_empty.png", 44, 40);
-        }
-
-        if (player.getComponent(PlayerComponent.class).getHp() < 30) {
-            heart = texture("heart.png", 44, 40);
-            heart2 = texture("heart.png", 44, 40);
-            heart3 = texture("heart_empty.png", 44, 40);
-        }
-
-        if (player.getComponent(PlayerComponent.class).getHp() > 29) {
-            heart = texture("heart.png", 44, 40);
-            heart2 = texture("heart.png", 44, 40);
-            heart3 = texture("heart.png", 44, 40);
-        }
     }
 
 //    @Override
@@ -529,14 +538,14 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     private void showStairs() {
-        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && doorOpened && !stairsDiscovered){
-                getGameWorld().spawn("stairs", 1216, 704);
-                stairsDiscovered = true;
+        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && doorOpened && !stairsDiscovered) {
+            getGameWorld().spawn("stairs", 1216, 704);
+            stairsDiscovered = true;
         }
     }
 
     private void openDoor() {
-        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened && getCurrentLevel().equals(levels.get(1))){
+        if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened && getCurrentLevel().equals(levels.get(1))) {
             getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
 //            getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).get(0).removeFromWorld();
             play("dooropen2.wav");
