@@ -83,6 +83,18 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initInput() {
+        FXGL.getInput().addAction(new UserAction("Use") {
+            @Override
+            protected void onActionBegin() {
+                getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
+                        .stream()
+                        .filter(btn -> player.isColliding(btn))
+                        .forEach(btn -> {
+                            player.getComponent(PlayerComponent.class).restoreHP();
+                        });
+            }
+        }, KeyCode.E);
+
         FXGL.getInput().addAction(new UserAction("Left") {
             @Override
             protected void onActionBegin() {
