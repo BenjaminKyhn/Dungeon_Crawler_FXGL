@@ -29,7 +29,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
-    private int levelNumber = 3;
+    private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
 

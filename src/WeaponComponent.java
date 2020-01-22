@@ -45,12 +45,12 @@ public class WeaponComponent extends Component {
 
     public void faceLeft(){
         getEntity().setScaleX(-1); //Changes the direction of the sprite
-        entity.translateX(-96);
+        entity.translateX(-114);
     }
 
     public void faceRight(){
         getEntity().setScaleX(1); //Changes the direction of the sprite
-        entity.translateX(96);
+        entity.translateX(114);
     }
 
     public void attackRight(){

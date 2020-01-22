@@ -21,7 +21,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class DungeonCrawlerFactory implements EntityFactory {
 
     @Spawns("player")
-    public Entity newPlayer(SpawnData data){
+    public Entity newPlayer(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
@@ -29,7 +29,8 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .type(DungeonCrawlerType.PLAYER)
                 .from(data)
                 //TODO: Fix hitboxes for players, weapon and enemies to match the sprites
-                .bbox(new HitBox(BoundingShape.box(48,66)))
+//                .bbox(new HitBox(BoundingShape.box(48,66)))
+                .bbox(new HitBox("main", new Point2D(9, 18), BoundingShape.box(30, 48)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
                 .with(new HPComponent(30))
@@ -38,7 +39,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("weapon")
-    public Entity newWeapon(SpawnData data){
+    public Entity newWeapon(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
@@ -46,7 +47,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .type(DungeonCrawlerType.WEAPON)
                 .from(data)
                 .viewWithBBox(texture("weapon.png"))
-                .bbox(new HitBox(BoundingShape.box(48,66)))
+                .bbox(new HitBox(BoundingShape.box(48, 66)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
                 .with(new WeaponComponent())
@@ -54,7 +55,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("hpfountain")
-    public Entity newHPFountain(SpawnData data){
+    public Entity newHPFountain(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.HPFOUNTAIN)
                 .from(data)
@@ -64,7 +65,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("mpfountain")
-    public Entity newMPFountain(SpawnData data){
+    public Entity newMPFountain(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.MPFOUNTAIN)
                 .from(data)
@@ -74,7 +75,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("wall")
-    public Entity newWall(SpawnData data){
+    public Entity newWall(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.WALL)
                 .from(data)
@@ -85,7 +86,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("rightwall")
-    public Entity newRightWall(SpawnData data){
+    public Entity newRightWall(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.RIGHTWALL)
                 .from(data)
@@ -96,7 +97,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("leftwall")
-    public Entity newLeftWall(SpawnData data){
+    public Entity newLeftWall(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.LEFTWALL)
                 .from(data)
@@ -107,7 +108,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("topwall")
-    public Entity newTopWall(SpawnData data){
+    public Entity newTopWall(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.TOPWALL)
                 .from(data)
@@ -118,7 +119,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("bottomwall")
-    public Entity neBottomwWall(SpawnData data){
+    public Entity neBottomwWall(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.BOTTOMWALL)
                 .from(data)
@@ -129,7 +130,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("stairs")
-    public Entity newStairs(SpawnData data){
+    public Entity newStairs(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.STAIRS)
                 .from(data)
@@ -141,7 +142,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("door")
-    public Entity newDoor(SpawnData data){
+    public Entity newDoor(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.DOOR)
                 .from(data)
@@ -152,14 +153,14 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("enemy")
-    public Entity newEnemy(SpawnData data){
+    public Entity newEnemy(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(64,64)))
+                .bbox(new HitBox("main", new Point2D(13, 6), BoundingShape.box(48, 58)))
                 .with(new CollidableComponent(true))
                 .with(new HPComponent(100))
                 .with(new EnemyComponent())
@@ -167,14 +168,14 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("goblin")
-    public Entity newGoblin(SpawnData data){
+    public Entity newGoblin(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(64,64)))
+                .bbox(new HitBox("main", new Point2D(15, 23), BoundingShape.box(30, 41)))
                 .with(new CollidableComponent(true))
                 .with(new HPComponent(50))
                 .with(new GoblinComponent())
