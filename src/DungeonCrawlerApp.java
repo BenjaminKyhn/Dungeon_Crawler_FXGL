@@ -46,7 +46,7 @@ public class DungeonCrawlerApp extends GameApplication {
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
-        gameSettings.setDeveloperMenuEnabled(true);
+//        gameSettings.setDeveloperMenuEnabled(true);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class DungeonCrawlerApp extends GameApplication {
     public void onUpdate(double tpf) {
         openDoor();
         showStairs();
-        updateUI();
+//        updateUI();
     }
 
     private void updateUI() {
@@ -430,10 +430,10 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity stairs) {
                 if (!levelComplete) {
                     levelComplete = true;
-                    runOnce(() -> {
+                    getGameScene().getViewport().fade(() -> {
                         cleanupLevel();
                         nextLevel();
-                    }, Duration.seconds(2));
+                    });
                 }
             }
         });
@@ -457,17 +457,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 keyEntity.getViewComponent().opacityProperty().setValue(0);
             }
         });
-
-//        onCollisionBegin(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON, (player, prompt) -> {
-//            String key = prompt.getString("key");
-//
-//            var entity = getGameWorld().create("keyCode", new SpawnData(prompt.getX(), prompt.getY()).put("key", key));
-//            spawnWithScale(entity, Duration.seconds(1), Interpolators.ELASTIC.EASE_OUT());
-//
-//            runOnce(() -> {
-//                despawnWithScale(entity, Duration.seconds(1), Interpolators.ELASTIC.EASE_IN());
-//            }, Duration.seconds(2.5));
-//        });
     }
 
     Texture heart;

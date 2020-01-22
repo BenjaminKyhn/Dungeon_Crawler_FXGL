@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Dungeon Crawler:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Dungeon_Crawler_jar</output-path>
+    <root id="archive" name="Dungeon Crawler.jar">
+      <element id="module-output" name="Dungeon Crawler" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../External Libraries/fxgl-11.6-uber.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
