@@ -50,7 +50,7 @@ public class GoblinComponent extends Component{
         if (moveTimer.elapsed(Duration.seconds(1.5)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead) right();
+                    if (!dead && !rightWallTouched) right();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -63,7 +63,7 @@ public class GoblinComponent extends Component{
         if (moveTimer.elapsed(Duration.seconds(1.5)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead) left();
+                    if (!dead && !leftWallTouched) left();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -76,7 +76,7 @@ public class GoblinComponent extends Component{
         if (moveTimer.elapsed(Duration.seconds(1.5)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead) up();
+                    if (!dead && !topWallTouched) up();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -89,7 +89,7 @@ public class GoblinComponent extends Component{
         if (moveTimer.elapsed(Duration.seconds(1.5)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead) down();
+                    if (!dead && !bottomWallTouched) down();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -107,7 +107,7 @@ public class GoblinComponent extends Component{
                     if (moveTimer.elapsed(Duration.seconds(1.5)) && !topWallTouched) {
                         for (int i = 0; i < 32; i++) {
                             runOnce(() -> {
-                                if (!dead) up();
+                                if (!dead && !topWallTouched) up();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -121,7 +121,7 @@ public class GoblinComponent extends Component{
                     if (moveTimer.elapsed(Duration.seconds(1.5)) && !bottomWallTouched) {
                         for (int i = 0; i < 32; i++) {
                             runOnce(() -> {
-                                if (!dead) down();
+                                if (!dead && !bottomWallTouched) down();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -135,7 +135,7 @@ public class GoblinComponent extends Component{
                     if (moveTimer.elapsed(Duration.seconds(1.5)) && !rightWallTouched) {
                         for (int i = 0; i < 32; i++) {
                             runOnce(() -> {
-                                if (!dead) right();
+                                if (!dead && !rightWallTouched) right();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -149,7 +149,7 @@ public class GoblinComponent extends Component{
                     if (moveTimer.elapsed(Duration.seconds(1.5)) && !leftWallTouched) {
                         for (int i = 0; i < 32; i++) {
                             runOnce(() -> {
-                                if (!dead) left();
+                                if (!dead && !leftWallTouched) left();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
