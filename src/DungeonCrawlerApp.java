@@ -1,14 +1,10 @@
-import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.SpawnData;
-import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.texture.Texture;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -36,6 +32,9 @@ public class DungeonCrawlerApp extends GameApplication {
     private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
+    private Texture heart1;
+    private Texture heart2;
+    private Texture heart3;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -45,7 +44,7 @@ public class DungeonCrawlerApp extends GameApplication {
         gameSettings.setVersion("0.1");
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
-//        gameSettings.setMenuEnabled(true);
+        gameSettings.setMenuEnabled(true);
 //        gameSettings.setDeveloperMenuEnabled(true);
     }
 
@@ -82,27 +81,45 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     @Override
+    protected void initUI() {
+//        HPIndicator hp = new HPIndicator(player.getComponent(HPComponent.class));
+//        addUINode(hp);
+
+        heart1 = texture("heart.png", 44, 40);
+        heart2 = texture("heart.png", 44, 40);
+        heart3 = texture("heart.png", 44, 40);
+
+        addUINode(heart1, 15, 15);
+        addUINode(heart2, 62, 15);
+        addUINode(heart3, 109, 15);
+    }
+
+    @Override
     public void onUpdate(double tpf) {
         openDoor();
         showStairs();
-//        updateUI();
+        updateUI();
     }
 
     private void updateUI() {
-        if (player.getComponent(PlayerComponent.class).getHp() < 20) {
+        if (player.getComponent(PlayerComponent.class).getHp() == 0) {
+            heart1 = texture("heart_empty.png", 44, 40);
+            addUINode(heart1, 15, 15);
+        } else if (player.getComponent(PlayerComponent.class).getHp() < 20) {
             heart2 = texture("heart_empty.png", 44, 40);
-            heart3 = texture("heart_empty.png", 44, 40);
-            addUINode(heart2, 109, 15);
+            addUINode(heart2, 62, 15);
         } else if (player.getComponent(PlayerComponent.class).getHp() < 30) {
-            heart = texture("heart.png", 44, 40);
-            heart2 = texture("heart.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart3, 109, 15);
-        } else if (player.getComponent(PlayerComponent.class).getHp() > 29) {
-            heart = texture("heart.png", 44, 40);
-            heart2 = texture("heart.png", 44, 40);
-            heart3 = texture("heart.png", 44, 40);
         }
+//        else if (player.getComponent(PlayerComponent.class).getHp() > 29) {
+//            heart1 = texture("heart.png", 44, 40);
+//            heart2 = texture("heart.png", 44, 40);
+//            heart3 = texture("heart.png", 44, 40);
+//            addUINode(heart1, 15, 15);
+//            addUINode(heart3, 62, 15);
+//            addUINode(heart3, 109, 15);
+//        }
     }
 
     @Override
@@ -459,45 +476,6 @@ public class DungeonCrawlerApp extends GameApplication {
         });
     }
 
-    Texture heart;
-    Texture heart2;
-    Texture heart3;
-
-    @Override
-    protected void initUI() {
-        HPIndicator hp = new HPIndicator(player.getComponent(HPComponent.class));
-        addUINode(hp);
-
-        heart = texture("heart.png", 44, 40);
-        heart2 = texture("heart.png", 44, 40);
-        heart3 = texture("heart.png", 44, 40);
-
-        addUINode(heart, 15, 15);
-        addUINode(heart2, 62, 15);
-        addUINode(heart3, 109, 15);
-    }
-
-//    @Override
-//    protected void onUpdate(double tpf) {
-//        if (player.getComponent(PlayerComponent.class).getHp() < 20){
-//            heart = texture("heart.png", 44, 40);
-//            heart2 = texture("heart_empty.png", 44, 40);
-//            heart3 = texture("heart_empty.png", 44, 40);
-//        }
-//
-//        if (player.getComponent(PlayerComponent.class).getHp() < 30){
-//            heart = texture("heart.png", 44, 40);
-//            heart2 = texture("heart.png", 44, 40);
-//            heart3 = texture("heart_empty.png", 44, 40);
-//        }
-//
-//        if (player.getComponent(PlayerComponent.class).getHp() > 29){
-//            heart = texture("heart.png", 44, 40);
-//            heart2 = texture("heart.png", 44, 40);
-//            heart3 = texture("heart.png", 44, 40);
-//        }
-//    }
-
     public void onPlayerDied() {
         getDisplay().showMessageBox("YOU DIED", () -> {
             respawn();
@@ -570,6 +548,30 @@ public class DungeonCrawlerApp extends GameApplication {
         weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
         getCurrentLevel().spawnEnemies();
+    }
+
+    public Texture getHeart1() {
+        return heart1;
+    }
+
+    public Texture getHeart2() {
+        return heart2;
+    }
+
+    public Texture getHeart3() {
+        return heart3;
+    }
+
+    public void setHeart1(Texture heart1) {
+        this.heart1 = heart1;
+    }
+
+    public void setHeart2(Texture heart2) {
+        this.heart2 = heart2;
+    }
+
+    public void setHeart3(Texture heart3) {
+        this.heart3 = heart3;
     }
 
     public static void main(String[] args) {

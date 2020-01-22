@@ -103,6 +103,12 @@ public class PlayerComponent extends Component {
 
     public void restoreHP() {
         hp.setValue(hp.getMaxHP());
+        FXGL.<DungeonCrawlerApp>getAppCast().setHeart1(texture("heart.png", 44, 40));
+        FXGL.<DungeonCrawlerApp>getAppCast().setHeart2(texture("heart.png", 44, 40));
+        FXGL.<DungeonCrawlerApp>getAppCast().setHeart3(texture("heart.png", 44, 40));
+        addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart1(), 15, 15);
+        addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart2(), 62, 15);
+        addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart3(), 109, 15);
     }
 
     public int getHp() {
