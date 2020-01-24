@@ -173,6 +173,16 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("hole")
+    public Entity newHole(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.HOLE)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("door")
     public Entity newDoor(SpawnData data) {
         return entityBuilder()

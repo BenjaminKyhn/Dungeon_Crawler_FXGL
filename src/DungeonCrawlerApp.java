@@ -30,7 +30,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean healing;
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
     private Texture heart1;
@@ -132,11 +132,13 @@ public class DungeonCrawlerApp extends GameApplication {
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
-                            if (!healing){
+                            if (!healing) {
                                 healing = true;
                                 player.getComponent(PlayerComponent.class).restoreHP();
                                 play("SP_HEAL.wav");
-                                runOnce(() ->{healing = false;}, Duration.seconds(1));
+                                runOnce(() -> {
+                                    healing = false;
+                                }, Duration.seconds(1));
                             }
                         });
             }
@@ -489,6 +491,24 @@ public class DungeonCrawlerApp extends GameApplication {
             }
         });
 
+        /** Adds unitCollision to player and hole unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.HOLE) {
+            @Override
+            protected void onCollision(Entity player, Entity hole) {
+                levelComplete = true;
+                getGameScene().getViewport().fade(() -> {
+                    player.setPosition(2560, 3008);
+                    weapon.setPosition(2560 + 48, 3008);
+                    if (!weaponFacingRight) {
+                        player.setScaleX(1);
+                        weaponFacingRight = true;
+                    }
+                    levelComplete = false;
+                });
+            }
+        });
+
+        /** Adds unitCollision to player and button unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON) {
             @Override
             protected void onCollisionBegin(Entity player, Entity btn) {
