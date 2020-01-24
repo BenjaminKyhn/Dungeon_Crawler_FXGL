@@ -109,10 +109,16 @@ public class DungeonCrawlerApp extends GameApplication {
     private void updateUI() {
         if (player.getComponent(PlayerComponent.class).getHp() == 0) {
             heart1 = texture("heart_empty.png", 44, 40);
+            heart2 = texture("heart_empty.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
         } else if (player.getComponent(PlayerComponent.class).getHp() < 20) {
             heart2 = texture("heart_empty.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
         } else if (player.getComponent(PlayerComponent.class).getHp() < 30) {
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart3, 109, 15);
@@ -455,7 +461,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.ENEMY) {
             @Override
             protected void onCollision(Entity player, Entity enemy) {
-                player.getComponent(PlayerComponent.class).onHit(enemy);
+                player.getComponent(PlayerComponent.class).onHit(10);
             }
         });
 
@@ -516,7 +522,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.SPIKES) {
             @Override
             protected void onCollision(Entity player, Entity spikes) {
-                player.getComponent(PlayerComponent.class).onHit(spikes);
+                player.getComponent(PlayerComponent.class).onHit(30);
             }
         });
 

@@ -71,7 +71,7 @@ public class PlayerComponent extends Component {
         entity.translateY(speed);
     }
 
-    public void onHit(Entity enemy) {
+    public void onHit(int damage) {
         if (isBeingDamaged)
             return;
 
@@ -79,7 +79,7 @@ public class PlayerComponent extends Component {
 //            return;
 
         /** When mob is still alive */
-        hp.setValue(hp.getValue() - 10);
+        hp.setValue(hp.getValue() - damage);
         if (hp.getValue() > 0) {
             int randomHitSound = (int) (Math.random() * 3);
             switch (randomHitSound) {
