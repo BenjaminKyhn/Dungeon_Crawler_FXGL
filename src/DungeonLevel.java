@@ -1,3 +1,5 @@
+import com.almasb.fxgl.entity.Entity;
+
 import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
@@ -9,6 +11,8 @@ public abstract class DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
+    private boolean trapActivated;
+    private ArrayList<Entity> trapEnemies = new ArrayList();
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -51,6 +55,18 @@ public abstract class DungeonLevel {
 
     public int getEnemyY(int index){
         return enemyY.get(index);
+    }
+
+    public boolean isTrapActivated() {
+        return trapActivated;
+    }
+
+    public void setTrapActivated(boolean trapActivated) {
+        this.trapActivated = trapActivated;
+    }
+
+    public ArrayList<Entity> getTrapEnemies() {
+        return trapEnemies;
     }
 
     public void spawnEnemies(){

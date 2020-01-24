@@ -14,6 +14,7 @@ public class Level_03 extends DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
+    private ArrayList<Entity> trapEnemies = new ArrayList();
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -58,6 +59,10 @@ public class Level_03 extends DungeonLevel {
         return enemyY.get(index);
     }
 
+    public ArrayList<Entity> getTrapEnemies() {
+        return trapEnemies;
+    }
+
     public void spawnEnemies(){
         getGameWorld().spawn("ogre", 2560, 1000);
     }
@@ -92,12 +97,11 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnTrolls(){
-        runOnce(() ->{getGameWorld().spawn("troll", 1088, 640); play("trollspawn.wav");}, Duration.seconds(0.5));
-        runOnce(() ->{getGameWorld().spawn("troll", 896, 704); play("trollspawn.wav");}, Duration.seconds(1.0));
-        runOnce(() ->{getGameWorld().spawn("troll", 896, 960); play("trollspawn.wav");}, Duration.seconds(1.5));
-        runOnce(() ->{getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav");}, Duration.seconds(2.0));
-        runOnce(() ->{getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav");}, Duration.seconds(2.5));
-        runOnce(() ->{getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav");}, Duration.seconds(3.0));
-
+        runOnce(() ->{Entity troll1 = getGameWorld().spawn("troll", 1088, 640); play("trollspawn.wav"); trapEnemies.add(troll1);}, Duration.seconds(0.5));
+        runOnce(() ->{Entity troll2 = getGameWorld().spawn("troll", 896, 704); play("trollspawn.wav"); trapEnemies.add(troll2);}, Duration.seconds(1.0));
+        runOnce(() ->{Entity troll3 = getGameWorld().spawn("troll", 896, 960); play("trollspawn.wav"); trapEnemies.add(troll3);}, Duration.seconds(1.5));
+        runOnce(() ->{Entity troll4 = getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav"); trapEnemies.add(troll4);}, Duration.seconds(2.0));
+        runOnce(() ->{Entity troll5 = getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav"); trapEnemies.add(troll5);}, Duration.seconds(2.5));
+        runOnce(() ->{Entity troll6 = getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav"); trapEnemies.add(troll6);}, Duration.seconds(3.0));
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -101,6 +102,9 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     public void onUpdate(double tpf) {
+        if (getCurrentLevel().equals(levels.get(2)) && getCurrentLevel().isTrapActivated()){
+            removeTrapWall();
+        }
         openDoor();
         showStairs();
         updateUI();
@@ -563,6 +567,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.TRAP) {
             @Override
             protected void onCollision(Entity player, Entity trap) {
+                getCurrentLevel().setTrapActivated(true);
                 getCurrentLevel().spawnTrapWalls();
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.TRAP).forEach(Entity::removeFromWorld); //Game slows down if the traps are not removed from world upon activation
             }
@@ -658,12 +663,8 @@ public class DungeonCrawlerApp extends GameApplication {
         }
     }
 
-    private DungeonLevel getCurrentLevel() {
+    protected DungeonLevel getCurrentLevel() {
         return levels.get(levelNumber - 1); //right now we don't have level 1
-    }
-
-    public boolean isLevelComplete() {
-        return freezeInput;
     }
 
     private void showStairs() {
@@ -682,6 +683,15 @@ public class DungeonCrawlerApp extends GameApplication {
             doorOpened = true;
             Level_02 level_02 = new Level_02();
             level_02.spawnGoblins();
+        }
+    }
+
+    //TODO: make openDoor() work for every level and not just level 2
+    private void removeTrapWall() {
+        if (getCurrentLevel().getTrapEnemies().isEmpty() && !freezeInput){
+            getGameWorld().getEntitiesByType(DungeonCrawlerType.RIGHTTRAPWALL).forEach(Entity::removeFromWorld);
+            play("wallup.wav");
+            getCurrentLevel().setTrapActivated(false);
         }
     }
 
