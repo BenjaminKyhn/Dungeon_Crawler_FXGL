@@ -47,10 +47,10 @@ public class OgreComponent extends Component {
         /**
          * Target the player
          */
-        if (moveTimer.elapsed(Duration.seconds(2)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete && !(entity == null)) right();
+                    if (!dead && !rightWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -60,10 +60,10 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(2)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead && !leftWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) left();
+                    if (!dead && !leftWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -73,10 +73,10 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(2)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) up();
+                    if (!dead && !topWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -86,10 +86,10 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(2)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
             for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
-                    if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) down();
+                    if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -100,14 +100,14 @@ public class OgreComponent extends Component {
         }
 
         /** Random movement when outside of aggro range */
-        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.levelComplete){
+        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.freezeInput){
             int randomMovement = (int) (Math.random() * 4);
             switch (randomMovement) {
                 case 0:
                     if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) up();
+                                if (!dead && !topWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -121,7 +121,7 @@ public class OgreComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) down();
+                                if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -135,7 +135,7 @@ public class OgreComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) right();
+                                if (!dead && !rightWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -149,7 +149,7 @@ public class OgreComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !leftWallTouched && !DungeonCrawlerApp.levelComplete  && !(entity == null)) left();
+                                if (!dead && !leftWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);

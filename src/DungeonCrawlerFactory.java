@@ -270,4 +270,19 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .with(new OgreComponent())
                 .build();
     }
+
+    @Spawns("troll")
+    public Entity newTroll(SpawnData data) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.ENEMY)
+                .from(data)
+                .bbox(new HitBox("main", new Point2D(7, 6), BoundingShape.box(30, 45)))
+                .with(new CollidableComponent(true))
+                .with(new HPComponent(75))
+                .with(new TrollComponent())
+                .build();
+    }
 }

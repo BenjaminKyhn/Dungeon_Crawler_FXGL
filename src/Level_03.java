@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Level_03 extends DungeonLevel {
-    private int playerX = 320;
-    private int playerY = 3008;
+    private int playerX = 1344;
+    private int playerY = 832;
+//    private int playerX = 320;
+//    private int playerY = 3008;
     private String levelName = "dungeon3.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
@@ -84,5 +86,18 @@ public class Level_03 extends DungeonLevel {
     public void spawnTrapWalls(){
         Entity rightTrapWall1 = getGameWorld().spawn("righttrapwall", 1280, 704);
         play("walldown.wav");
+        DungeonCrawlerApp.freezeInput = true;
+        runOnce(() ->{DungeonCrawlerApp.freezeInput = false;}, Duration.seconds(2));
+        spawnTrolls();
+    }
+
+    public void spawnTrolls(){
+        runOnce(() ->{getGameWorld().spawn("troll", 1088, 640); play("trollspawn.wav");}, Duration.seconds(0.5));
+        runOnce(() ->{getGameWorld().spawn("troll", 896, 704); play("trollspawn.wav");}, Duration.seconds(1.0));
+        runOnce(() ->{getGameWorld().spawn("troll", 896, 960); play("trollspawn.wav");}, Duration.seconds(1.5));
+        runOnce(() ->{getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav");}, Duration.seconds(2.0));
+        runOnce(() ->{getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav");}, Duration.seconds(2.5));
+        runOnce(() ->{getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav");}, Duration.seconds(3.0));
+
     }
 }
