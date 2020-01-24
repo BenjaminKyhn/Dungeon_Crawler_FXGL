@@ -104,23 +104,25 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     public void onUpdate(double tpf) {
-        if (getCurrentLevel().equals(levels.get(2)) && getCurrentLevel().isTrapActivated()){
-            removeTrapWall();
-        }
+        /** onUpdate methods that are always relevant*/
+        updateUI();
 
+        /** onUpdate methods specific for Level_02*/
         if (getCurrentLevel().equals((levels.get(1)))){
             openDoor();
             showStairs();
         }
 
-        if (getCurrentLevel().equals((levels.get(2)))){
+        /** onUpdate methods specific for Level_03*/
+        if (getCurrentLevel().equals(levels.get(2))){
             getCurrentLevel().spawnSpikes();
+            if (getCurrentLevel().isTrapActivated()){
+                removeTrapWall();
+            }
             if (!redSwitchActivated){
                 getCurrentLevel().spawnTrapSpikes();
             }
         }
-
-        updateUI();
     }
 
     private void updateUI() {
