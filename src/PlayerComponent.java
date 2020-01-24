@@ -93,6 +93,19 @@ public class PlayerComponent extends Component {
                     play("MAN2HIT3.wav");
                     break;
             }
+
+            double zeroOpacity = 0.1;
+            double fullOpacity = 0.0;
+            for (int i = 0; i < 4; i++) {
+                runOnce(() -> {
+                    entity.getViewComponent().setOpacity(0.0);
+                }, Duration.seconds(fullOpacity));
+                runOnce(() -> {
+                    entity.getViewComponent().setOpacity(1.0);
+                }, Duration.seconds(zeroOpacity));
+                zeroOpacity += 0.175;
+                fullOpacity += 0.175;
+            }
         }
 
         isBeingDamaged = true;
@@ -100,7 +113,7 @@ public class PlayerComponent extends Component {
         // Damage time 1 sec
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(1));
+        }, Duration.seconds(0.7));
 
         if (hp.getValue() <= 0) {
             FXGL.<DungeonCrawlerApp>getAppCast().onPlayerDied();

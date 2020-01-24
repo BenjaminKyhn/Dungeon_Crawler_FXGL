@@ -202,17 +202,17 @@ public class ImpComponent extends Component{
                 case 2: play("IMPHIT3.wav"); break;
             }
 
-            double zeroOpacity = 0.2;
+            double zeroOpacity = 0.1;
             double fullOpacity = 0.0;
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 4; i++) {
                 runOnce(() -> {
                     entity.getViewComponent().setOpacity(0.0);
                 }, Duration.seconds(fullOpacity));
                 runOnce(() -> {
                     entity.getViewComponent().setOpacity(1.0);
                 }, Duration.seconds(zeroOpacity));
-                zeroOpacity += 0.4;
-                fullOpacity += 0.4;
+                zeroOpacity += 0.175;
+                fullOpacity += 0.175;
             }
         }
 
