@@ -75,6 +75,9 @@ public abstract class DungeonLevel {
     public void spawnSpikes(){
     }
 
+    public void spawnTrapSpikes(){
+    }
+
     public void spawnTrapWalls(){
     }
 }

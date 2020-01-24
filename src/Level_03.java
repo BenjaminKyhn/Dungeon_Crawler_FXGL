@@ -74,6 +74,14 @@ public class Level_03 extends DungeonLevel {
             Entity spikes1 = getGameWorld().spawn("spikes", 4160, 960);
             Entity spikes2 = getGameWorld().spawn("spikes", 4224, 960);
             Entity spikes3 = getGameWorld().spawn("spikes", 4288, 960);
+            runOnce(() ->{getGameWorld().getEntitiesByType(DungeonCrawlerType.SPIKES).forEach(Entity::removeFromWorld);}, Duration.seconds(2));
+            runOnce(() ->{DungeonCrawlerApp.spikesSpawned = false;}, Duration.seconds(2.75));
+        }
+    }
+
+    public void spawnTrapSpikes(){
+        if(!DungeonCrawlerApp.trapSpikesSpawned){
+            DungeonCrawlerApp.trapSpikesSpawned = true;
             Entity spikes4 = getGameWorld().spawn("spikes", 4160, 1280);
             Entity spikes5 = getGameWorld().spawn("spikes", 4224, 1280);
             Entity spikes6 = getGameWorld().spawn("spikes", 4288, 1280);
@@ -84,7 +92,7 @@ public class Level_03 extends DungeonLevel {
             Entity spikes11 = getGameWorld().spawn("spikes", 4224, 1408);
             Entity spikes12 = getGameWorld().spawn("spikes", 4288, 1408);
             runOnce(() ->{getGameWorld().getEntitiesByType(DungeonCrawlerType.SPIKES).forEach(Entity::removeFromWorld);}, Duration.seconds(2));
-            runOnce(() ->{DungeonCrawlerApp.spikesSpawned = false;}, Duration.seconds(2.75));
+            runOnce(() ->{DungeonCrawlerApp.trapSpikesSpawned = false;}, Duration.seconds(2.75));
         }
     }
 

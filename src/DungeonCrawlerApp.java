@@ -31,9 +31,11 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
+    private boolean redSwitchActivated;
     private boolean healing;
     public static boolean spikesSpawned;
-    private int levelNumber = 1;
+    public static boolean trapSpikesSpawned;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;
@@ -113,6 +115,9 @@ public class DungeonCrawlerApp extends GameApplication {
 
         if (getCurrentLevel().equals((levels.get(2)))){
             getCurrentLevel().spawnSpikes();
+            if (!redSwitchActivated){
+                getCurrentLevel().spawnTrapSpikes();
+            }
         }
 
         updateUI();
@@ -600,6 +605,7 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity redswitch) {
                 redswitch.removeFromWorld();
                 play("switch.wav");
+                redSwitchActivated = true;
             }
         });
 
