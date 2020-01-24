@@ -55,4 +55,7 @@ public abstract class DungeonLevel {
 
     public void spawnEnemies(){
     }
+
+    public void spawnSpikes(){
+    }
 }

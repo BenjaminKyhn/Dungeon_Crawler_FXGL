@@ -30,6 +30,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean healing;
+    public static boolean spikesSpawned;
     private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
@@ -100,6 +101,9 @@ public class DungeonCrawlerApp extends GameApplication {
         openDoor();
         showStairs();
         updateUI();
+        getCurrentLevel().spawnSpikes();
+        player.setZ(Integer.MAX_VALUE);
+        weapon.setZ(Integer.MAX_VALUE);
     }
 
     private void updateUI() {
@@ -505,6 +509,14 @@ public class DungeonCrawlerApp extends GameApplication {
                     }
                     levelComplete = false;
                 });
+            }
+        });
+
+        /** Adds unitCollision to player and spikes unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.SPIKES) {
+            @Override
+            protected void onCollision(Entity player, Entity spikes) {
+                player.getComponent(PlayerComponent.class).onHit(spikes);
             }
         });
 

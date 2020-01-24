@@ -183,6 +183,26 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+//    @Spawns("spikes")
+//    public Entity newSpikes(SpawnData data) {
+//        return entityBuilder()
+//                .type(DungeonCrawlerType.HPFOUNTAIN)
+//                .from(data)
+//                .viewWithBBox(texture("spikes.png").toAnimatedTexture(4, Duration.seconds(1.5)).loop())
+//                .with(new CollidableComponent(true))
+//                .build();
+//    }
+
+    @Spawns("spikes")
+    public Entity newSpikes(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.SPIKES)
+                .from(data)
+                .viewWithBBox(texture("spikes.png").toAnimatedTexture(5, Duration.seconds(2)).loop())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("door")
     public Entity newDoor(SpawnData data) {
         return entityBuilder()

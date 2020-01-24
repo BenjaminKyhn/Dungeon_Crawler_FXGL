@@ -1,6 +1,10 @@
+import com.almasb.fxgl.entity.Entity;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
+import static com.almasb.fxgl.dsl.FXGL.runOnce;
 
 public class Level_03 extends DungeonLevel {
     private int playerX = 320;
@@ -55,5 +59,14 @@ public class Level_03 extends DungeonLevel {
 
     public void spawnEnemies(){
         getGameWorld().spawn("ogre", 2560, 1000);
+    }
+
+    public void spawnSpikes(){
+        if(!DungeonCrawlerApp.spikesSpawned){
+            DungeonCrawlerApp.spikesSpawned = true;
+            Entity spikes1 = getGameWorld().spawn("spikes", 576, 2944);
+            runOnce(spikes1::removeFromWorld, Duration.seconds(2));
+            runOnce(() ->{DungeonCrawlerApp.spikesSpawned = false;}, Duration.seconds(3));
+        }
     }
 }
