@@ -29,7 +29,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
     private Texture heart1;
@@ -44,7 +44,7 @@ public class DungeonCrawlerApp extends GameApplication {
         gameSettings.setVersion("0.1");
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
-        gameSettings.setMenuEnabled(true);
+//        gameSettings.setMenuEnabled(true);
 //        gameSettings.setDeveloperMenuEnabled(true);
     }
 
@@ -330,8 +330,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setTopWallTouched(true);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setTopWallTouched(true);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setTopWallTouched(true);
                 }
             }
 
@@ -340,8 +343,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setTopWallTouched(false);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setTopWallTouched(false);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setTopWallTouched(false);
                 }
             }
         });
@@ -353,8 +359,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setBottomWallTouched(true);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setBottomWallTouched(true);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setBottomWallTouched(true);
                 }
             }
 
@@ -363,8 +372,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setBottomWallTouched(false);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setBottomWallTouched(false);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setBottomWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setBottomWallTouched(false);
                 }
             }
         });
@@ -376,8 +388,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setRightWallTouched(true);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setRightWallTouched(true);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setRightWallTouched(true);
                 }
             }
 
@@ -386,8 +401,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setRightWallTouched(false);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setRightWallTouched(false);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setRightWallTouched(false);
                 }
             }
         });
@@ -399,8 +417,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setLeftWallTouched(true);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setLeftWallTouched(true);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(true);
                 }
             }
 
@@ -409,8 +430,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(GoblinComponent.class)) {
                     enemy.getComponent(GoblinComponent.class).setLeftWallTouched(false);
                 }
-                if (enemy.hasComponent(EnemyComponent.class)) {
-                    enemy.getComponent(EnemyComponent.class).setLeftWallTouched(false);
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(false);
                 }
             }
         });
@@ -428,12 +452,17 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollision(Entity weapon, Entity enemy) {
                 if (isAttacking) {
-                    if (enemy.hasComponent(EnemyComponent.class)) {
-                        enemy.getComponent(EnemyComponent.class).onHit();
+                    if (enemy.hasComponent(DemonComponent.class)) {
+                        enemy.getComponent(DemonComponent.class).onHit();
                     }
 
                     if (enemy.hasComponent(GoblinComponent.class)) {
                         enemy.getComponent(GoblinComponent.class).onHit();
+
+                    }
+
+                    if (enemy.hasComponent(OgreComponent.class)) {
+                        enemy.getComponent(OgreComponent.class).onHit();
 
                     }
                 }

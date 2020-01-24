@@ -5,13 +5,12 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-public class EnemyComponent extends Component {
+public class DemonComponent extends Component {
     private HPComponent hp;
     private PhysicsComponent physics;
     private AnimatedTexture texture;
@@ -26,8 +25,8 @@ public class EnemyComponent extends Component {
     private double speed = 1;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
-    public EnemyComponent() {
-        Image image = image("enemy3times.png");
+    public DemonComponent() {
+        Image image = image("demon3times.png");
 
         animIdle = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 0, 3);
         animWalk = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 4, 7);

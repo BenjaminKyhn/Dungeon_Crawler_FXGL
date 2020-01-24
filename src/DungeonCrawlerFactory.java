@@ -1,4 +1,3 @@
-import com.almasb.fxgl.dsl.EntityBuilder;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.LiftComponent;
 import com.almasb.fxgl.entity.Entity;
@@ -12,14 +11,10 @@ import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
-import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-
-import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -200,7 +195,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .bbox(new HitBox("main", new Point2D(21, 36), BoundingShape.box(54, 87)))
                 .with(new CollidableComponent(true))
                 .with(new HPComponent(100))
-                .with(new EnemyComponent())
+                .with(new DemonComponent())
                 .build();
     }
 
@@ -216,6 +211,21 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .with(new HPComponent(50))
                 .with(new GoblinComponent())
+                .build();
+    }
+
+    @Spawns("ogre")
+    public Entity newOgre(SpawnData data) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.ENEMY)
+                .from(data)
+                .bbox(new HitBox("main", new Point2D(24, 6), BoundingShape.box(54, 78)))
+                .with(new CollidableComponent(true))
+                .with(new HPComponent(100))
+                .with(new OgreComponent())
                 .build();
     }
 }

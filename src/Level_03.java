@@ -54,5 +54,6 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnEnemies(){
+        getGameWorld().spawn("ogre", 2560, 2800);
     }
 }
