@@ -51,7 +51,7 @@ public class EnemyComponent extends Component {
         if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete) right();
+                    if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete && !(entity == null)) right();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -64,7 +64,7 @@ public class EnemyComponent extends Component {
         if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !leftWallTouched  && !DungeonCrawlerApp.levelComplete) left();
+                    if (!dead && !leftWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) left();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -77,7 +77,7 @@ public class EnemyComponent extends Component {
         if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete) up();
+                    if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) up();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -90,7 +90,7 @@ public class EnemyComponent extends Component {
         if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete) down();
+                    if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) down();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
@@ -108,7 +108,7 @@ public class EnemyComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete) up();
+                                if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) up();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -122,7 +122,7 @@ public class EnemyComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete) down();
+                                if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) down();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -136,7 +136,7 @@ public class EnemyComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete) right();
+                                if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) right();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -150,7 +150,7 @@ public class EnemyComponent extends Component {
                     if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !leftWallTouched && !DungeonCrawlerApp.levelComplete) left();
+                                if (!dead && !leftWallTouched && !DungeonCrawlerApp.levelComplete  && !(entity == null)) left();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
