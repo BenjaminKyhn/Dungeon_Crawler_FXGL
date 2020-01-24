@@ -133,13 +133,28 @@ public class DungeonCrawlerApp extends GameApplication {
             addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-        } else if (player.getComponent(PlayerComponent.class).getHp() < 20) {
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 0) && (player.getComponent(PlayerComponent.class).getHp() < 10)) {
+            heart1 = texture("heart_half_full.png", 44, 40);
+            heart2 = texture("heart_empty.png", 44, 40);
+            heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 9) && (player.getComponent(PlayerComponent.class).getHp() < 15)) {
             heart2 = texture("heart_empty.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-        } else if (player.getComponent(PlayerComponent.class).getHp() < 30) {
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 14) && (player.getComponent(PlayerComponent.class).getHp() < 20)) {
+            heart2 = texture("heart_half_full.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 19) && (player.getComponent(PlayerComponent.class).getHp() < 25)) {
+            heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart3, 109, 15);
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 24) && (player.getComponent(PlayerComponent.class).getHp() < 30)) {
+            heart3 = texture("heart_half_full.png", 44, 40);
             addUINode(heart3, 109, 15);
         }
 //        else if (player.getComponent(PlayerComponent.class).getHp() > 29) {
