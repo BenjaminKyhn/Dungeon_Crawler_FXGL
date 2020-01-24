@@ -35,7 +35,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean healing;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
-    private int levelNumber = 3;
+    private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;

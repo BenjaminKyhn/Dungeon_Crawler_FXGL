@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Level_03 extends DungeonLevel {
-//    private int playerX = 320;
-//    private int playerY = 3008;
+    private int playerX = 320;
+    private int playerY = 3008;
 //    private int playerX = 1344;
 //    private int playerY = 832;
-    private int playerX = 3776;
-    private int playerY = 1856;
+//    private int playerX = 3776;
+//    private int playerY = 1856;
     private String levelName = "dungeon3.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
