@@ -113,7 +113,7 @@ public class PlayerComponent extends Component {
         // Damage time 1 sec
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(0.7));
+        }, Duration.seconds(0.6));
 
         if (hp.getValue() <= 0) {
             FXGL.<DungeonCrawlerApp>getAppCast().onPlayerDied();
