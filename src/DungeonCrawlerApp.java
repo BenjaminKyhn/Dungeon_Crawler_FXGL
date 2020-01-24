@@ -132,7 +132,6 @@ public class DungeonCrawlerApp extends GameApplication {
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
                             player.getComponent(PlayerComponent.class).restoreHP();
-                            play("SP_HEAL.wav");
                         });
             }
         }, KeyCode.E);

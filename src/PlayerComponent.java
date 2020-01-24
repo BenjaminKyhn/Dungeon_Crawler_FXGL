@@ -20,12 +20,13 @@ public class PlayerComponent extends Component {
     private AnimationChannel animIdle, animWalk;
     private double speed = 5;
     private boolean isBeingDamaged = false;
+    private boolean healthRegenerating = false;
 
     public PlayerComponent() {
         Image image = image("player.png");
 
         animIdle = new AnimationChannel(image, 8, 48, 66, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 48, 66, Duration.seconds(1), 4, 7);
+        animWalk = new AnimationChannel(image, 8, 48, 66, Duration.seconds(0.33), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
@@ -80,12 +81,18 @@ public class PlayerComponent extends Component {
 
         /** When mob is still alive */
         hp.setValue(hp.getValue() - 10);
-        if (hp.getValue() > 0){
-            int randomHitSound = (int)(Math.random()*3);
-            switch (randomHitSound){
-                case 0: play("MAN2HIT1.wav"); break;
-                case 1: play("MAN2HIT2.wav"); break;
-                case 2: play("MAN2HIT3.wav"); break;
+        if (hp.getValue() > 0) {
+            int randomHitSound = (int) (Math.random() * 3);
+            switch (randomHitSound) {
+                case 0:
+                    play("MAN2HIT1.wav");
+                    break;
+                case 1:
+                    play("MAN2HIT2.wav");
+                    break;
+                case 2:
+                    play("MAN2HIT3.wav");
+                    break;
             }
         }
 
@@ -102,13 +109,22 @@ public class PlayerComponent extends Component {
     }
 
     public void restoreHP() {
+        if (healthRegenerating) {
+            return;
+        }
+
+        healthRegenerating = true;
         hp.setValue(hp.getMaxHP());
+        play("SP_HEAL.wav");
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart1(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart2(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart3(texture("heart.png", 44, 40));
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart1(), 15, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart2(), 62, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart3(), 109, 15);
+        runOnce(() -> {
+            healthRegenerating = false;
+        }, Duration.seconds(1));
     }
 
     public int getHp() {
