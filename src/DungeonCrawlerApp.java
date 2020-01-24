@@ -29,7 +29,8 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
-    private int levelNumber = 3;
+    private boolean healing;
+    private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean levelComplete = false;
     private Texture heart1;
@@ -131,7 +132,12 @@ public class DungeonCrawlerApp extends GameApplication {
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
-                            player.getComponent(PlayerComponent.class).restoreHP();
+                            if (!healing){
+                                healing = true;
+                                player.getComponent(PlayerComponent.class).restoreHP();
+                                play("SP_HEAL.wav");
+                                runOnce(() ->{healing = false;}, Duration.seconds(1));
+                            }
                         });
             }
         }, KeyCode.E);

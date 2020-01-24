@@ -20,7 +20,6 @@ public class PlayerComponent extends Component {
     private AnimationChannel animIdle, animWalk;
     private double speed = 5;
     private boolean isBeingDamaged = false;
-    private boolean healthRegenerating = false;
 
     public PlayerComponent() {
         Image image = image("player.png");
@@ -109,22 +108,13 @@ public class PlayerComponent extends Component {
     }
 
     public void restoreHP() {
-        if (healthRegenerating) {
-            return;
-        }
-
-        healthRegenerating = true;
         hp.setValue(hp.getMaxHP());
-        play("SP_HEAL.wav");
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart1(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart2(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart3(texture("heart.png", 44, 40));
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart1(), 15, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart2(), 62, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart3(), 109, 15);
-        runOnce(() -> {
-            healthRegenerating = false;
-        }, Duration.seconds(1));
     }
 
     public int getHp() {
