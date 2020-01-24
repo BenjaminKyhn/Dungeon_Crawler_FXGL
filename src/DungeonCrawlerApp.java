@@ -506,7 +506,7 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollision(Entity player, Entity trap) {
                 getCurrentLevel().spawnTrapWalls();
-                getGameWorld().getEntitiesByType(DungeonCrawlerType.TRAP).forEach(Entity::removeFromWorld);
+                getGameWorld().getEntitiesByType(DungeonCrawlerType.TRAP).forEach(Entity::removeFromWorld); //Game slows down if the traps are not removed from world upon activation
             }
         });
 
