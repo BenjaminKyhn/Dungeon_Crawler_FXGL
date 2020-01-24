@@ -74,6 +74,8 @@ public class DungeonCrawlerApp extends GameApplication {
         /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
         weapon = getGameWorld().spawn("weapon", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+        player.setZ(1);
+        weapon.setZ(1);
 
         /** Spawn initial enemies */
         getCurrentLevel().spawnEnemies();
@@ -103,8 +105,6 @@ public class DungeonCrawlerApp extends GameApplication {
         showStairs();
         updateUI();
         getCurrentLevel().spawnSpikes();
-        player.setZ(Integer.MAX_VALUE);
-        weapon.setZ(Integer.MAX_VALUE);
     }
 
     private void updateUI() {
@@ -545,7 +545,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.SPIKES) {
             @Override
             protected void onCollision(Entity player, Entity spikes) {
-                player.getComponent(PlayerComponent.class).onHit(30);
+                player.getComponent(PlayerComponent.class).onHit(10);
             }
         });
 
@@ -638,8 +638,8 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public void nextLevel() {
         levelNumber += 1;
-        player.setZ(Integer.MAX_VALUE);
-        weapon.setZ(Integer.MAX_VALUE);
+        player.setZ(1);
+        weapon.setZ(1);
         player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
         weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
