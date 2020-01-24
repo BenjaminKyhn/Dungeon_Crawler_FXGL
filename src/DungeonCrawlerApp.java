@@ -126,7 +126,7 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     private void updateUI() {
-        if (player.getComponent(PlayerComponent.class).getHp() == 0) {
+        if (player.getComponent(PlayerComponent.class).getHp() <= 0) {
             heart1 = texture("heart_empty.png", 44, 40);
             heart2 = texture("heart_empty.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
@@ -573,7 +573,15 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.ENEMY) {
             @Override
             protected void onCollision(Entity player, Entity enemy) {
-                player.getComponent(PlayerComponent.class).onHit(10);
+                if (enemy.hasComponent(ImpComponent.class)){
+                    player.getComponent(PlayerComponent.class).onHit(5); //imps do little damage
+                }
+                if (enemy.hasComponent(OgreComponent.class)){
+                    player.getComponent(PlayerComponent.class).onHit(20); //ogres do high damage
+                }
+                else{
+                    player.getComponent(PlayerComponent.class).onHit(10); //standard hit
+                }
             }
         });
 

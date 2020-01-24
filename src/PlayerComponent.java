@@ -102,7 +102,7 @@ public class PlayerComponent extends Component {
             isBeingDamaged = false;
         }, Duration.seconds(1));
 
-        if (hp.getValue() == 0) {
+        if (hp.getValue() <= 0) {
             FXGL.<DungeonCrawlerApp>getAppCast().onPlayerDied();
         }
     }
