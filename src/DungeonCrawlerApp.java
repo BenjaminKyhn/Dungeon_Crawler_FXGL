@@ -33,7 +33,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean stairsDiscovered;
     private boolean healing;
     public static boolean spikesSpawned;
-    private int levelNumber = 3;
+    private int levelNumber = 1;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;
@@ -105,10 +105,17 @@ public class DungeonCrawlerApp extends GameApplication {
         if (getCurrentLevel().equals(levels.get(2)) && getCurrentLevel().isTrapActivated()){
             removeTrapWall();
         }
-        openDoor();
-        showStairs();
+
+        if (getCurrentLevel().equals((levels.get(1)))){
+            openDoor();
+            showStairs();
+        }
+
+        if (getCurrentLevel().equals((levels.get(2)))){
+            getCurrentLevel().spawnSpikes();
+        }
+
         updateUI();
-        getCurrentLevel().spawnSpikes();
     }
 
     private void updateUI() {
