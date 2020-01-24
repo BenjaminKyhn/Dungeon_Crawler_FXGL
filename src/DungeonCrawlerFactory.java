@@ -285,4 +285,14 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .with(new TrollComponent())
                 .build();
     }
+
+    @Spawns("redswitch")
+    public Entity newRedSwitch(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.REDSWITCH)
+                .from(data)
+                .viewWithBBox(texture("red_switch.png"))
+                .with(new CollidableComponent(true))
+                .build();
+    }
 }

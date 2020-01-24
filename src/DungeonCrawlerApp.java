@@ -582,6 +582,15 @@ public class DungeonCrawlerApp extends GameApplication {
             }
         });
 
+        /** Adds unitCollision to player and red switch unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.REDSWITCH) {
+            @Override
+            protected void onCollision(Entity player, Entity redswitch) {
+                redswitch.removeFromWorld();
+                play("switch.wav");
+            }
+        });
+
         /** Adds unitCollision to player and hole unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.HOLE) {
             @Override
