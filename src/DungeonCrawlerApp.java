@@ -26,6 +26,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean topWallTouched;
     private boolean rightWallTouched;
     private boolean leftWallTouched;
+    private boolean rightTrapWallTouched;
     private boolean doorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
@@ -186,7 +187,7 @@ public class DungeonCrawlerApp extends GameApplication {
             }
 
             protected void onAction() {
-                if (rightWallTouched || levelComplete) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (rightWallTouched || levelComplete || rightTrapWallTouched) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
 
                 player.getComponent(PlayerComponent.class).right();
@@ -341,6 +342,19 @@ public class DungeonCrawlerApp extends GameApplication {
             }
         });
 
+        /** Adds unitCollision to door and player unit. The door is treated functionally like a top wall*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.RIGHTTRAPWALL) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity righttrapwall) {
+                rightTrapWallTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity righttrapwall) {
+                rightTrapWallTouched = false;
+            }
+        });
+
         /** Adds unitCollision to top wall and enemy unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.TOPWALL) {
             @Override
@@ -484,6 +498,15 @@ public class DungeonCrawlerApp extends GameApplication {
 
                     }
                 }
+            }
+        });
+
+        /** Adds unitCollision to player and trap unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.TRAP) {
+            @Override
+            protected void onCollision(Entity player, Entity trap) {
+                getCurrentLevel().spawnTrapWalls();
+                getGameWorld().getEntitiesByType(DungeonCrawlerType.TRAP).forEach(Entity::removeFromWorld);
             }
         });
 

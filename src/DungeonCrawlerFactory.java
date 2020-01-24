@@ -161,6 +161,28 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("trap")
+    public Entity newTrap(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.TRAP)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("righttrapwall")
+    public Entity newRightTrapWall(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.RIGHTTRAPWALL)
+                .from(data)
+                .viewWithBBox(texture("right_trap_wall.png"))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("stairs")
     public Entity newStairs(SpawnData data) {
         return entityBuilder()
@@ -182,16 +204,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
     }
-
-//    @Spawns("spikes")
-//    public Entity newSpikes(SpawnData data) {
-//        return entityBuilder()
-//                .type(DungeonCrawlerType.HPFOUNTAIN)
-//                .from(data)
-//                .viewWithBBox(texture("spikes.png").toAnimatedTexture(4, Duration.seconds(1.5)).loop())
-//                .with(new CollidableComponent(true))
-//                .build();
-//    }
 
     @Spawns("spikes")
     public Entity newSpikes(SpawnData data) {

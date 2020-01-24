@@ -81,4 +81,8 @@ public class Level_03 extends DungeonLevel {
             runOnce(() ->{DungeonCrawlerApp.spikesSpawned = false;}, Duration.seconds(2.75));
         }
     }
+
+    public void spawnTrapWalls(){
+        Entity rightTrapWall1 = getGameWorld().spawn("righttrapwall", 1280, 704);
+    }
 }
