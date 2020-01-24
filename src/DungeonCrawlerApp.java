@@ -606,6 +606,7 @@ public class DungeonCrawlerApp extends GameApplication {
         }
     }
 
+    //TODO: make openDoor() work for every level and not just level 2
     private void openDoor() {
         if (getGameWorld().getEntitiesByType(DungeonCrawlerType.ENEMY).isEmpty() && !doorOpened && getCurrentLevel().equals(levels.get(1))) {
             getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);

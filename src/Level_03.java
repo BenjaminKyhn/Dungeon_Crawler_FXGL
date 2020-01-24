@@ -3,8 +3,7 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
-import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
-import static com.almasb.fxgl.dsl.FXGL.runOnce;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Level_03 extends DungeonLevel {
     private int playerX = 320;
@@ -84,5 +83,6 @@ public class Level_03 extends DungeonLevel {
 
     public void spawnTrapWalls(){
         Entity rightTrapWall1 = getGameWorld().spawn("righttrapwall", 1280, 704);
+        play("walldown.wav");
     }
 }
