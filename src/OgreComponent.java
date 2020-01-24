@@ -22,14 +22,14 @@ public class OgreComponent extends Component {
     private boolean isBeingDamaged = false;
     private boolean dead = false;
     private LocalTimer moveTimer;
-    private double speed = 1;
+    private double speed = 2;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
     public OgreComponent() {
         Image image = image("ogre3times.png");
 
-        animIdle = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 97, 84, Duration.seconds(1), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 97, 84, Duration.seconds(1), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
@@ -47,8 +47,8 @@ public class OgreComponent extends Component {
         /**
          * Target the player
          */
-        if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
-            for (int i = 0; i < 64; i++) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
+            for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead && !rightWallTouched  && !DungeonCrawlerApp.levelComplete && !(entity == null)) right();
                 }, Duration.seconds(i / 32.0));
@@ -60,8 +60,8 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
-            for (int i = 0; i < 64; i++) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.levelComplete) {
+            for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead && !leftWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) left();
                 }, Duration.seconds(i / 32.0));
@@ -73,8 +73,8 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
-            for (int i = 0; i < 64; i++) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
+            for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead && !topWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) up();
                 }, Duration.seconds(i / 32.0));
@@ -86,8 +86,8 @@ public class OgreComponent extends Component {
             }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
-            for (int i = 0; i < 64; i++) {
+        if (moveTimer.elapsed(Duration.seconds(2)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.levelComplete) {
+            for (int i = 0; i < 32; i++) {
                 runOnce(() -> {
                     if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.levelComplete  && !(entity == null)) down();
                 }, Duration.seconds(i / 32.0));

@@ -224,7 +224,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .bbox(new HitBox("main", new Point2D(24, 6), BoundingShape.box(54, 78)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(100))
+                .with(new HPComponent(150))
                 .with(new OgreComponent())
                 .build();
     }
