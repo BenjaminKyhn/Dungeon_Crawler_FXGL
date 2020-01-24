@@ -446,10 +446,10 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity stairs) {
                 if (!levelComplete) {
                     levelComplete = true;
-                    getGameScene().getViewport().fade(() -> {
+                    runOnce(() -> {getGameScene().getViewport().fade(() -> {
                         cleanupLevel();
                         nextLevel();
-                    });
+                    });}, Duration.seconds(1));
                 }
             }
         });
