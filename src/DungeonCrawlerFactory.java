@@ -195,6 +195,16 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("redswitch")
+    public Entity newRedSwitch(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.REDSWITCH)
+                .from(data)
+                .viewWithBBox(texture("red_switch.png"))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("hole")
     public Entity newHole(SpawnData data) {
         return entityBuilder()
@@ -226,8 +236,8 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("enemy")
-    public Entity newEnemy(SpawnData data) {
+    @Spawns("demon")
+    public Entity newDemon(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
@@ -286,13 +296,20 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("redswitch")
-    public Entity newRedSwitch(SpawnData data) {
+    @Spawns("imp")
+    public Entity newImp(SpawnData data) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
         return entityBuilder()
-                .type(DungeonCrawlerType.REDSWITCH)
+                .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .viewWithBBox(texture("red_switch.png"))
+                .bbox(new HitBox("main", new Point2D(9, 12), BoundingShape.box(25, 30)))
                 .with(new CollidableComponent(true))
+                .with(new HPComponent(25))
+                .with(new ImpComponent())
                 .build();
     }
+
+
 }

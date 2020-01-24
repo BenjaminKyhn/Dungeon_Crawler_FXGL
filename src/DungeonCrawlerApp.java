@@ -389,6 +389,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setTopWallTouched(true);
                 }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setTopWallTouched(true);
+                }
             }
 
             @Override
@@ -404,6 +407,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setTopWallTouched(false);
                 }
             }
         });
@@ -424,6 +430,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setBottomWallTouched(true);
                 }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
+                }
             }
 
             @Override
@@ -439,6 +448,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
                 }
             }
         });
@@ -459,6 +471,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setRightWallTouched(true);
                 }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setRightWallTouched(true);
+                }
             }
 
             @Override
@@ -474,6 +489,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setRightWallTouched(false);
                 }
             }
         });
@@ -494,6 +512,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setLeftWallTouched(true);
                 }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setLeftWallTouched(true);
+                }
             }
 
             @Override
@@ -509,6 +530,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setLeftWallTouched(false);
                 }
             }
         });
@@ -561,17 +585,17 @@ public class DungeonCrawlerApp extends GameApplication {
                     if (enemy.hasComponent(DemonComponent.class)) {
                         enemy.getComponent(DemonComponent.class).onHit();
                     }
-
                     if (enemy.hasComponent(GoblinComponent.class)) {
                         enemy.getComponent(GoblinComponent.class).onHit();
                     }
-
                     if (enemy.hasComponent(OgreComponent.class)) {
                         enemy.getComponent(OgreComponent.class).onHit();
                     }
-
                     if (enemy.hasComponent(TrollComponent.class)) {
                         enemy.getComponent(TrollComponent.class).onHit();
+                    }
+                    if (enemy.hasComponent(ImpComponent.class)) {
+                        enemy.getComponent(ImpComponent.class).onHit();
                     }
                 }
             }
