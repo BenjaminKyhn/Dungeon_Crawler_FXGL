@@ -221,7 +221,7 @@ public class GoblinComponent extends Component{
         /** Damage time 1 sec */
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(0.6));
+        }, Duration.seconds(0.7));
 
         /** When mob is dead */
         if (hp.getValue() == 0) {
