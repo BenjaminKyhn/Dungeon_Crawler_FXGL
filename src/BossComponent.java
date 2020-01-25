@@ -28,12 +28,14 @@ public class    BossComponent extends Component {
 
     public BossComponent() {
         Image image = image("boss4times.png");
+        Image image2 = image("boss_death.png");
 
         animIdle = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
         animWalk = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
-        animDead = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
+        animDead = new AnimationChannel(image2, 4, 1000, 424, Duration.seconds(1), 0, 3);
 
-        texture = new AnimatedTexture(animIdle);
+//        texture = new AnimatedTexture(animIdle);
+        texture = new AnimatedTexture(animDead);
         texture.loop();
     }
 
@@ -49,116 +51,92 @@ public class    BossComponent extends Component {
         /**
          * Target the player
          */
-        if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput && !dead) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !rightWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
+                    if (!dead && !rightWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
                 }, Duration.seconds(i / 32.0));
+                texture.loopAnimationChannel(animWalk);
             }
-            texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
-            runOnce(() -> {
-                texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput && !dead) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
                     if (!dead && !leftWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
                 }, Duration.seconds(i / 32.0));
+                texture.loopAnimationChannel(animWalk);
             }
-            texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
-            runOnce(() -> {
-                texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput && !dead) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
                     if (!dead && !topWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
                 }, Duration.seconds(i / 32.0));
+                texture.loopAnimationChannel(animWalk);
             }
-            texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
-            runOnce(() -> {
-                texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput && !dead) {
             for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
                     if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
                 }, Duration.seconds(i / 32.0));
+                texture.loopAnimationChannel(animWalk);
             }
-            texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
-            runOnce(() -> {
-                texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(2));
         }
 
         /** Random movement when outside of aggro range */
-        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.freezeInput){
+        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.freezeInput  && !dead){
             int randomMovement = (int) (Math.random() * 4);
             switch (randomMovement) {
                 case 0:
-                    if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched  && !dead) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
                                 if (!dead && !topWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
                             }, Duration.seconds(i / 32.0));
+                            texture.loopAnimationChannel(animWalk);
                         }
-                        texture.loopAnimationChannel(animWalk);
                         moveTimer.capture();
-                        runOnce(() -> {
-                            texture.loopAnimationChannel(animIdle);
-                        }, Duration.seconds(2));
                         break;
                     }
                 case 1:
-                    if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched  && !dead) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
                                 if (!dead && !bottomWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
                             }, Duration.seconds(i / 32.0));
+                            texture.loopAnimationChannel(animWalk);
                         }
-                        texture.loopAnimationChannel(animWalk);
                         moveTimer.capture();
-                        runOnce(() -> {
-                            texture.loopAnimationChannel(animIdle);
-                        }, Duration.seconds(2));
                         break;
                     }
                 case 2:
-                    if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && !dead) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
                                 if (!dead && !rightWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
                             }, Duration.seconds(i / 32.0));
+                            texture.loopAnimationChannel(animWalk);
                         }
-                        texture.loopAnimationChannel(animWalk);
                         moveTimer.capture();
-                        runOnce(() -> {
-                            texture.loopAnimationChannel(animIdle);
-                        }, Duration.seconds(2));
                         break;
                     }
                 case 3:
-                    if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched  && !dead) {
                         for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
                                 if (!dead && !leftWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
                             }, Duration.seconds(i / 32.0));
+                            texture.loopAnimationChannel(animWalk);
                         }
-                        texture.loopAnimationChannel(animWalk);
                         moveTimer.capture();
-                        runOnce(() -> {
-                            texture.loopAnimationChannel(animIdle);
-                        }, Duration.seconds(2));
                         break;
                     }
             }
@@ -190,10 +168,6 @@ public class    BossComponent extends Component {
 
     public void down() {
         entity.translateY(speed);
-    }
-
-    public void setDead(boolean dead) {
-        this.dead = dead;
     }
 
     public void onHit() {
@@ -235,10 +209,10 @@ public class    BossComponent extends Component {
         }, Duration.seconds(0.7));
 
         /** When mob is dead */
-        if (hp.getValue() == 0) {
-            setDead(true);
-            entity.removeFromWorld();
+        if (hp.getValue() <= 0) {
+            dead = true;
             play("HORNDIE2.wav");
+            texture.playAnimationChannel(animDead);
         }
     }
 
@@ -256,5 +230,13 @@ public class    BossComponent extends Component {
 
     public void setLeftWallTouched(boolean leftWallTouched) {
         this.leftWallTouched = leftWallTouched;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public boolean isDead() {
+        return this.dead;
     }
 }

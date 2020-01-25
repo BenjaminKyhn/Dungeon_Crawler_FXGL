@@ -613,10 +613,15 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollision(Entity player, Entity enemy) {
                 if (enemy.hasComponent(ImpComponent.class)){
-                    player.getComponent(PlayerComponent.class).onHit(5); //imps do little damage
+                    player.getComponent(PlayerComponent.class).onHit(5); //imps deal little damage
                 }
                 if (enemy.hasComponent(OgreComponent.class)){
-                    player.getComponent(PlayerComponent.class).onHit(20); //ogres do high damage
+                    player.getComponent(PlayerComponent.class).onHit(20); //ogres deal high damage
+                }
+                if (enemy.hasComponent(BossComponent.class)){
+                    if (!enemy.getComponent(BossComponent.class).isDead()){
+                        player.getComponent(PlayerComponent.class).onHit(10); //boss deals normal damage and its corpse lingers
+                    }
                 }
                 else{
                     player.getComponent(PlayerComponent.class).onHit(10); //standard hit

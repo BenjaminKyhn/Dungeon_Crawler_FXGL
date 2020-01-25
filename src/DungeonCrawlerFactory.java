@@ -319,9 +319,9 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .bbox(new HitBox("main", new Point2D(136, 111), BoundingShape.box(416, 297)))
+                .bbox(new HitBox("main", new Point2D(136, 111), BoundingShape.box(416, 297))) //TODO fix hitbox to be oval/circle or something - trapezoid maybe
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(500))
+                .with(new HPComponent(50))
                 .with(new BossComponent())
                 .build();
     }
