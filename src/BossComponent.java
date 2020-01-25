@@ -14,7 +14,7 @@ public class    BossComponent extends Component {
     private HPComponent hp;
     private PhysicsComponent physics;
     private AnimatedTexture texture;
-    private AnimationChannel animIdle, animWalk;
+    private AnimationChannel animIdle, animWalk, animDead;
     private boolean bottomWallTouched;
     private boolean topWallTouched;
     private boolean rightWallTouched;
@@ -23,14 +23,15 @@ public class    BossComponent extends Component {
     private boolean dead = false;
     private boolean facingRight = true;
     private LocalTimer moveTimer;
-    private double speed = 1;
+    private double speed = 2;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
     public BossComponent() {
-        Image image = image("boss.png");
+        Image image = image("boss4times.png");
 
         animIdle = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
         animWalk = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
+        animDead = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
@@ -167,7 +168,7 @@ public class    BossComponent extends Component {
 
     public void left() {
         if (facingRight){
-            entity.translateX(400);
+            entity.translateX(350);
             facingRight = false;
         }
         getEntity().setScaleX(-1); //Changes the direction of the sprite
@@ -176,7 +177,7 @@ public class    BossComponent extends Component {
 
     public void right() {
         if (!facingRight){
-            entity.translateX(-400);
+            entity.translateX(-350);
             facingRight = true;
         }
         getEntity().setScaleX(1); //Changes the direction of the sprite
