@@ -205,6 +205,16 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("blueswitch")
+    public Entity newBlueSwitch(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.BLUESWITCH)
+                .from(data)
+                .viewWithBBox(texture("blue_switch.png"))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("hole")
     public Entity newHole(SpawnData data) {
         return entityBuilder()
