@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -44,12 +43,12 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(15 * 64);
-        gameSettings.setHeight(10 * 64);
+        gameSettings.setWidth(1280);
+        gameSettings.setHeight(720);
         gameSettings.setTitle("Dungeon Crawler");
         gameSettings.setVersion("0.1");
-//        gameSettings.setFullScreenAllowed(true);
-//        gameSettings.setFullScreenFromStart(true);
+        gameSettings.setFullScreenAllowed(true);
+        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
 //        gameSettings.setDeveloperMenuEnabled(true);
     }
