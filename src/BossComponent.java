@@ -32,10 +32,10 @@ public class    BossComponent extends Component {
 
         animIdle = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
         animWalk = new AnimationChannel(image, 4, 696, 432, Duration.seconds(1), 0, 3);
-        animDead = new AnimationChannel(image2, 4, 1000, 424, Duration.seconds(1), 0, 3);
+        animDead = new AnimationChannel(image2, 4, 653, 432, Duration.seconds(1), 0, 3);
 
 //        texture = new AnimatedTexture(animIdle);
-        texture = new AnimatedTexture(animDead);
+        texture = new AnimatedTexture(animIdle);
         texture.loop();
     }
 
