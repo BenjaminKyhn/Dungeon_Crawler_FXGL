@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Level_03 extends DungeonLevel {
-    private int playerX = 320;
-    private int playerY = 3008;
+//    private int playerX = 320;
+//    private int playerY = 3008;
 //    private int playerX = 1344;
 //    private int playerY = 832;
-//    private int playerX = 3776;
-//    private int playerY = 1856;
+    private int playerX = 4032;
+    private int playerY = 1728;
     private String levelName = "dungeon3.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
@@ -67,8 +67,15 @@ public class Level_03 extends DungeonLevel {
 
     public void spawnEnemies(){
         getGameWorld().spawn("boss", 2250, 500);
-        getGameWorld().spawn("imp", 4224, 1536);
         getGameWorld().spawn("demon", 4160, 1920);
+
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                int finalJ = j;
+                int finalI = i;
+                runOnce(() ->{getGameWorld().spawn("imp", 64*(54+(2* finalJ)), 64*(23+(2* finalI)));}, Duration.seconds(i/(j+1)));
+            }
+        }
     }
 
     public void spawnSpikes(){

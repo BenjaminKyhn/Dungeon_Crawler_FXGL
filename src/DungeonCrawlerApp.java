@@ -34,7 +34,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean healing;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;
@@ -43,8 +43,8 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-//        gameSettings.setWidth(1280);
-//        gameSettings.setHeight(720);
+        gameSettings.setWidth(1280);
+        gameSettings.setHeight(720);
         gameSettings.setWidth(15*64);
         gameSettings.setHeight(10*64);
         gameSettings.setTitle("Dungeon Crawler");
@@ -52,7 +52,7 @@ public class DungeonCrawlerApp extends GameApplication {
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
-        gameSettings.setDeveloperMenuEnabled(true);
+//        gameSettings.setDeveloperMenuEnabled(true);
     }
 
     @Override
