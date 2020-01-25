@@ -313,15 +313,19 @@ public class DungeonCrawlerFactory implements EntityFactory {
 
     @Spawns("boss")
     public Entity newBoss(SpawnData data) {
-        PhysicsComponent physics = new PhysicsComponent();
-        physics.setBodyType(BodyType.DYNAMIC);
-
         return entityBuilder()
                 .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .bbox(new HitBox("main", new Point2D(136, 111), BoundingShape.box(416, 297))) //TODO fix hitbox to be oval/circle or something - trapezoid maybe
+                .bbox(new HitBox("main", new Point2D(136, 111), BoundingShape.box(416, 210))) //TODO fix hitbox to be oval/circle or something - trapezoid maybe
+                .bbox(new HitBox("leftwing", new Point2D(50, 150), BoundingShape.box(100, 170)))
+                .bbox(new HitBox("rightwing", new Point2D(550, 150), BoundingShape.box(100, 170)))
+                .bbox(new HitBox("legs", new Point2D(260, 290), BoundingShape.box(180, 100)))
+                .bbox(new HitBox("feet", new Point2D(330, 380), BoundingShape.box(50, 50)))
+//                .bbox(new HitBox("body", new Point2D(210, 119), BoundingShape.circle(150)))
+//                .bbox(new HitBox("body", new Point2D(210, 119), BoundingShape.polygon(-150.0,30, 0,-30, 100,0, 160,55, 200,55, 300,0, 360,-30, 470,30, 470,70, 350,210, 250,200, 160,310, 60,270, 0,180, -150,150)))
+//                .bbox(new HitBox("main", new Point2D(0, 0), BoundingShape.polygon(-60.0, 119.0, 210.0, 89.0, 310.0, 119.0, 370.0, 174.0, 410.0, 174.0, 510.0, 119.0, 570.0, 89.0, 680.0, 149.0, 680.0, 189.0, 560.0,329.0, 460.0, 319.0, 370.0, 429.0, 270.0, 389.0, 210.0, 299.0, 60.0, 269.0)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(50))
+                .with(new HPComponent(500))
                 .with(new BossComponent())
                 .build();
     }
