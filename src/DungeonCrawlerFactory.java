@@ -327,7 +327,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.ENEMY)
                 .from(data)
-                .bbox(new HitBox("main", new Point2D(9, 12), BoundingShape.box(25, 30)))
+                .bbox(new HitBox("main", new Point2D(4, 15), BoundingShape.box(42, 48)))
                 .with(new CollidableComponent(true))
                 .with(new HPComponent(100))
                 .with(new DragonComponent())
