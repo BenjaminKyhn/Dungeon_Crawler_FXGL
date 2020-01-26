@@ -5,6 +5,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.texture.Texture;
+import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -27,10 +29,12 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean rightWallTouched;
     private boolean leftWallTouched;
     private boolean rightTrapWallTouched;
-    private boolean doorTouched;
+    private boolean topDoorTouched;
+    private boolean bottomDoorTouched;
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean redSwitchActivated;
+    private boolean blueSwitchActivated;
     private boolean healing;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
@@ -122,6 +126,10 @@ public class DungeonCrawlerApp extends GameApplication {
             }
             if (!redSwitchActivated){
                 getCurrentLevel().spawnTrapSpikes();
+            }
+            if (blueSwitchActivated){
+                getGameWorld().getEntitiesInRange(new Rectangle2D(896,1152,1,1)).forEach(Entity::removeFromWorld);
+                getGameWorld().getEntitiesAt(new Point2D(896,1152)).forEach(Entity::removeFromWorld);
             }
         }
     }
@@ -237,7 +245,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Up") {
             @Override
             protected void onAction() {
-                if (topWallTouched || doorTouched || freezeInput) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (topWallTouched || topDoorTouched || freezeInput) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).up();
                 weapon.getComponent(WeaponComponent.class).up();
@@ -252,7 +260,7 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Down") {
             @Override
             protected void onAction() {
-                if (bottomWallTouched || freezeInput) //If player unit collides with right wall,"Move Right" function stops until false.
+                if (bottomWallTouched || bottomDoorTouched || freezeInput) //If player unit collides with right wall,"Move Right" function stops until false.
                     return;
                 player.getComponent(PlayerComponent.class).down();
                 weapon.getComponent(WeaponComponent.class).down();
@@ -367,12 +375,18 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
-                doorTouched = true;
+                if (door.getY() < player.getY()){
+                    topDoorTouched = true;
+                }
+                if (door.getY() > player.getY()){
+                    bottomDoorTouched = true;
+                }
             }
 
             @Override
             protected void onCollisionEnd(Entity player, Entity door) {
-                doorTouched = false;
+                topDoorTouched = false;
+                bottomDoorTouched = false;
             }
         });
 
@@ -688,6 +702,16 @@ public class DungeonCrawlerApp extends GameApplication {
                 redswitch.removeFromWorld();
                 play("switch.wav");
                 redSwitchActivated = true;
+            }
+        });
+
+        /** Adds unitCollision to player and red switch unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BLUESWITCH) {
+            @Override
+            protected void onCollision(Entity player, Entity blueswitch) {
+                blueswitch.removeFromWorld();
+                play("switch.wav");
+                blueSwitchActivated = true;
             }
         });
 
