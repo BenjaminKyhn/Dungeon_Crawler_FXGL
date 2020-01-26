@@ -230,7 +230,7 @@ public class TrollComponent extends Component{
         if (hp.getValue() == 0) {
             setDead(true);
             entity.removeFromWorld();
-            FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getTrapEnemies().remove(entity); //used when the mobs are added to the trapEnemies ArrayList
+            FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getTrollTrapEnemies().remove(entity); //used when the mobs are added to the trapEnemies ArrayList
             int randomDeathSound = (int)(Math.random()*2);
             switch (randomDeathSound){
                 case 0: play("trolldie1.wav"); break;

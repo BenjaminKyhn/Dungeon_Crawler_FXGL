@@ -8,17 +8,18 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class Level_03 extends DungeonLevel {
 //    private int playerX = 320;
 //    private int playerY = 3008;
-//    private int playerX = 1344;
-//    private int playerY = 832;
+    private int playerX = 1344;
+    private int playerY = 832;
 //    private int playerX = 4032;
 //    private int playerY = 1728;
-    private int playerX = 1792;
-    private int playerY = 2368;
+//    private int playerX = 1792;
+//    private int playerY = 2368;
     private String levelName = "dungeon3.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
-    private ArrayList<Entity> trapEnemies = new ArrayList();
+    private ArrayList<Entity> trollTrapEnemies = new ArrayList();
+    private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -63,18 +64,21 @@ public class Level_03 extends DungeonLevel {
         return enemyY.get(index);
     }
 
-    public ArrayList<Entity> getTrapEnemies() {
-        return trapEnemies;
+    public ArrayList<Entity> getTrollTrapEnemies() {
+        return trollTrapEnemies;
+    }
+
+    public ArrayList<Entity> getDragonTrapEnemies() {
+        return dragonTrapEnemies;
     }
 
     public void spawnEnemies(){
-        getGameWorld().spawn("boss", 2250, 500);
         getGameWorld().spawn("demon", 3328, 2240);
         getGameWorld().spawn("demon", 3584, 1600);
         getGameWorld().spawn("demon", 3776, 2048);
         getGameWorld().spawn("demon", 4224, 1728);
         getGameWorld().spawn("ogre", 4480, 3008);
-        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
+//        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -123,15 +127,29 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnTrolls(){
-        runOnce(() ->{Entity troll1 = getGameWorld().spawn("troll", 1088, 640); play("trollspawn.wav"); trapEnemies.add(troll1);}, Duration.seconds(0.5));
-        runOnce(() ->{Entity troll2 = getGameWorld().spawn("troll", 896, 704); play("trollspawn.wav"); trapEnemies.add(troll2);}, Duration.seconds(1.0));
-        runOnce(() ->{Entity troll3 = getGameWorld().spawn("troll", 896, 960); play("trollspawn.wav"); trapEnemies.add(troll3);}, Duration.seconds(1.5));
-        runOnce(() ->{Entity troll4 = getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav"); trapEnemies.add(troll4);}, Duration.seconds(2.0));
-        runOnce(() ->{Entity troll5 = getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav"); trapEnemies.add(troll5);}, Duration.seconds(2.5));
-        runOnce(() ->{Entity troll6 = getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav"); trapEnemies.add(troll6);}, Duration.seconds(3.0));
+        runOnce(() ->{Entity troll1 = getGameWorld().spawn("troll", 1088, 640); play("trollspawn.wav"); trollTrapEnemies.add(troll1);}, Duration.seconds(0.5));
+        runOnce(() ->{Entity troll2 = getGameWorld().spawn("troll", 896, 704); play("trollspawn.wav"); trollTrapEnemies.add(troll2);}, Duration.seconds(1.0));
+        runOnce(() ->{Entity troll3 = getGameWorld().spawn("troll", 896, 960); play("trollspawn.wav"); trollTrapEnemies.add(troll3);}, Duration.seconds(1.5));
+        runOnce(() ->{Entity troll4 = getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav"); trollTrapEnemies.add(troll4);}, Duration.seconds(2.0));
+        runOnce(() ->{Entity troll5 = getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav"); trollTrapEnemies.add(troll5);}, Duration.seconds(2.5));
+        runOnce(() ->{Entity troll6 = getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav"); trollTrapEnemies.add(troll6);}, Duration.seconds(3.0));
     }
 
     public void spawnDragons(){
         Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
+        Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2752);
+        Entity dragon3 = getGameWorld().spawn("dragon", 1472, 2496);
+        Entity dragon4 = getGameWorld().spawn("dragon", 1792, 2368);
+        Entity dragon5 = getGameWorld().spawn("dragon", 1792, 2688);
+        dragonTrapEnemies.add(dragon1);
+        dragonTrapEnemies.add(dragon2);
+        dragonTrapEnemies.add(dragon3);
+        dragonTrapEnemies.add(dragon4);
+        dragonTrapEnemies.add(dragon5);
+    }
+
+    public void spawnBoss(){
+        getGameWorld().spawn("boss", 2250, 500);
+        play("hornhapy.wav");
     }
 }

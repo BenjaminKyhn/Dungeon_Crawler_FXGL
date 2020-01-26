@@ -207,13 +207,13 @@ public class DragonComponent extends Component {
             int randomHitSound = (int) (Math.random() * 3);
             switch (randomHitSound) {
                 case 0:
-                    play("HORNHIT1.wav");
+                    play("draghit1.wav");
                     break;
                 case 1:
-                    play("HORNHIT2.wav");
+                    play("draghit2.wav");
                     break;
                 case 2:
-                    play("HORNHIT3.wav");
+                    play("draghit3.wav");
                     break;
             }
 
@@ -233,7 +233,7 @@ public class DragonComponent extends Component {
 
         isBeingDamaged = true;
 
-        /** Damage time 0.6 sec */
+        /** Damage time 0.6 sec */ //TODO fix the invuln frames for ALL enemies and players to be 0.6 sec without crashing
         runOnce(() -> {
             isBeingDamaged = false;
         }, Duration.seconds(0.7));
@@ -242,7 +242,7 @@ public class DragonComponent extends Component {
         if (hp.getValue() == 0) {
             setDead(true);
             entity.removeFromWorld();
-            play("HORNDIE2.wav");
+            play("dragdie.wav");
         }
     }
 

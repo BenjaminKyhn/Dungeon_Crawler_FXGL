@@ -12,7 +12,8 @@ public abstract class DungeonLevel {
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
     private boolean trapActivated;
-    private ArrayList<Entity> trapEnemies = new ArrayList();
+    private ArrayList<Entity> trollTrapEnemies = new ArrayList();
+    private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -65,11 +66,21 @@ public abstract class DungeonLevel {
         this.trapActivated = trapActivated;
     }
 
-    public ArrayList<Entity> getTrapEnemies() {
-        return trapEnemies;
+    public ArrayList<Entity> getTrollTrapEnemies() {
+        return trollTrapEnemies;
+    }
+
+    public ArrayList<Entity> getDragonTrapEnemies() {
+        return dragonTrapEnemies;
     }
 
     public void spawnEnemies(){
+    }
+
+    public void spawnDragons(){
+    }
+
+    public void spawnBoss(){
     }
 
     public void spawnSpikes(){

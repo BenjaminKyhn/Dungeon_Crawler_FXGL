@@ -34,7 +34,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean redSwitchActivated;
-    private boolean blueSwitchActivated;
+    private boolean blueSwitchActivated = true;
     private boolean healing;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
@@ -130,6 +130,8 @@ public class DungeonCrawlerApp extends GameApplication {
             if (blueSwitchActivated){
                 getGameWorld().getEntitiesInRange(new Rectangle2D(896,1152,1,1)).forEach(Entity::removeFromWorld);
                 getGameWorld().getEntitiesAt(new Point2D(896,1152)).forEach(Entity::removeFromWorld);
+                getCurrentLevel().spawnDragons();
+                blueSwitchActivated = false;
             }
         }
     }
@@ -851,12 +853,17 @@ public class DungeonCrawlerApp extends GameApplication {
         }
     }
 
-    //TODO: make openDoor() work for every level and not just level 2
     private void removeTrapWall() {
-        if (getCurrentLevel().getTrapEnemies().isEmpty() && !freezeInput){
+        if (getCurrentLevel().getTrollTrapEnemies().isEmpty() && !freezeInput){
             getGameWorld().getEntitiesByType(DungeonCrawlerType.RIGHTTRAPWALL).forEach(Entity::removeFromWorld);
             play("wallup.wav");
             getCurrentLevel().setTrapActivated(false);
+        }
+    }
+
+    private void spawnBoss() {
+        if (getCurrentLevel().getDragonTrapEnemies().isEmpty() && !freezeInput){
+            getCurrentLevel().spawnBoss();
         }
     }
 
