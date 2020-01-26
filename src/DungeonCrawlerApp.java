@@ -10,6 +10,7 @@ import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -107,9 +108,6 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initUI() {
-//        HPIndicator hp = new HPIndicator(player.getComponent(HPComponent.class));
-//        addUINode(hp);
-
         Texture coin = texture("coin.png").toAnimatedTexture(4, Duration.seconds(1)).loop();
         heart1 = texture("heart.png", 44, 40);
         heart2 = texture("heart.png", 44, 40);
