@@ -241,6 +241,8 @@ public class DragonComponent extends Component {
         /** When mob is dead */
         if (hp.getValue() <= 0) {
             setDead(true);
+            spawn("coin", entity.getX()+entity.getWidth()/2, entity.getY()+entity.getHeight()/3);
+            spawn("coin", entity.getX()+entity.getWidth()/3, entity.getY()+entity.getHeight()/2);
             entity.removeFromWorld();
             FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getDragonTrapEnemies().remove(entity);
             play("dragdie.wav");

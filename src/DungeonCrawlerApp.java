@@ -4,16 +4,22 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.texture.AnimatedTexture;
+import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -69,6 +75,11 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     @Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("score", 0);
+    }
+
+    @Override
     protected void initGame() {
         /** Add all the levels to the Dungeon Level ArrayList */
         levels.add(new Level_01());
@@ -99,10 +110,18 @@ public class DungeonCrawlerApp extends GameApplication {
 //        HPIndicator hp = new HPIndicator(player.getComponent(HPComponent.class));
 //        addUINode(hp);
 
+        Texture coin = texture("coin.png").toAnimatedTexture(4, Duration.seconds(1)).loop();
         heart1 = texture("heart.png", 44, 40);
         heart2 = texture("heart.png", 44, 40);
         heart3 = texture("heart.png", 44, 40);
 
+        var scoreText = getUIFactory().newText("", Color.GOLD, 38.0);
+        scoreText.setStrokeWidth(2.5);
+        scoreText.setStroke(Color.color(0.0, 0.0, 0.0, 0.56));
+        scoreText.textProperty().bind(getip("score").asString());
+
+        addUINode(scoreText, 285, 49);
+        addUINode(coin, 250, 21);
         addUINode(heart1, 15, 15);
         addUINode(heart2, 62, 15);
         addUINode(heart3, 109, 15);
@@ -174,14 +193,6 @@ public class DungeonCrawlerApp extends GameApplication {
             heart3 = texture("heart_half_full.png", 44, 40);
             addUINode(heart3, 109, 15);
         }
-//        else if (player.getComponent(PlayerComponent.class).getHp() > 29) {
-//            heart1 = texture("heart.png", 44, 40);
-//            heart2 = texture("heart.png", 44, 40);
-//            heart3 = texture("heart.png", 44, 40);
-//            addUINode(heart1, 15, 15);
-//            addUINode(heart3, 62, 15);
-//            addUINode(heart3, 109, 15);
-//        }
     }
 
     @Override
@@ -826,6 +837,16 @@ public class DungeonCrawlerApp extends GameApplication {
                 Entity keyEntity = btn.getObject("keyEntity");
 
                 keyEntity.getViewComponent().opacityProperty().setValue(0);
+            }
+        });
+
+        /** Adds unitCollision to player and coin unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.COIN) {
+            @Override
+            protected void onCollision(Entity player, Entity coin) {
+                inc("score", +1);
+                play("coins.wav");
+                coin.removeFromWorld();
             }
         });
     }

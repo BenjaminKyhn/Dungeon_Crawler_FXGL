@@ -226,6 +226,7 @@ public class GoblinComponent extends Component{
         /** When mob is dead */
         if (hp.getValue() <= 0) {
             setDead(true);
+            spawn("coin", entity.getX()+entity.getWidth()/2, entity.getY()+entity.getHeight()/2);
             entity.removeFromWorld();
             play("IMPDIE2.wav");
         }

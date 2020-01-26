@@ -229,6 +229,7 @@ public class TrollComponent extends Component{
         /** When mob is dead */
         if (hp.getValue() <= 0) {
             setDead(true);
+            spawn("coin", entity.getX()+entity.getWidth()/2, entity.getY()+entity.getHeight()/2);
             entity.removeFromWorld();
             FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getTrollTrapEnemies().remove(entity); //used when the mobs are added to the trapEnemies ArrayList
             int randomDeathSound = (int)(Math.random()*2);
