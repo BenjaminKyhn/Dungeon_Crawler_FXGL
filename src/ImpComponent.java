@@ -224,7 +224,7 @@ public class ImpComponent extends Component{
         }, Duration.seconds(0.6));
 
         /** When mob is dead */
-        if (hp.getValue() == 0) {
+        if (hp.getValue() <= 0) {
             setDead(true);
             entity.removeFromWorld();
             play("IMPDIE2.wav");

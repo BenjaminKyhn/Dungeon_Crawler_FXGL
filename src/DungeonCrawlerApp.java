@@ -123,6 +123,7 @@ public class DungeonCrawlerApp extends GameApplication {
         if (getCurrentLevel().equals(levels.get(2))){
             getCurrentLevel().spawnSpikes();
             spawnBoss();
+            getCurrentLevel().openDoor();
 
             if (getCurrentLevel().isTrapActivated()){
                 removeTrapWall();

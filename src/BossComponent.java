@@ -238,4 +238,5 @@ public class    BossComponent extends Component {
     public boolean isDead() {
         return this.dead;
     }
+
 }

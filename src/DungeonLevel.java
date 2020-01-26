@@ -91,4 +91,7 @@ public abstract class DungeonLevel {
 
     public void spawnTrapWalls(){
     }
+
+    public void openDoor(){
+    }
 }

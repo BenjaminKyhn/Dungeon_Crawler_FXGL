@@ -227,7 +227,7 @@ public class TrollComponent extends Component{
         }, Duration.seconds(0.7));
 
         /** When mob is dead */
-        if (hp.getValue() == 0) {
+        if (hp.getValue() <= 0) {
             setDead(true);
             entity.removeFromWorld();
             FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getTrollTrapEnemies().remove(entity); //used when the mobs are added to the trapEnemies ArrayList

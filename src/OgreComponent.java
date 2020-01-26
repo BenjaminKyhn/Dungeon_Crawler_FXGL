@@ -225,7 +225,7 @@ public class OgreComponent extends Component {
         }, Duration.seconds(0.7));
 
         /** When mob is dead */
-        if (hp.getValue() == 0) {
+        if (hp.getValue() <= 0) {
             setDead(true);
             entity.removeFromWorld();
             int randomDeathSound = (int)(Math.random()*2);
