@@ -301,7 +301,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .bbox(new HitBox("main", new Point2D(7, 6), BoundingShape.box(30, 45)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(75))
+                .with(new HPComponent(7))
                 .with(new TrollComponent())
                 .build();
     }
@@ -329,7 +329,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .bbox(new HitBox("main", new Point2D(4, 15), BoundingShape.box(42, 48)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(100))
+                .with(new HPComponent(1))
                 .with(new DragonComponent())
                 .build();
     }
@@ -348,7 +348,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
 //                .bbox(new HitBox("body", new Point2D(210, 119), BoundingShape.polygon(-150.0,30, 0,-30, 100,0, 160,55, 200,55, 300,0, 360,-30, 470,30, 470,70, 350,210, 250,200, 160,310, 60,270, 0,180, -150,150)))
 //                .bbox(new HitBox("main", new Point2D(0, 0), BoundingShape.polygon(-60.0, 119.0, 210.0, 89.0, 310.0, 119.0, 370.0, 174.0, 410.0, 174.0, 510.0, 119.0, 570.0, 89.0, 680.0, 149.0, 680.0, 189.0, 560.0,329.0, 460.0, 319.0, 370.0, 429.0, 270.0, 389.0, 210.0, 299.0, 60.0, 269.0)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(500))
+                .with(new HPComponent(5))
                 .with(new BossComponent())
                 .build();
     }

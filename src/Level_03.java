@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class Level_03 extends DungeonLevel {
-//    private int playerX = 320;
+//    private int playerX = 128;
 //    private int playerY = 3008;
     private int playerX = 1344;
     private int playerY = 832;
@@ -103,7 +103,7 @@ public class Level_03 extends DungeonLevel {
     public void spawnSpikes(){
         if(!DungeonCrawlerApp.spikesSpawned){
             DungeonCrawlerApp.spikesSpawned = true;
-            Entity spikes0 = getGameWorld().spawn("spikes", 576, 2944);
+            Entity spikes0 = getGameWorld().spawn("spikes", 384, 2944);
             Entity spikes1 = getGameWorld().spawn("spikes", 4160, 960);
             Entity spikes2 = getGameWorld().spawn("spikes", 4224, 960);
             Entity spikes3 = getGameWorld().spawn("spikes", 4288, 960);

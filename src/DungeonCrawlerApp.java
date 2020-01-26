@@ -50,8 +50,8 @@ public class DungeonCrawlerApp extends GameApplication {
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setWidth(1280);
         gameSettings.setHeight(720);
-        gameSettings.setWidth(15*64);
-        gameSettings.setHeight(10*64);
+        gameSettings.setWidth(15 * 64);
+        gameSettings.setHeight(10 * 64);
         gameSettings.setTitle("Dungeon Crawler");
         gameSettings.setVersion("0.1");
 //        gameSettings.setFullScreenAllowed(true);
@@ -114,26 +114,28 @@ public class DungeonCrawlerApp extends GameApplication {
         updateUI();
 
         /** onUpdate methods specific for Level_02*/
-        if (getCurrentLevel().equals((levels.get(1)))){
+        if (getCurrentLevel().equals((levels.get(1)))) {
             openDoor();
             showStairs();
         }
 
         /** onUpdate methods specific for Level_03*/
-        if (getCurrentLevel().equals(levels.get(2))){
+        if (getCurrentLevel().equals(levels.get(2))) {
             getCurrentLevel().spawnSpikes();
             spawnBoss();
             getCurrentLevel().openDoor();
 
-            if (getCurrentLevel().isTrapActivated()){
+            if (getCurrentLevel().isTrapActivated()) {
                 removeTrapWall();
             }
-            if (!redSwitchActivated){
+            if (!redSwitchActivated) {
                 getCurrentLevel().spawnTrapSpikes();
             }
-            if (blueSwitchActivated){
-                getGameWorld().getEntitiesInRange(new Rectangle2D(896,1152,1,1)).forEach(Entity::removeFromWorld);
-                runOnce(() ->{play("dooropen2.wav");}, Duration.seconds(1));
+            if (blueSwitchActivated) {
+                getGameWorld().getEntitiesInRange(new Rectangle2D(896, 1152, 1, 1)).forEach(Entity::removeFromWorld);
+                runOnce(() -> {
+                    play("dooropen2.wav");
+                }, Duration.seconds(1));
                 bossActivated = true;
                 blueSwitchActivated = false;
             }
@@ -381,10 +383,10 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
-                if (door.getY() < player.getY()){
+                if (door.getY() < player.getY()) {
                     topDoorTouched = true;
                 }
-                if (door.getY() > player.getY()){
+                if (door.getY() > player.getY()) {
                     bottomDoorTouched = true;
                 }
             }
@@ -629,6 +631,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(TrollComponent.class).setRightTrapWallTouched(true);
                 }
             }
+
             @Override
             protected void onCollisionEnd(Entity enemy, Entity righttrapwall) {
                 if (enemy.hasComponent(TrollComponent.class)) {
@@ -641,24 +644,25 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity enemy, Entity door) {
-                if (door.getY() < enemy.getY()){
-                    if (enemy.hasComponent(TrollComponent.class)){
+                if (door.getY() < enemy.getY()) {
+                    if (enemy.hasComponent(TrollComponent.class)) {
                         enemy.getComponent(TrollComponent.class).setTopDoorTouched(true);
                     }
-                    if (enemy.hasComponent(DragonComponent.class)){
+                    if (enemy.hasComponent(DragonComponent.class)) {
                         enemy.getComponent(DragonComponent.class).setTopDoorTouched(true);
                     }
                 }
 
-                if (door.getY() > enemy.getY()){
-                    if (enemy.hasComponent(TrollComponent.class)){
+                if (door.getY() > enemy.getY()) {
+                    if (enemy.hasComponent(TrollComponent.class)) {
                         enemy.getComponent(TrollComponent.class).setBottomDoorTouched(true);
                     }
-                    if (enemy.hasComponent(DragonComponent.class)){
+                    if (enemy.hasComponent(DragonComponent.class)) {
                         enemy.getComponent(DragonComponent.class).setBottomDoorTouched(true);
                     }
                 }
             }
+
             @Override
             protected void onCollisionEnd(Entity enemy, Entity door) {
                 if (enemy.hasComponent(TrollComponent.class)) {
@@ -676,18 +680,17 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.ENEMY) {
             @Override
             protected void onCollision(Entity player, Entity enemy) {
-                if (enemy.hasComponent(ImpComponent.class)){
+                if (enemy.hasComponent(ImpComponent.class)) {
                     player.getComponent(PlayerComponent.class).onHit(5); //imps deal little damage
                 }
-                if (enemy.hasComponent(OgreComponent.class)){
+                if (enemy.hasComponent(OgreComponent.class)) {
                     player.getComponent(PlayerComponent.class).onHit(20); //ogres deal high damage
                 }
-                if (enemy.hasComponent(BossComponent.class)){
-                    if (!enemy.getComponent(BossComponent.class).isDead()){ //boss corpse lingers (boss is never removed from world)
+                if (enemy.hasComponent(BossComponent.class)) {
+                    if (!enemy.getComponent(BossComponent.class).isDead()) { //boss corpse lingers (boss is never removed from world)
                         player.getComponent(PlayerComponent.class).onHit(10); //boss deals normal damage
                     }
-                }
-                else{
+                } else {
                     player.getComponent(PlayerComponent.class).onHit(10); //standard hit
                 }
             }
@@ -737,7 +740,19 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.STAIRS) {
             @Override
             protected void onCollision(Entity player, Entity stairs) {
-                if (!freezeInput) {
+                if (getCurrentLevel().equals(levels.get(2))) {
+                    getDisplay().showMessageBox("You've completed the game. You can continue to play around in Level 03 if you'd like.", () -> {
+                        player.setPosition(128, 3008);
+                        weapon.setPosition(128 + 48, 3008);
+                        if (!weaponFacingRight){
+                            player.setScaleX(1);
+                            weapon.setScaleX(1);
+                            weaponFacingRight = true;
+                        }
+                    });
+                }
+
+                if (!getCurrentLevel().equals(levels.get(2))) {
                     freezeInput = true;
                     getGameScene().getViewport().fade(() -> {
                         cleanupLevel();
@@ -859,7 +874,7 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     private void removeTrapWall() {
-        if (getCurrentLevel().getTrollTrapEnemies().isEmpty() && !freezeInput){
+        if (getCurrentLevel().getTrollTrapEnemies().isEmpty() && !freezeInput) {
             getGameWorld().getEntitiesByType(DungeonCrawlerType.RIGHTTRAPWALL).forEach(Entity::removeFromWorld);
             play("wallup.wav");
             getCurrentLevel().setTrapActivated(false);
@@ -867,7 +882,7 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     private void spawnBoss() {
-        if (bossActivated && getCurrentLevel().getDragonTrapEnemies().isEmpty()){
+        if (bossActivated && getCurrentLevel().getDragonTrapEnemies().isEmpty()) {
             getCurrentLevel().spawnBoss();
             bossActivated = false;
         }
