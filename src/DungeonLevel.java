@@ -14,6 +14,7 @@ public abstract class DungeonLevel {
     private boolean trapActivated;
     private ArrayList<Entity> trollTrapEnemies = new ArrayList();
     private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
+    private boolean doorOpened;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;

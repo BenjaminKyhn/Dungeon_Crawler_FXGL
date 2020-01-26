@@ -133,6 +133,7 @@ public class DungeonCrawlerApp extends GameApplication {
             }
             if (blueSwitchActivated){
                 getGameWorld().getEntitiesInRange(new Rectangle2D(896,1152,1,1)).forEach(Entity::removeFromWorld);
+                runOnce(() ->{play("dooropen2.wav");}, Duration.seconds(1));
                 bossActivated = true;
                 blueSwitchActivated = false;
             }

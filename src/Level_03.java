@@ -21,6 +21,7 @@ public class Level_03 extends DungeonLevel {
     private ArrayList<Entity> trollTrapEnemies = new ArrayList();
     private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
     Entity boss;
+    private boolean doorOpened;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -135,10 +136,12 @@ public class Level_03 extends DungeonLevel {
         runOnce(() ->{DungeonCrawlerApp.freezeInput = false;}, Duration.seconds(2));
         spawnTrolls();
     }
-    
+
     public void openDoor(){
-        if (!(boss == null) && boss.getComponent(BossComponent.class).isDead()){
+        if (!(boss == null) && boss.getComponent(BossComponent.class).isDead() && !doorOpened){
             getGameWorld().getEntitiesByType(DungeonCrawlerType.DOOR).forEach(Entity::removeFromWorld);
+            play("dooropen2.wav");
+            doorOpened = true;
         }
     }
 
