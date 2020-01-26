@@ -75,7 +75,6 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnEnemies(){
-        getGameWorld().spawn("coin", 1500, 832);
         getGameWorld().spawn("demon", 3328, 2240);
         getGameWorld().spawn("demon", 3584, 1600);
         getGameWorld().spawn("demon", 3776, 2048);

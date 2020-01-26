@@ -76,7 +76,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
-        vars.put("score", 0);
+        vars.put("gold", 0);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class DungeonCrawlerApp extends GameApplication {
         var scoreText = getUIFactory().newText("", Color.GOLD, 38.0);
         scoreText.setStrokeWidth(2.5);
         scoreText.setStroke(Color.color(0.0, 0.0, 0.0, 0.56));
-        scoreText.textProperty().bind(getip("score").asString());
+        scoreText.textProperty().bind(getip("gold").asString());
 
         addUINode(scoreText, 285, 49);
         addUINode(coin, 250, 21);
@@ -844,7 +844,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.COIN) {
             @Override
             protected void onCollision(Entity player, Entity coin) {
-                inc("score", +1);
+                inc("gold", +1);
                 play("coins.wav");
                 coin.removeFromWorld();
             }
