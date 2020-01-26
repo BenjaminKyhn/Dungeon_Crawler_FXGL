@@ -270,4 +270,6 @@ public class DragonComponent extends Component {
     public void setBottomDoorTouched(boolean bottomDoorTouched) {
         this.bottomDoorTouched = bottomDoorTouched;
     }
+
+    //TODO make dragons shoot fireballs
 }

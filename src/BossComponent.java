@@ -239,4 +239,7 @@ public class    BossComponent extends Component {
         return this.dead;
     }
 
+
+    //TODO remove pillars in the center so he has less collisions
+    //TODO make boss shoot firefalls
 }
