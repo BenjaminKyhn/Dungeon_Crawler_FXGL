@@ -242,6 +242,7 @@ public class DragonComponent extends Component {
         if (hp.getValue() == 0) {
             setDead(true);
             entity.removeFromWorld();
+            FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getDragonTrapEnemies().remove(entity);
             play("dragdie.wav");
         }
     }

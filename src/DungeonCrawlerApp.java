@@ -36,6 +36,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean redSwitchActivated;
     private boolean blueSwitchActivated = true;
     private boolean healing;
+    private boolean bossActivated;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
     private int levelNumber = 3;
@@ -121,6 +122,8 @@ public class DungeonCrawlerApp extends GameApplication {
         /** onUpdate methods specific for Level_03*/
         if (getCurrentLevel().equals(levels.get(2))){
             getCurrentLevel().spawnSpikes();
+            spawnBoss();
+
             if (getCurrentLevel().isTrapActivated()){
                 removeTrapWall();
             }
@@ -129,8 +132,7 @@ public class DungeonCrawlerApp extends GameApplication {
             }
             if (blueSwitchActivated){
                 getGameWorld().getEntitiesInRange(new Rectangle2D(896,1152,1,1)).forEach(Entity::removeFromWorld);
-                getGameWorld().getEntitiesAt(new Point2D(896,1152)).forEach(Entity::removeFromWorld);
-                getCurrentLevel().spawnDragons();
+                bossActivated = true;
                 blueSwitchActivated = false;
             }
         }
@@ -757,6 +759,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BLUESWITCH) {
             @Override
             protected void onCollision(Entity player, Entity blueswitch) {
+                getCurrentLevel().spawnDragons();
                 blueswitch.removeFromWorld();
                 play("switch.wav");
                 blueSwitchActivated = true;
@@ -862,8 +865,9 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     private void spawnBoss() {
-        if (getCurrentLevel().getDragonTrapEnemies().isEmpty() && !freezeInput){
+        if (bossActivated && getCurrentLevel().getDragonTrapEnemies().isEmpty()){
             getCurrentLevel().spawnBoss();
+            bossActivated = false;
         }
     }
 

@@ -78,7 +78,16 @@ public class Level_03 extends DungeonLevel {
         getGameWorld().spawn("demon", 3776, 2048);
         getGameWorld().spawn("demon", 4224, 1728);
         getGameWorld().spawn("ogre", 4480, 3008);
-//        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
+        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
+        Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2752);
+        Entity dragon3 = getGameWorld().spawn("dragon", 1472, 2496);
+        Entity dragon4 = getGameWorld().spawn("dragon", 1792, 2368);
+        Entity dragon5 = getGameWorld().spawn("dragon", 1792, 2688);
+        dragonTrapEnemies.add(dragon1);
+        dragonTrapEnemies.add(dragon2);
+        dragonTrapEnemies.add(dragon3);
+        dragonTrapEnemies.add(dragon4);
+        dragonTrapEnemies.add(dragon5);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -136,20 +145,13 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnDragons(){
-        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
-        Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2752);
-        Entity dragon3 = getGameWorld().spawn("dragon", 1472, 2496);
-        Entity dragon4 = getGameWorld().spawn("dragon", 1792, 2368);
-        Entity dragon5 = getGameWorld().spawn("dragon", 1792, 2688);
-        dragonTrapEnemies.add(dragon1);
-        dragonTrapEnemies.add(dragon2);
-        dragonTrapEnemies.add(dragon3);
-        dragonTrapEnemies.add(dragon4);
-        dragonTrapEnemies.add(dragon5);
     }
 
     public void spawnBoss(){
+        DungeonCrawlerApp.freezeInput = true;
+        runOnce(() ->{DungeonCrawlerApp.freezeInput = false;}, Duration.seconds(2));
         getGameWorld().spawn("boss", 2250, 500);
         play("hornhapy.wav");
+        getGameScene().getViewport().shakeRotational(1.0);
     }
 }
