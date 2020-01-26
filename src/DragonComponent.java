@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-public class TrollComponent extends Component{
+public class DragonComponent extends Component {
     private HPComponent hp;
     private PhysicsComponent physics;
     private AnimatedTexture texture;
@@ -19,27 +19,26 @@ public class TrollComponent extends Component{
     private boolean topWallTouched;
     private boolean rightWallTouched;
     private boolean leftWallTouched;
-    private boolean rightTrapWallTouched;
     private boolean topDoorTouched;
     private boolean bottomDoorTouched;
     private boolean isBeingDamaged = false;
     private boolean dead = false;
     private LocalTimer moveTimer;
-    private double speed = 2;
+    private double speed = 1;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
-    public TrollComponent() {
-        Image image = image("troll3times.png");
+    public DragonComponent() {
+        Image image = image("dragon3times.png");
 
-        animIdle = new AnimationChannel(image, 8, 48, 51, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 48, 51, Duration.seconds(1), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 48, 63, Duration.seconds(1), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 48, 63, Duration.seconds(1), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
     }
 
     @Override
-    public void onAdded(){
+    public void onAdded() {
         moveTimer = FXGL.newLocalTimer();
         moveTimer.capture();
         entity.getViewComponent().addChild(texture);
@@ -50,21 +49,21 @@ public class TrollComponent extends Component{
         /**
          * Target the player
          */
-        if (moveTimer.elapsed(Duration.seconds(1)) && !rightWallTouched && !rightTrapWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
-            for (int i = 0; i < 32; i++) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched && (player.getX() - entity.getX() > 0) && (player.getX() - entity.getX() < 640) && (player.getX() - entity.getX() > player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
+            for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !rightWallTouched && !rightTrapWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
+                    if (!dead && !rightWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
             runOnce(() -> {
                 texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(1));
+            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
-            for (int i = 0; i < 32; i++) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched && (player.getX() - entity.getX() < 0) && (player.getX() - entity.getX() > -640) && (player.getX() - entity.getX() < player.getY() - entity.getY()) && !DungeonCrawlerApp.freezeInput) {
+            for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
                     if (!dead && !leftWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
                 }, Duration.seconds(i / 32.0));
@@ -73,44 +72,47 @@ public class TrollComponent extends Component{
             moveTimer.capture();
             runOnce(() -> {
                 texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(1));
+            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
-            for (int i = 0; i < 32; i++) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched && (player.getY() - entity.getY() < 0) && (player.getY() - entity.getY() > -640) && (player.getY() - entity.getY() < player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
+            for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !topWallTouched && !topDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
+                    if (!dead && !topWallTouched && !topDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                        up();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
             runOnce(() -> {
                 texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(1));
+            }, Duration.seconds(2));
         }
 
-        if (moveTimer.elapsed(Duration.seconds(1)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
-            for (int i = 0; i < 32; i++) {
+        if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched && (player.getY() - entity.getY() > 0) && (player.getY() - entity.getY() < 640) && (player.getY() - entity.getY() > player.getX() - entity.getX()) && !DungeonCrawlerApp.freezeInput) {
+            for (int i = 0; i < 64; i++) {
                 runOnce(() -> {
-                    if (!dead && !bottomWallTouched && !bottomDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
+                    if (!dead && !bottomWallTouched && !bottomDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                        down();
                 }, Duration.seconds(i / 32.0));
             }
             texture.loopAnimationChannel(animWalk);
             moveTimer.capture();
             runOnce(() -> {
                 texture.loopAnimationChannel(animIdle);
-            }, Duration.seconds(1));
+            }, Duration.seconds(2));
         }
 
         /** Random movement when outside of aggro range */
-        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.freezeInput){
+        if ((player.getX() - entity.getX() > 640) && (player.getX() - entity.getX() < -640) && (player.getY() - entity.getY() > 640) && (player.getY() - entity.getY() < -640) && !DungeonCrawlerApp.freezeInput) {
             int randomMovement = (int) (Math.random() * 4);
             switch (randomMovement) {
                 case 0:
-                    if (moveTimer.elapsed(Duration.seconds(1)) && !topWallTouched) {
-                        for (int i = 0; i < 32; i++) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !topWallTouched) {
+                        for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !topWallTouched && !topDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) up();
+                                if (!dead && !topWallTouched && !topDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                                    up();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -121,10 +123,11 @@ public class TrollComponent extends Component{
                         break;
                     }
                 case 1:
-                    if (moveTimer.elapsed(Duration.seconds(1)) && !bottomWallTouched) {
-                        for (int i = 0; i < 32; i++) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !bottomWallTouched) {
+                        for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !bottomDoorTouched && !bottomWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) down();
+                                if (!dead && !bottomWallTouched && !bottomDoorTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                                    down();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -135,10 +138,11 @@ public class TrollComponent extends Component{
                         break;
                     }
                 case 2:
-                    if (moveTimer.elapsed(Duration.seconds(1)) && !rightWallTouched) {
-                        for (int i = 0; i < 32; i++) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !rightWallTouched) {
+                        for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !rightWallTouched && !rightTrapWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null)) right();
+                                if (!dead && !rightWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                                    right();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -149,10 +153,11 @@ public class TrollComponent extends Component{
                         break;
                     }
                 case 3:
-                    if (moveTimer.elapsed(Duration.seconds(1)) && !leftWallTouched) {
-                        for (int i = 0; i < 32; i++) {
+                    if (moveTimer.elapsed(Duration.seconds(3)) && !leftWallTouched) {
+                        for (int i = 0; i < 64; i++) {
                             runOnce(() -> {
-                                if (!dead && !leftWallTouched  && !DungeonCrawlerApp.freezeInput && !(entity == null)) left();
+                                if (!dead && !leftWallTouched && !DungeonCrawlerApp.freezeInput && !(entity == null))
+                                    left();
                             }, Duration.seconds(i / 32.0));
                         }
                         texture.loopAnimationChannel(animWalk);
@@ -166,6 +171,7 @@ public class TrollComponent extends Component{
         }
 
     }
+
     public void left() {
         getEntity().setScaleX(-1); //Changes the direction of the sprite
         entity.translateX(-speed);
@@ -197,12 +203,18 @@ public class TrollComponent extends Component{
 
         /** When mob is still alive */
         hp.setValue(hp.getValue() - 25);
-        if (hp.getValue() > 0){
-            int randomHitSound = (int)(Math.random()*3);
-            switch (randomHitSound){
-                case 0: play("trollhit1.wav"); break;
-                case 1: play("trollhit2.wav"); break;
-                case 2: play("trollhit3.wav"); break;
+        if (hp.getValue() > 0) {
+            int randomHitSound = (int) (Math.random() * 3);
+            switch (randomHitSound) {
+                case 0:
+                    play("HORNHIT1.wav");
+                    break;
+                case 1:
+                    play("HORNHIT2.wav");
+                    break;
+                case 2:
+                    play("HORNHIT3.wav");
+                    break;
             }
 
             double zeroOpacity = 0.1;
@@ -221,7 +233,7 @@ public class TrollComponent extends Component{
 
         isBeingDamaged = true;
 
-        /** Damage time 1 sec */
+        /** Damage time 0.6 sec */
         runOnce(() -> {
             isBeingDamaged = false;
         }, Duration.seconds(0.7));
@@ -230,12 +242,7 @@ public class TrollComponent extends Component{
         if (hp.getValue() == 0) {
             setDead(true);
             entity.removeFromWorld();
-            FXGL.<DungeonCrawlerApp>getAppCast().getCurrentLevel().getTrapEnemies().remove(entity); //used when the mobs are added to the trapEnemies ArrayList
-            int randomDeathSound = (int)(Math.random()*2);
-            switch (randomDeathSound){
-                case 0: play("trolldie1.wav"); break;
-                case 1: play("trolldie2.wav"); break;
-            }
+            play("HORNDIE2.wav");
         }
     }
 
@@ -253,10 +260,6 @@ public class TrollComponent extends Component{
 
     public void setLeftWallTouched(boolean leftWallTouched) {
         this.leftWallTouched = leftWallTouched;
-    }
-
-    public void setRightTrapWallTouched(boolean rightTrapWallTouched) {
-        this.rightTrapWallTouched = rightTrapWallTouched;
     }
 
     public void setTopDoorTouched(boolean topDoorTouched) {

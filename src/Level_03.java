@@ -8,10 +8,12 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class Level_03 extends DungeonLevel {
 //    private int playerX = 320;
 //    private int playerY = 3008;
-    private int playerX = 1344;
-    private int playerY = 832;
+//    private int playerX = 1344;
+//    private int playerY = 832;
 //    private int playerX = 4032;
 //    private int playerY = 1728;
+    private int playerX = 1792;
+    private int playerY = 2368;
     private String levelName = "dungeon3.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
@@ -72,6 +74,7 @@ public class Level_03 extends DungeonLevel {
         getGameWorld().spawn("demon", 3776, 2048);
         getGameWorld().spawn("demon", 4224, 1728);
         getGameWorld().spawn("ogre", 4480, 3008);
+        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -126,5 +129,9 @@ public class Level_03 extends DungeonLevel {
         runOnce(() ->{Entity troll4 = getGameWorld().spawn("troll", 640, 1024); play("trollspawn.wav"); trapEnemies.add(troll4);}, Duration.seconds(2.0));
         runOnce(() ->{Entity troll5 = getGameWorld().spawn("troll", 640, 788); play("trollspawn.wav"); trapEnemies.add(troll5);}, Duration.seconds(2.5));
         runOnce(() ->{Entity troll6 = getGameWorld().spawn("troll", 576, 640); play("trollspawn.wav"); trapEnemies.add(troll6);}, Duration.seconds(3.0));
+    }
+
+    public void spawnDragons(){
+        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
     }
 }

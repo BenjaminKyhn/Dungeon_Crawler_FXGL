@@ -425,6 +425,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setTopWallTouched(true);
                 }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setTopWallTouched(true);
+                }
             }
 
             @Override
@@ -446,6 +449,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setTopWallTouched(false);
                 }
             }
         });
@@ -472,6 +478,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setBottomWallTouched(true);
                 }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
+                }
             }
 
             @Override
@@ -493,6 +502,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
                 }
             }
         });
@@ -519,6 +531,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setRightWallTouched(true);
                 }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setRightWallTouched(true);
+                }
             }
 
             @Override
@@ -540,6 +555,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setRightWallTouched(false);
                 }
             }
         });
@@ -566,6 +584,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setLeftWallTouched(true);
                 }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
+                }
             }
 
             @Override
@@ -587,6 +608,9 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(BossComponent.class)) {
                     enemy.getComponent(BossComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setLeftWallTouched(false);
                 }
             }
         });
@@ -610,15 +634,34 @@ public class DungeonCrawlerApp extends GameApplication {
         /** Adds unitCollision to door and enemy unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.DOOR) {
             @Override
-            protected void onCollisionBegin(Entity enemy, Entity wall) {
-                if (enemy.hasComponent(TrollComponent.class)) {
-                    enemy.getComponent(TrollComponent.class).setDoorTouched(true);
+            protected void onCollisionBegin(Entity enemy, Entity door) {
+                if (door.getY() < enemy.getY()){
+                    if (enemy.hasComponent(TrollComponent.class)){
+                        enemy.getComponent(TrollComponent.class).setTopDoorTouched(true);
+                    }
+                    if (enemy.hasComponent(DragonComponent.class)){
+                        enemy.getComponent(DragonComponent.class).setTopDoorTouched(true);
+                    }
+                }
+
+                if (door.getY() > enemy.getY()){
+                    if (enemy.hasComponent(TrollComponent.class)){
+                        enemy.getComponent(TrollComponent.class).setBottomDoorTouched(true);
+                    }
+                    if (enemy.hasComponent(DragonComponent.class)){
+                        enemy.getComponent(DragonComponent.class).setBottomDoorTouched(true);
+                    }
                 }
             }
             @Override
-            protected void onCollisionEnd(Entity enemy, Entity wall) {
+            protected void onCollisionEnd(Entity enemy, Entity door) {
                 if (enemy.hasComponent(TrollComponent.class)) {
-                    enemy.getComponent(TrollComponent.class).setDoorTouched(false);
+                    enemy.getComponent(TrollComponent.class).setTopDoorTouched(false);
+                    enemy.getComponent(TrollComponent.class).setBottomDoorTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setTopDoorTouched(false);
+                    enemy.getComponent(DragonComponent.class).setBottomDoorTouched(false);
                 }
             }
         });
@@ -634,8 +677,8 @@ public class DungeonCrawlerApp extends GameApplication {
                     player.getComponent(PlayerComponent.class).onHit(20); //ogres deal high damage
                 }
                 if (enemy.hasComponent(BossComponent.class)){
-                    if (!enemy.getComponent(BossComponent.class).isDead()){
-                        player.getComponent(PlayerComponent.class).onHit(10); //boss deals normal damage and its corpse lingers
+                    if (!enemy.getComponent(BossComponent.class).isDead()){ //boss corpse lingers (boss is never removed from world)
+                        player.getComponent(PlayerComponent.class).onHit(10); //boss deals normal damage
                     }
                 }
                 else{
@@ -666,6 +709,9 @@ public class DungeonCrawlerApp extends GameApplication {
                     }
                     if (enemy.hasComponent(BossComponent.class)) {
                         enemy.getComponent(BossComponent.class).onHit();
+                    }
+                    if (enemy.hasComponent(DragonComponent.class)) {
+                        enemy.getComponent(DragonComponent.class).onHit();
                     }
                 }
             }
