@@ -1,5 +1,7 @@
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.LiftComponent;
+import com.almasb.fxgl.dsl.components.OffscreenCleanComponent;
+import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
@@ -51,6 +53,18 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
                 .with(new WeaponComponent())
+                .build();
+    }
+
+    @Spawns("fireball")
+    public Entity newFireball(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.ENEMY)
+                .from(data)
+                .viewWithBBox(texture("fireball.png").toAnimatedTexture(3, Duration.seconds(0.46)).loop())
+                .with(new CollidableComponent(true))
+                .with(new ProjectileComponent(data.get("direction"), 350))
+                .with(new OffscreenCleanComponent())
                 .build();
     }
 

@@ -681,6 +681,10 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.ENEMY) {
             @Override
             protected void onCollision(Entity player, Entity enemy) {
+                if (enemy.getProperties().exists("isProjectile")) {
+                    player.getComponent(PlayerComponent.class).onHit(10);
+                    enemy.removeFromWorld();
+                }
                 if (enemy.hasComponent(ImpComponent.class)) {
                     player.getComponent(PlayerComponent.class).onHit(5); //imps deal little damage
                 }
@@ -805,7 +809,7 @@ public class DungeonCrawlerApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.SPIKES) {
             @Override
             protected void onCollision(Entity player, Entity spikes) {
-                player.getComponent(PlayerComponent.class).onHit(10);
+                player.getComponent(PlayerComponent.class).onHit(30);
             }
         });
 

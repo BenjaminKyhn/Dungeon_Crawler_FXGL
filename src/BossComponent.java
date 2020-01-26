@@ -1,5 +1,6 @@
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
@@ -43,6 +44,15 @@ public class    BossComponent extends Component {
         moveTimer = FXGL.newLocalTimer();
         moveTimer.capture();
         entity.getViewComponent().addChild(texture);
+
+        /** Shoot fireballs */
+        texture.setOnCycleFinished(() -> {
+            if (player != null) {
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(0));
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(0.5));
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(1));
+            }
+        });
     }
 
     @Override
