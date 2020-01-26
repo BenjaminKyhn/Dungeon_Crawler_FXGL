@@ -327,7 +327,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .bbox(new HitBox("main", new Point2D(7, 6), BoundingShape.box(30, 45)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(75))
+                .with(new HPComponent(7))
                 .with(new TrollComponent())
                 .build();
     }
@@ -355,7 +355,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .bbox(new HitBox("main", new Point2D(4, 15), BoundingShape.box(42, 48)))
                 .with(new CollidableComponent(true))
-                .with(new HPComponent(100))
+                .with(new HPComponent(1))
                 .with(new DragonComponent())
                 .build();
     }

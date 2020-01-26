@@ -3,6 +3,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.physics.box2d.dynamics.contacts.Position;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
@@ -24,6 +25,7 @@ public class    BossComponent extends Component {
     private boolean dead = false;
     private boolean facingRight = true;
     private LocalTimer moveTimer;
+    private LocalTimer shootTimer;
     private double speed = 2;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
@@ -43,20 +45,29 @@ public class    BossComponent extends Component {
     public void onAdded() {
         moveTimer = FXGL.newLocalTimer();
         moveTimer.capture();
+//        shootTimer.capture();
         entity.getViewComponent().addChild(texture);
 
         /** Shoot fireballs */
         texture.setOnCycleFinished(() -> {
             if (player != null) {
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(0));
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(0.5));
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getPosition()).put("direction", player.getPosition().subtract(entity.getPosition())));}, Duration.seconds(1));
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
+                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
             }
         });
     }
 
     @Override
     public void onUpdate(double tpf) {
+//        /** Shoot fireballs */
+//        if (player != null && shootTimer.elapsed(Duration.seconds(3))) {
+//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
+//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
+//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
+//            shootTimer.capture();
+//        }
+
         /**
          * Target the player
          */
