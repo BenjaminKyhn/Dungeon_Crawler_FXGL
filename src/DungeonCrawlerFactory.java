@@ -80,12 +80,28 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.SHOP)
                 .from(data)
-                .bbox(new HitBox("main", new Point2D(-10,-10), BoundingShape.box(70, 70)))
+                .bbox(new HitBox("main", new Point2D(-10,-10), BoundingShape.box(84, 84)))
                 .view(texture("elfgirl_idle.png").toAnimatedTexture(4, Duration.seconds(1)).loop())
                 .with(new CollidableComponent(true))
                 .with("keyEntity", keyEntity)
                 .build();
     }
+
+    @Spawns("chest")
+    public Entity newChest(SpawnData data) {
+        var keyEntity = FXGL.getGameWorld().create("keyCode", new SpawnData(data.getX() + 20, data.getY()-20).put("key", "E"));
+        keyEntity.getViewComponent().opacityProperty().setValue(0);
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.CHEST)
+                .from(data)
+                .viewWithBBox( texture("chestfull.png"))
+//                .bbox(new HitBox("main", new Point2D(0,0), BoundingShape.box(64, 64)))
+                .with(new CollidableComponent(true))
+                .with("keyEntity", keyEntity)
+                .build();
+    }
+
 
     @Spawns("fireball")
     public Entity newFireball(SpawnData data) {
@@ -115,17 +131,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .from(data)
                 .viewWithBBox( texture("coin2.png").toAnimatedTexture(4, Duration.seconds(1)).loop())
                 .bbox(new HitBox(BoundingShape.box(12, 14)))
-                .with(new CollidableComponent(true))
-                .build();
-    }
-
-    @Spawns("chest")
-    public Entity newChest(SpawnData data) {
-
-        return entityBuilder()
-                .type(DungeonCrawlerType.COIN)
-                .from(data)
-                .viewWithBBox( texture("chest.png"))
                 .with(new CollidableComponent(true))
                 .build();
     }
@@ -161,6 +166,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
         lift.yAxisDistanceDuration(6, Duration.seconds(0.76));
 
         return entityBuilder()
+                .type(DungeonCrawlerType.KEYCODE)
                 .from(data)
                 .view(new KeyView(keyCode, Color.YELLOW, 24))
                 .with(lift)

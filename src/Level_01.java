@@ -9,6 +9,7 @@ public class Level_01 extends DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
+    private int chest1 = 10;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;

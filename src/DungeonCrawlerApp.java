@@ -282,6 +282,18 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Use") {
             @Override
             protected void onActionBegin() {
+                getGameWorld().getEntitiesByType(DungeonCrawlerType.CHEST)
+                        .stream()
+                        .filter(btn -> player.isColliding(btn))
+                        .forEach(btn -> {
+                            inc("gold", +10);
+                            play("coins.wav");
+                            btn.removeFromWorld();
+                            if (getCurrentLevel().equals(levels.get(0))){
+                                getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
+                            }
+                        });
+
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
                         .stream()
                         .filter(btn -> player.isColliding(btn))
@@ -1252,6 +1264,20 @@ public class DungeonCrawlerApp extends GameApplication {
                     getGameScene().removeUINode(shopUI);
                     shopActive = false;
                 }
+            }
+        });
+
+        /** Adds unitCollision to player and chest unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.CHEST) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity btn) {
+                Entity keyEntity = btn.getObject("keyEntity");
+
+                if (!keyEntity.isActive()) {
+                    getGameWorld().addEntity(keyEntity);
+                }
+
+                keyEntity.getViewComponent().opacityProperty().setValue(1);
             }
         });
 
