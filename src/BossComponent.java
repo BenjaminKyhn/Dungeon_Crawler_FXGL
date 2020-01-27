@@ -48,15 +48,6 @@ public class    BossComponent extends Component {
         shootTimer = FXGL.newLocalTimer();
         shootTimer.capture();
         entity.getViewComponent().addChild(texture);
-
-//        /** Shoot fireballs */
-//        texture.setOnCycleFinished(() -> {
-//            if (player != null) {
-//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
-//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
-//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
-//            }
-//        });
     }
 
     @Override
@@ -68,11 +59,6 @@ public class    BossComponent extends Component {
             runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
             shootTimer.capture();
         }
-
-//        if (shootTimer.elapsed(Duration.seconds(3)) && !dead){
-//            runOnce(() -> {FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(3));
-//            shootTimer.capture();
-//        }
 
         /**
          * Target the player
@@ -172,7 +158,7 @@ public class    BossComponent extends Component {
 
     public void left() {
         if (facingRight){
-            entity.translateX(300);
+            entity.translateX(250);
             facingRight = false;
         }
         getEntity().setScaleX(-1); //Changes the direction of the sprite
@@ -181,7 +167,7 @@ public class    BossComponent extends Component {
 
     public void right() {
         if (!facingRight){
-            entity.translateX(-300);
+            entity.translateX(-250);
             facingRight = true;
         }
         getEntity().setScaleX(1); //Changes the direction of the sprite
