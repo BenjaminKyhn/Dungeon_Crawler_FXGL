@@ -80,15 +80,15 @@ public class Level_03 extends DungeonLevel {
         getGameWorld().spawn("demon", 3776, 2048);
         getGameWorld().spawn("demon", 4224, 1728);
         getGameWorld().spawn("ogre", 4480, 3008);
-        getGameWorld().spawn("ogre", 2624, 2560);
-        getGameWorld().spawn("ogre", 2368, 2048);
-        getGameWorld().spawn("ogre", 2560, 1728);
-        getGameWorld().spawn("ogre", 2752, 1024);
-        getGameWorld().spawn("ogre", 2240, 640);
+        getGameWorld().spawn("ogre", 2112, 768);
+        getGameWorld().spawn("ogre", 2560, 256);
+        getGameWorld().spawn("ogre", 3008, 768);
+        getGameWorld().spawn("ogre", 2688, 1344);
+        getGameWorld().spawn("ogre", 3040, 1008);
         getGameWorld().spawn("ogre", 2816, 448);
         getGameWorld().spawn("goblin", 3904, 832);
         getGameWorld().spawn("goblin", 1600, 832);
-        getGameWorld().spawn("goblin", 2432, 704);
+        getGameWorld().spawn("goblin", 3840, 832);
         Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
         Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2752);
         Entity dragon3 = getGameWorld().spawn("dragon", 1472, 2496);
@@ -170,7 +170,8 @@ public class Level_03 extends DungeonLevel {
         DungeonCrawlerApp.freezeInput = true;
         runOnce(() ->{DungeonCrawlerApp.freezeInput = false;}, Duration.seconds(2));
         boss = getGameWorld().spawn("boss", 2304, 576);
-        play("hornhapy.wav");
-        getGameScene().getViewport().shakeRotational(1.0);
+        play("gargroar.wav");
+        runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(0));
+        runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(1.5));
     }
 }

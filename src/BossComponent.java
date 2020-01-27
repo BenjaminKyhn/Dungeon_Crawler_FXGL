@@ -194,9 +194,9 @@ public class    BossComponent extends Component {
         if (hp.getValue() > 0){
             int randomHitSound = (int)(Math.random()*3);
             switch (randomHitSound){
-                case 0: play("HORNHIT1.wav"); break;
-                case 1: play("HORNHIT2.wav"); break;
-                case 2: play("HORNHIT3.wav"); break;
+                case 0: play("garghit.wav"); break;
+                case 1: play("garghit.wav"); break;
+                case 2: play("garghit.wav"); break;
             }
 
             double zeroOpacity = 0.1;
@@ -223,7 +223,7 @@ public class    BossComponent extends Component {
         /** When mob is dead */
         if (hp.getValue() <= 0 && !dead) {
             dead = true;
-            play("HORNDIE2.wav");
+            play("gargdie.wav");
             texture.playAnimationChannel(animDead);
         }
     }

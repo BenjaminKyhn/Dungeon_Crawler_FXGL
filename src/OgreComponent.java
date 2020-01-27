@@ -28,8 +28,8 @@ public class OgreComponent extends Component {
     public OgreComponent() {
         Image image = image("ogre3times.png");
 
-        animIdle = new AnimationChannel(image, 8, 97, 84, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 97, 84, Duration.seconds(1), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 66, 83, Duration.seconds(1), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 66, 83, Duration.seconds(1), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();

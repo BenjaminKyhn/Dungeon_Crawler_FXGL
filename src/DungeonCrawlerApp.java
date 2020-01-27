@@ -33,12 +33,12 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean redSwitchActivated;
-    private boolean blueSwitchActivated;
+    private boolean blueSwitchActivated = true;
     private boolean healing;
     private boolean bossActivated;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;

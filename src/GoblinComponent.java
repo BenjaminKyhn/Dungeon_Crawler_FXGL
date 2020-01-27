@@ -28,8 +28,8 @@ public class GoblinComponent extends Component{
     public GoblinComponent() {
         Image image = image("goblin.png");
 
-        animIdle = new AnimationChannel(image, 8, 64, 68, Duration.seconds(0.5), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 64, 68, Duration.seconds(0.5), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 42, 68, Duration.seconds(0.5), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 42, 68, Duration.seconds(0.5), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();
