@@ -46,8 +46,8 @@ public class DungeonCrawlerApp extends GameApplication {
     private List<DungeonLevel> levels = new ArrayList<>();
     private int levelNumber = 3;
     private int greatswordPrice = 200;
-    private int heartPrice = 150;
-    private int gold;
+    private int healthPrice = 150;
+    private int startingGold = 400;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
@@ -79,7 +79,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
-        vars.put("gold", 0);
+        vars.put("gold", startingGold);
     }
 
     @Override
@@ -170,6 +170,14 @@ public class DungeonCrawlerApp extends GameApplication {
             addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 0) && (player.getComponent(PlayerComponent.class).getHp() < 10)) {
             heart1 = texture("heart_half_full.png", 44, 40);
             heart2 = texture("heart_empty.png", 44, 40);
@@ -177,22 +185,95 @@ public class DungeonCrawlerApp extends GameApplication {
             addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 9) && (player.getComponent(PlayerComponent.class).getHp() < 15)) {
             heart2 = texture("heart_empty.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 14) && (player.getComponent(PlayerComponent.class).getHp() < 20)) {
             heart2 = texture("heart_half_full.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 19) && (player.getComponent(PlayerComponent.class).getHp() < 25)) {
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 24) && (player.getComponent(PlayerComponent.class).getHp() < 30)) {
             heart3 = texture("heart_half_full.png", 44, 40);
             addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 29) && (player.getComponent(PlayerComponent.class).getHp() < 35)){
+            heart3 = texture("heart.png", 44, 40);
+            addUINode(heart3, 109, 15);
+            if (heart4 != null){
+                heart4 = texture("heart_empty.png", 44, 40);
+                addUINode(heart4, 156, 15);
+            }
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 34) && (player.getComponent(PlayerComponent.class).getHp() < 40)){
+            heart4 = texture("heart_half_full.png", 44, 40);
+            addUINode(heart4, 156, 15);
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 39) && (player.getComponent(PlayerComponent.class).getHp() < 45)){
+            heart4 = texture("heart.png", 44, 40);
+            addUINode(heart4, 156, 15);
+            if (heart5 != null){
+                heart5 = texture("heart_empty.png", 44, 40);
+                addUINode(heart5, 203, 15);
+            }
+        }
+        else if ((player.getComponent(PlayerComponent.class).getHp() > 44) && (player.getComponent(PlayerComponent.class).getHp() < 50)){
+            heart5 = texture("heart_half_full.png", 44, 40);
+            addUINode(heart5, 203, 15);
+        }
+        else if ((player.getComponent(PlayerComponent.class).getHp() > 49)){
+            heart5 = texture("heart.png", 44, 40);
+            addUINode(heart5, 203, 15);
         }
     }
 
@@ -321,17 +402,19 @@ public class DungeonCrawlerApp extends GameApplication {
                     }
                 }
                 if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth() / 2) && (getInput().getMouseYUI() < shopUI.getHeight())) {
-                    if (heart5 == null && heart4 != null && getGameState().getInt("gold") >= heartPrice) {
-                        heart5 = texture("heart.png", 44, 40);
+                    if (heart5 == null && heart4 != null && getGameState().getInt("gold") >= healthPrice) {
+                        heart5 = texture("heart_empty.png", 44, 40);
                         addUINode(heart5, 203, 15);
-                        inc("gold", -heartPrice);
+                        inc("gold", -healthPrice);
                         play("coins.wav");
+                        player.getComponent(PlayerComponent.class).gainMoreHealth(10);
                     }
-                    if (heart4 == null && getGameState().getInt("gold") >= heartPrice) {
-                        heart4 = texture("heart.png", 44, 40);
+                    if (heart4 == null && getGameState().getInt("gold") >= healthPrice) {
+                        heart4 = texture("heart_empty.png", 44, 40);
                         addUINode(heart4, 156, 15);
-                        inc("gold", -heartPrice);
+                        inc("gold", -healthPrice);
                         play("coins.wav");
+                        player.getComponent(PlayerComponent.class).gainMoreHealth(10);
                     } else {
                         return;
                     }
@@ -1281,6 +1364,14 @@ public class DungeonCrawlerApp extends GameApplication {
         return heart3;
     }
 
+    public Texture getHeart4() {
+        return heart4;
+    }
+
+    public Texture getHeart5() {
+        return heart5;
+    }
+
     public void setHeart1(Texture heart1) {
         this.heart1 = heart1;
     }
@@ -1291,6 +1382,14 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public void setHeart3(Texture heart3) {
         this.heart3 = heart3;
+    }
+
+    public void setHeart4(Texture heart4) {
+        this.heart4 = heart4;
+    }
+
+    public void setHeart5(Texture heart5) {
+        this.heart5 = heart5;
     }
 
     public static void main(String[] args) {

@@ -1,11 +1,9 @@
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.component.Required;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
@@ -121,13 +119,31 @@ public class PlayerComponent extends Component {
     }
 
     public void restoreHP() {
-        hp.setValue(hp.getMaxHP());
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart1(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart2(texture("heart.png", 44, 40));
         FXGL.<DungeonCrawlerApp>getAppCast().setHeart3(texture("heart.png", 44, 40));
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart1(), 15, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart2(), 62, 15);
         addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart3(), 109, 15);
+
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getHeart4() == null){
+            hp.setValue(hp.getStartingHP());
+        }
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getHeart4() != null){
+            hp.setValue(40);
+            FXGL.<DungeonCrawlerApp>getAppCast().setHeart4(texture("heart.png", 44, 40));
+            addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart4(), 156, 15);
+        }
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getHeart5() != null){
+            hp.setValue(50);
+            FXGL.<DungeonCrawlerApp>getAppCast().setHeart5(texture("heart.png", 44, 40));
+            addUINode(FXGL.<DungeonCrawlerApp>getAppCast().getHeart5(), 203, 15);
+        }
+
+    }
+
+    public void gainMoreHealth(int health){
+        hp.setValue(hp.getValue() + health);
     }
 
     public int getHp() {
