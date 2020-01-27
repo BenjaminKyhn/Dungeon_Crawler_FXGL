@@ -212,8 +212,8 @@ public class DemonComponent extends Component {
                 runOnce(() -> {
                     entity.getViewComponent().setOpacity(1.0);
                 }, Duration.seconds(zeroOpacity));
-                zeroOpacity += 0.175;
-                fullOpacity += 0.175;
+                zeroOpacity += 0.15;
+                fullOpacity += 0.15;
             }
         }
 
@@ -222,7 +222,7 @@ public class DemonComponent extends Component {
         /** Damage time 0.6 sec */
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(0.7));
+        }, Duration.seconds(0.6));
 
         /** When mob is dead */
         if (hp.getValue() <= 0) {

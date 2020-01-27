@@ -235,8 +235,8 @@ public class DragonComponent extends Component {
                 runOnce(() -> {
                     entity.getViewComponent().setOpacity(1.0);
                 }, Duration.seconds(zeroOpacity));
-                zeroOpacity += 0.175;
-                fullOpacity += 0.175;
+                zeroOpacity += 0.15;
+                fullOpacity += 0.15;
             }
         }
 
@@ -245,7 +245,7 @@ public class DragonComponent extends Component {
         /** Damage time 0.6 sec */ //TODO fix the invuln frames for ALL enemies and players to be 0.6 sec without crashing
         runOnce(() -> {
             isBeingDamaged = false;
-        }, Duration.seconds(0.7));
+        }, Duration.seconds(0.6));
 
         /** When mob is dead */
         if (hp.getValue() <= 0) {
