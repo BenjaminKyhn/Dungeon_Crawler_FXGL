@@ -34,7 +34,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean doorOpened;
     private boolean stairsDiscovered;
     private boolean redSwitchActivated;
-    private boolean blueSwitchActivated = true;
+    private boolean blueSwitchActivated;
     private boolean healing;
     private boolean bossActivated;
     public static boolean spikesSpawned;
