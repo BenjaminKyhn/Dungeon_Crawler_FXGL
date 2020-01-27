@@ -40,7 +40,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("weapon")
+    @Spawns("sword")
     public Entity newWeapon(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
@@ -48,7 +48,23 @@ public class DungeonCrawlerFactory implements EntityFactory {
         return entityBuilder()
                 .type(DungeonCrawlerType.WEAPON)
                 .from(data)
-                .viewWithBBox(texture("weapon.png"))
+                .viewWithBBox(texture("sword.png"))
+                .bbox(new HitBox(BoundingShape.box(48, 66)))
+                .with(new CollidableComponent(true))
+                .with(new IrremovableComponent())
+                .with(new WeaponComponent())
+                .build();
+    }
+
+    @Spawns("greatsword")
+    public Entity newGreatsword(SpawnData data) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.WEAPON)
+                .from(data)
+                .viewWithBBox(texture("greatsword.png"))
                 .bbox(new HitBox(BoundingShape.box(48, 66)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())

@@ -87,7 +87,8 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-        weapon = getGameWorld().spawn("weapon", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+//        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
         player.setZ(1);
         weapon.setZ(1);
 
