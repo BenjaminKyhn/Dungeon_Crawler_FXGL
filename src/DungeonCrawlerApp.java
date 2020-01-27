@@ -37,6 +37,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean blueSwitchActivated;
     private boolean healing;
     private boolean bossActivated;
+    private boolean shopActive = false;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
     private int levelNumber = 3;
@@ -45,6 +46,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
+    private Texture shopUI;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -87,8 +89,8 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-//        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
-        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
+        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+//        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
         player.setZ(1);
         weapon.setZ(1);
 
@@ -210,13 +212,15 @@ public class DungeonCrawlerApp extends GameApplication {
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
-                            if (!healing) {
-                                healing = true;
-                                player.getComponent(PlayerComponent.class).restoreHP();
-                                play("SP_HEAL.wav");
-                                runOnce(() -> {
-                                    healing = false;
-                                }, Duration.seconds(1));
+                            if (!shopActive){
+                                shopUI = texture("shop.png");
+                                shopUI.setTranslateX(getAppWidth() - shopUI.getWidth());
+                                getGameScene().addUINode(shopUI);
+                                shopActive = true;
+                            }
+                            else{
+                                getGameScene().removeUINode(shopUI);
+                                shopActive = false;
                             }
                         });
             }
@@ -1127,8 +1131,11 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollisionEnd(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");
-
                 keyEntity.getViewComponent().opacityProperty().setValue(0);
+                if (shopActive){
+                    getGameScene().removeUINode(shopUI);
+                    shopActive = false;
+                }
             }
         });
 
