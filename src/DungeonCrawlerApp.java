@@ -660,12 +660,24 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setRightTrapWallTouched(true);
                 }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setLeftWallTouched(true);
+                }
             }
 
             @Override
             protected void onCollisionEnd(Entity enemy, Entity righttrapwall) {
                 if (enemy.hasComponent(TrollComponent.class)) {
                     enemy.getComponent(TrollComponent.class).setRightTrapWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setLeftWallTouched(false);
                 }
             }
         });
@@ -681,6 +693,12 @@ public class DungeonCrawlerApp extends GameApplication {
                     if (enemy.hasComponent(DragonComponent.class)) {
                         enemy.getComponent(DragonComponent.class).setTopDoorTouched(true);
                     }
+                    if (enemy.hasComponent(OgreComponent.class)) {
+                        enemy.getComponent(OgreComponent.class).setTopDoorTouched(true);
+                    }
+                    if (enemy.hasComponent(GoblinComponent.class)) {
+                        enemy.getComponent(GoblinComponent.class).setTopDoorTouched(true);
+                    }
                 }
 
                 if (door.getY() > enemy.getY()) {
@@ -689,6 +707,12 @@ public class DungeonCrawlerApp extends GameApplication {
                     }
                     if (enemy.hasComponent(DragonComponent.class)) {
                         enemy.getComponent(DragonComponent.class).setBottomDoorTouched(true);
+                    }
+                    if (enemy.hasComponent(OgreComponent.class)) {
+                        enemy.getComponent(OgreComponent.class).setBottomDoorTouched(true);
+                    }
+                    if (enemy.hasComponent(GoblinComponent.class)) {
+                        enemy.getComponent(GoblinComponent.class).setBottomDoorTouched(true);
                     }
                 }
             }

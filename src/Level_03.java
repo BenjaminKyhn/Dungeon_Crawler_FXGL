@@ -89,11 +89,11 @@ public class Level_03 extends DungeonLevel {
         getGameWorld().spawn("goblin", 3904, 832);
         getGameWorld().spawn("goblin", 1600, 832);
         getGameWorld().spawn("goblin", 3840, 832);
-        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2304);
-        Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2752);
-        Entity dragon3 = getGameWorld().spawn("dragon", 1472, 2496);
-        Entity dragon4 = getGameWorld().spawn("dragon", 1792, 2368);
-        Entity dragon5 = getGameWorld().spawn("dragon", 1792, 2688);
+        Entity dragon1 = getGameWorld().spawn("dragon", 1280, 2752);
+        Entity dragon2 = getGameWorld().spawn("dragon", 1344, 2592);
+        Entity dragon3 = getGameWorld().spawn("dragon", 1504, 2784);
+        Entity dragon4 = getGameWorld().spawn("dragon", 1648, 2656);
+        Entity dragon5 = getGameWorld().spawn("dragon", 1776, 2736);
         dragonTrapEnemies.add(dragon1);
         dragonTrapEnemies.add(dragon2);
         dragonTrapEnemies.add(dragon3);

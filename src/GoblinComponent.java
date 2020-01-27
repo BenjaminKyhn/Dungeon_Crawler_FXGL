@@ -19,6 +19,8 @@ public class GoblinComponent extends Component{
     private boolean topWallTouched;
     private boolean rightWallTouched;
     private boolean leftWallTouched;
+    private boolean topDoorTouched;
+    private boolean bottomDoorTouched;
     private boolean isBeingDamaged = false;
     private boolean dead = false;
     private LocalTimer moveTimer;
@@ -246,5 +248,13 @@ public class GoblinComponent extends Component{
 
     public void setLeftWallTouched(boolean leftWallTouched) {
         this.leftWallTouched = leftWallTouched;
+    }
+
+    public void setTopDoorTouched(boolean topDoorTouched) {
+        this.topDoorTouched = topDoorTouched;
+    }
+
+    public void setBottomDoorTouched(boolean bottomDoorTouched) {
+        this.bottomDoorTouched = bottomDoorTouched;
     }
 }
