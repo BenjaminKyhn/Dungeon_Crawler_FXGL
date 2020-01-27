@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
 
 public class Level_01 extends DungeonLevel {
-    private int playerX = 150;
-    private int playerY = 150;
+    private int playerX = 640;
+    private int playerY = 192;
     private String levelName = "dungeon1.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
@@ -54,10 +54,11 @@ public class Level_01 extends DungeonLevel {
     }
 
     public void spawnEnemies(){
-        getGameWorld().spawn("demon", 448, 384);
-        getGameWorld().spawn("goblin", 192, 384);
-        getGameWorld().spawn("demon", 320, 896);
-        getGameWorld().spawn("goblin", 640, 1088);
-        getGameWorld().spawn("demon", 1152, 900);
+        getGameWorld().spawn("demon", 1088, 448);
+        getGameWorld().spawn("goblin", 704, 448);
+        getGameWorld().spawn("demon", 1152, 896);
+        getGameWorld().spawn("goblin", 832, 1024);
+        getGameWorld().spawn("demon", 1600, 960);
+        getGameWorld().spawn("dragon", 192, 1216);
     }
 }

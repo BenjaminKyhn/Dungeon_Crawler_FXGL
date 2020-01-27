@@ -119,6 +119,17 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("chest")
+    public Entity newChest(SpawnData data) {
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.COIN)
+                .from(data)
+                .viewWithBBox( texture("chest.png"))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("hpfountain")
     public Entity newHPFountain(SpawnData data) {
         return entityBuilder()
