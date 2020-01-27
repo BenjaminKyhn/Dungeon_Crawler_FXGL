@@ -213,6 +213,7 @@ public class DungeonCrawlerApp extends GameApplication {
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
                             if (!shopActive){
+                                play("femhapy.wav");
                                 shopUI = texture("shop.png");
                                 shopUI.setTranslateX(getAppWidth() - shopUI.getWidth());
                                 getGameScene().addUINode(shopUI);
