@@ -488,6 +488,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setTopWallTouched(true);
                 }
+                if (enemy.hasComponent(ProjectileComponent.class)) {
+                    Entity flame = spawn("flame", enemy.getX(), enemy.getY()-40);
+                    enemy.removeFromWorld();
+                    runOnce(flame::removeFromWorld, Duration.seconds(1.5));
+                }
             }
 
             @Override
@@ -535,6 +540,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
                 }
+                if (enemy.hasComponent(ProjectileComponent.class)) {
+                    Entity flame = spawn("flame", enemy.getX(), enemy.getY()+40);
+                    enemy.removeFromWorld();
+                    runOnce(flame::removeFromWorld, Duration.seconds(1.5));
+                }
             }
 
             @Override
@@ -581,6 +591,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(ProjectileComponent.class)) {
+                    Entity flame = spawn("flame", enemy.getX()+40, enemy.getY());
+                    enemy.removeFromWorld();
+                    runOnce(flame::removeFromWorld, Duration.seconds(1.5));
                 }
             }
 
@@ -630,8 +645,197 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
                 }
                 if (enemy.hasComponent(ProjectileComponent.class)) {
-                    spawn("flame", enemy.getX()-20, enemy.getY());
+                    Entity flame = spawn("flame", enemy.getX()-20, enemy.getY());
                     enemy.removeFromWorld();
+                    runOnce(flame::removeFromWorld, Duration.seconds(1.5));
+                }
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setLeftWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setLeftWallTouched(false);
+                }
+            }
+        });
+
+        /** Adds unitCollision to top void and enemy unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.TOPVOID) {
+            @Override
+            protected void onCollisionBegin(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setTopWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setTopWallTouched(true);
+                }
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setTopWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setTopWallTouched(false);
+                }
+            }
+        });
+
+        /** Adds unitCollision to bottom void and enemy unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.BOTTOMVOID) {
+            @Override
+            protected void onCollisionBegin(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
+                }
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setBottomWallTouched(false);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setBottomWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setBottomWallTouched(false);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
+                }
+            }
+        });
+
+        /** Adds unitCollision to right void and enemy unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.RIGHTVOID) {
+            @Override
+            protected void onCollisionBegin(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setRightWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setRightWallTouched(true);
+                }
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setRightWallTouched(false);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setRightWallTouched(false);
+                }
+            }
+        });
+
+        /** Adds unitCollision to left void and enemy unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.ENEMY, DungeonCrawlerType.LEFTVOID) {
+            @Override
+            protected void onCollisionBegin(Entity enemy, Entity wall) {
+                if (enemy.hasComponent(GoblinComponent.class)) {
+                    enemy.getComponent(GoblinComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(DemonComponent.class)) {
+                    enemy.getComponent(DemonComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(OgreComponent.class)) {
+                    enemy.getComponent(OgreComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(TrollComponent.class)) {
+                    enemy.getComponent(TrollComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(ImpComponent.class)) {
+                    enemy.getComponent(ImpComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(DragonComponent.class)) {
+                    enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
                 }
             }
 

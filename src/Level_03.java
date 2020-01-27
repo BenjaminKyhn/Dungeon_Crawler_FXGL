@@ -172,6 +172,6 @@ public class Level_03 extends DungeonLevel {
         boss = getGameWorld().spawn("boss", 2304, 576);
         play("gargroar.wav");
         runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(0));
-        runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(1.5));
+        runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(1));
     }
 }

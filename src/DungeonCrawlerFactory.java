@@ -187,7 +187,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     @Spawns("rightvoid")
     public Entity newVoid(SpawnData data) {
         return entityBuilder()
-                .type(DungeonCrawlerType.RIGHTWALL)
+                .type(DungeonCrawlerType.RIGHTVOID)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
@@ -198,7 +198,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     @Spawns("leftvoid")
     public Entity newLeftVoid(SpawnData data) {
         return entityBuilder()
-                .type(DungeonCrawlerType.LEFTWALL)
+                .type(DungeonCrawlerType.LEFTVOID)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
@@ -209,7 +209,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     @Spawns("topvoid")
     public Entity newTopVoid(SpawnData data) {
         return entityBuilder()
-                .type(DungeonCrawlerType.TOPWALL)
+                .type(DungeonCrawlerType.TOPVOID)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
@@ -220,7 +220,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
     @Spawns("bottomvoid")
     public Entity newBottomwVoid(SpawnData data) {
         return entityBuilder()
-                .type(DungeonCrawlerType.BOTTOMWALL)
+                .type(DungeonCrawlerType.BOTTOMVOID)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
