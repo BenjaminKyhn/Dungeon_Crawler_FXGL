@@ -38,6 +38,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean healing;
     private boolean bossActivated;
     private boolean shopActive = false;
+    private ArrayList<String> weapons = new ArrayList<>();
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
     private int levelNumber = 3;
@@ -305,6 +306,21 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Attack") {
             @Override
             protected void onActionBegin() {
+                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()) && (getInput().getMouseXUI() < getAppWidth() - (shopUI.getWidth()/2)) && (getInput().getMouseYUI() < shopUI.getHeight())){
+                    if (weapons.contains("greatsword")){
+                        return;
+                    }
+                    else {
+                        weapons.add("greatsword");
+                        inc("gold", -200);
+                        play("coins.wav");
+                    }
+                }
+                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()/2) && (getInput().getMouseYUI() < shopUI.getHeight())){
+                    inc("gold", -200);
+                    play("coins.wav");
+                }
+
                 if (!freezeInput) {
                     /** Switch for handling random swing sounds */
                     int randomSwingSound = (int) (Math.random() * 3);
