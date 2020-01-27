@@ -19,11 +19,11 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DungeonCrawlerApp extends GameApplication {
 
+    private Entity player;
+    private Entity weapon;
     private static boolean isMoving;
     private static boolean isAttacking = false;
     private static boolean weaponFacingRight = true;
-    private Entity player;
-    private Entity weapon;
     private boolean bottomWallTouched;
     private boolean topWallTouched;
     private boolean rightWallTouched;
@@ -38,12 +38,12 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean healing;
     private boolean bossActivated;
     private boolean shopActive = false;
-    private ArrayList<String> weapons = new ArrayList<>();
+    public static boolean freezeInput = false;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
-    private int levelNumber = 3;
+    private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
-    public static boolean freezeInput = false;
+    private int levelNumber = 3;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
