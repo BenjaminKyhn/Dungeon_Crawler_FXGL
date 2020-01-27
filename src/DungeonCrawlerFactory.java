@@ -68,6 +68,14 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("flame")
+    public Entity newFlame(SpawnData data) {
+        return entityBuilder()
+                .from(data)
+                .view(texture("flame.png").toAnimatedTexture(7, Duration.seconds(0.46)).loop())
+                .build();
+    }
+
     @Spawns("coin")
     public Entity newCoin(SpawnData data) {
 

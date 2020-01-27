@@ -1,6 +1,7 @@
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
@@ -627,6 +628,10 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
+                }
+                if (enemy.hasComponent(ProjectileComponent.class)) {
+                    spawn("flame", enemy.getX()-20, enemy.getY());
+                    enemy.removeFromWorld();
                 }
             }
 
