@@ -39,7 +39,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean bossActivated;
     public static boolean spikesSpawned;
     public static boolean trapSpikesSpawned;
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private List<DungeonLevel> levels = new ArrayList<>();
     public static boolean freezeInput = false;
     private Texture heart1;
@@ -193,6 +193,20 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onActionBegin() {
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
+                        .stream()
+                        .filter(btn -> player.isColliding(btn))
+                        .forEach(btn -> {
+                            if (!healing) {
+                                healing = true;
+                                player.getComponent(PlayerComponent.class).restoreHP();
+                                play("SP_HEAL.wav");
+                                runOnce(() -> {
+                                    healing = false;
+                                }, Duration.seconds(1));
+                            }
+                        });
+
+                getGameWorld().getEntitiesByType(DungeonCrawlerType.SHOP)
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
@@ -1078,6 +1092,27 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Adds unitCollision to player and button unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BUTTON) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity btn) {
+                Entity keyEntity = btn.getObject("keyEntity");
+
+                if (!keyEntity.isActive()) {
+                    getGameWorld().addEntity(keyEntity);
+                }
+
+                keyEntity.getViewComponent().opacityProperty().setValue(1);
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity btn) {
+                Entity keyEntity = btn.getObject("keyEntity");
+
+                keyEntity.getViewComponent().opacityProperty().setValue(0);
+            }
+        });
+
+        /** Adds unitCollision to player and shop unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.SHOP) {
             @Override
             protected void onCollisionBegin(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");

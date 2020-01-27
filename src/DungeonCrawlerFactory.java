@@ -72,6 +72,20 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("elfgirl")
+    public Entity newElfGirl(SpawnData data) {
+        var keyEntity = FXGL.getGameWorld().create("keyCode", new SpawnData(data.getX() + 20, data.getY() + 20).put("key", "E"));
+        keyEntity.getViewComponent().opacityProperty().setValue(0);
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.SHOP)
+                .from(data)
+                .viewWithBBox(texture("elfgirl_idle.png").toAnimatedTexture(4, Duration.seconds(1)).loop())
+                .with(new CollidableComponent(true))
+                .with("keyEntity", keyEntity)
+                .build();
+    }
+
     @Spawns("fireball")
     public Entity newFireball(SpawnData data) {
         return entityBuilder()
