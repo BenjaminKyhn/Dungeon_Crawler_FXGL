@@ -11,6 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,9 +45,14 @@ public class DungeonCrawlerApp extends GameApplication {
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
     private int levelNumber = 3;
+    private int greatswordPrice = 200;
+    private int heartPrice = 150;
+    private int gold;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
+    private Texture heart4;
+    private Texture heart5;
     private Texture shopUI;
 
     @Override
@@ -115,8 +121,8 @@ public class DungeonCrawlerApp extends GameApplication {
         scoreText.setStroke(Color.color(0.0, 0.0, 0.0, 0.56));
         scoreText.textProperty().bind(getip("gold").asString());
 
-        addUINode(scoreText, 285, 49);
-        addUINode(coin, 250, 21);
+        addUINode(scoreText, 295, 49);
+        addUINode(coin, 260, 21);
         addUINode(heart1, 15, 15);
         addUINode(heart2, 62, 15);
         addUINode(heart3, 109, 15);
@@ -213,14 +219,13 @@ public class DungeonCrawlerApp extends GameApplication {
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
-                            if (!shopActive){
+                            if (!shopActive) {
                                 play("femhapy.wav");
                                 shopUI = texture("shop.png");
                                 shopUI.setTranslateX(getAppWidth() - shopUI.getWidth());
                                 getGameScene().addUINode(shopUI);
                                 shopActive = true;
-                            }
-                            else{
+                            } else {
                                 getGameScene().removeUINode(shopUI);
                                 shopActive = false;
                             }
@@ -306,19 +311,30 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Attack") {
             @Override
             protected void onActionBegin() {
-                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()) && (getInput().getMouseXUI() < getAppWidth() - (shopUI.getWidth()/2)) && (getInput().getMouseYUI() < shopUI.getHeight())){
-                    if (weapons.contains("greatsword")){
+                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()) && (getInput().getMouseXUI() < getAppWidth() - (shopUI.getWidth() / 2)) && (getInput().getMouseYUI() < shopUI.getHeight())) {
+                    if (!weapons.contains("greatsword") && getGameState().getInt("gold") >= greatswordPrice) {
+                        weapons.add("greatsword");
+                        inc("gold", -greatswordPrice);
+                        play("coins.wav");
+                    } else {
                         return;
                     }
-                    else {
-                        weapons.add("greatsword");
-                        inc("gold", -200);
+                }
+                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth() / 2) && (getInput().getMouseYUI() < shopUI.getHeight())) {
+                    if (heart5 == null && heart4 != null && getGameState().getInt("gold") >= heartPrice) {
+                        heart5 = texture("heart.png", 44, 40);
+                        addUINode(heart5, 203, 15);
+                        inc("gold", -heartPrice);
                         play("coins.wav");
                     }
-                }
-                if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()/2) && (getInput().getMouseYUI() < shopUI.getHeight())){
-                    inc("gold", -200);
-                    play("coins.wav");
+                    if (heart4 == null && getGameState().getInt("gold") >= heartPrice) {
+                        heart4 = texture("heart.png", 44, 40);
+                        addUINode(heart4, 156, 15);
+                        inc("gold", -heartPrice);
+                        play("coins.wav");
+                    } else {
+                        return;
+                    }
                 }
 
                 if (!freezeInput) {
@@ -525,7 +541,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(DragonComponent.class).setTopWallTouched(true);
                 }
                 if (enemy.hasComponent(ProjectileComponent.class)) {
-                    Entity flame = spawn("flame", enemy.getX(), enemy.getY()-40);
+                    Entity flame = spawn("flame", enemy.getX(), enemy.getY() - 40);
                     enemy.removeFromWorld();
                     runOnce(flame::removeFromWorld, Duration.seconds(1.5));
                 }
@@ -577,7 +593,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
                 }
                 if (enemy.hasComponent(ProjectileComponent.class)) {
-                    Entity flame = spawn("flame", enemy.getX(), enemy.getY()+40);
+                    Entity flame = spawn("flame", enemy.getX(), enemy.getY() + 40);
                     enemy.removeFromWorld();
                     runOnce(flame::removeFromWorld, Duration.seconds(1.5));
                 }
@@ -629,7 +645,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(DragonComponent.class).setRightWallTouched(true);
                 }
                 if (enemy.hasComponent(ProjectileComponent.class)) {
-                    Entity flame = spawn("flame", enemy.getX()+40, enemy.getY());
+                    Entity flame = spawn("flame", enemy.getX() + 40, enemy.getY());
                     enemy.removeFromWorld();
                     runOnce(flame::removeFromWorld, Duration.seconds(1.5));
                 }
@@ -681,7 +697,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
                 }
                 if (enemy.hasComponent(ProjectileComponent.class)) {
-                    Entity flame = spawn("flame", enemy.getX()-20, enemy.getY());
+                    Entity flame = spawn("flame", enemy.getX() - 20, enemy.getY());
                     enemy.removeFromWorld();
                     runOnce(flame::removeFromWorld, Duration.seconds(1.5));
                 }
@@ -1047,7 +1063,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     getDisplay().showMessageBox("You've completed the game. You can continue to play around in Level 03 if you'd like.", () -> {
                         player.setPosition(128, 3008);
                         weapon.setPosition(128 + 48, 3008);
-                        if (!weaponFacingRight){
+                        if (!weaponFacingRight) {
                             player.setScaleX(1);
                             weapon.setScaleX(1);
                             weaponFacingRight = true;
@@ -1149,7 +1165,7 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollisionEnd(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");
                 keyEntity.getViewComponent().opacityProperty().setValue(0);
-                if (shopActive){
+                if (shopActive) {
                     getGameScene().removeUINode(shopUI);
                     shopActive = false;
                 }
