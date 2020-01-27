@@ -380,6 +380,59 @@ public class DungeonCrawlerApp extends GameApplication {
             }
         });
 
+        /** Adds unitCollision to right void and player unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.RIGHTVOID) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity wall) {
+                rightWallTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity wall) {
+                rightWallTouched = false;
+            }
+        });
+
+        /** Adds unitCollision to left void and player unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.LEFTVOID) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity wall) {
+                leftWallTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity wall) {
+                leftWallTouched = false;
+            }
+        });
+
+
+        /** Adds unitCollision to top void and player unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.TOPVOID) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity wall) {
+                topWallTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity wall) {
+                topWallTouched = false;
+            }
+        });
+
+        /** Adds unitCollision to bottom void and player unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.BOTTOMVOID) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity wall) {
+                bottomWallTouched = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity wall) {
+                bottomWallTouched = false;
+            }
+        });
+
         /** Adds unitCollision to door and player unit*/
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.DOOR) {
             @Override
@@ -431,9 +484,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setTopWallTouched(true);
                 }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setTopWallTouched(true);
-                }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setTopWallTouched(true);
                 }
@@ -455,9 +505,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setTopWallTouched(false);
-                }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setTopWallTouched(false);
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setTopWallTouched(false);
@@ -484,9 +531,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
                 }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setBottomWallTouched(true);
-                }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
                 }
@@ -508,9 +552,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setBottomWallTouched(true);
-                }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setBottomWallTouched(true);
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setBottomWallTouched(true);
@@ -537,9 +578,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setRightWallTouched(true);
                 }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setRightWallTouched(true);
-                }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setRightWallTouched(true);
                 }
@@ -561,9 +599,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setRightWallTouched(false);
-                }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setRightWallTouched(false);
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setRightWallTouched(false);
@@ -590,9 +625,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setLeftWallTouched(true);
                 }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setLeftWallTouched(true);
-                }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setLeftWallTouched(true);
                 }
@@ -614,9 +646,6 @@ public class DungeonCrawlerApp extends GameApplication {
                 }
                 if (enemy.hasComponent(ImpComponent.class)) {
                     enemy.getComponent(ImpComponent.class).setLeftWallTouched(false);
-                }
-                if (enemy.hasComponent(BossComponent.class)) {
-                    enemy.getComponent(BossComponent.class).setLeftWallTouched(false);
                 }
                 if (enemy.hasComponent(DragonComponent.class)) {
                     enemy.getComponent(DragonComponent.class).setLeftWallTouched(false);

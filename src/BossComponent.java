@@ -45,26 +45,32 @@ public class    BossComponent extends Component {
     public void onAdded() {
         moveTimer = FXGL.newLocalTimer();
         moveTimer.capture();
-//        shootTimer.capture();
+        shootTimer = FXGL.newLocalTimer();
+        shootTimer.capture();
         entity.getViewComponent().addChild(texture);
 
-        /** Shoot fireballs */
-        texture.setOnCycleFinished(() -> {
-            if (player != null) {
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
-                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
-            }
-        });
+//        /** Shoot fireballs */
+//        texture.setOnCycleFinished(() -> {
+//            if (player != null) {
+//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
+//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
+//                runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
+//            }
+//        });
     }
 
     @Override
     public void onUpdate(double tpf) {
-//        /** Shoot fireballs */
-//        if (player != null && shootTimer.elapsed(Duration.seconds(3))) {
-//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
-//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
-//            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
+        /** Shoot fireballs */
+        if (player != null && shootTimer.elapsed(Duration.seconds(1.5)) && !dead) {
+            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0));
+            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.25));
+            runOnce(() ->{FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(0.5));
+            shootTimer.capture();
+        }
+
+//        if (shootTimer.elapsed(Duration.seconds(3)) && !dead){
+//            runOnce(() -> {FXGL.spawn("fireball", new SpawnData(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2).put("direction", player.getPosition().subtract(entity.getX() + entity.getWidth()/2, entity.getY() + entity.getHeight()/2)));}, Duration.seconds(3));
 //            shootTimer.capture();
 //        }
 
@@ -166,7 +172,7 @@ public class    BossComponent extends Component {
 
     public void left() {
         if (facingRight){
-            entity.translateX(350);
+            entity.translateX(300);
             facingRight = false;
         }
         getEntity().setScaleX(-1); //Changes the direction of the sprite
@@ -175,7 +181,7 @@ public class    BossComponent extends Component {
 
     public void right() {
         if (!facingRight){
-            entity.translateX(-350);
+            entity.translateX(-300);
             facingRight = true;
         }
         getEntity().setScaleX(1); //Changes the direction of the sprite
@@ -259,8 +265,6 @@ public class    BossComponent extends Component {
     public boolean isDead() {
         return this.dead;
     }
-
-
     //TODO remove pillars in the center so he has less collisions
     //TODO make boss shoot firefalls
 }

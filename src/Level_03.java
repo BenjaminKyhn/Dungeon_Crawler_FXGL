@@ -169,7 +169,7 @@ public class Level_03 extends DungeonLevel {
     public void spawnBoss(){
         DungeonCrawlerApp.freezeInput = true;
         runOnce(() ->{DungeonCrawlerApp.freezeInput = false;}, Duration.seconds(2));
-        boss = getGameWorld().spawn("boss", 2250, 500);
+        boss = getGameWorld().spawn("boss", 2304, 576);
         play("hornhapy.wav");
         getGameScene().getViewport().shakeRotational(1.0);
     }

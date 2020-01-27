@@ -132,17 +132,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("wall")
-    public Entity newWall(SpawnData data) {
-        return entityBuilder()
-                .type(DungeonCrawlerType.WALL)
-                .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
-                .with(new PhysicsComponent())
-                .with(new CollidableComponent(true))
-                .build();
-    }
-
     @Spawns("rightwall")
     public Entity newRightWall(SpawnData data) {
         return entityBuilder()
@@ -177,7 +166,51 @@ public class DungeonCrawlerFactory implements EntityFactory {
     }
 
     @Spawns("bottomwall")
-    public Entity neBottomwWall(SpawnData data) {
+    public Entity newBottomwWall(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.BOTTOMWALL)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("rightvoid")
+    public Entity newVoid(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.RIGHTWALL)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("leftvoid")
+    public Entity newLeftVoid(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.LEFTWALL)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("topvoid")
+    public Entity newTopVoid(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.TOPWALL)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new PhysicsComponent())
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("bottomvoid")
+    public Entity newBottomwVoid(SpawnData data) {
         return entityBuilder()
                 .type(DungeonCrawlerType.BOTTOMWALL)
                 .from(data)
