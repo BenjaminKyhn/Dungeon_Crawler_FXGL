@@ -24,6 +24,9 @@ public class DungeonCrawlerApp extends GameApplication {
     private static boolean isMoving;
     private static boolean isAttacking = false;
     private static boolean weaponFacingRight = true;
+    public static boolean freezeInput = false;
+    public static boolean spikesSpawned;
+    public static boolean trapSpikesSpawned;
     private boolean bottomWallTouched;
     private boolean topWallTouched;
     private boolean rightWallTouched;
@@ -38,9 +41,6 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean healing;
     private boolean bossActivated;
     private boolean shopActive = false;
-    public static boolean freezeInput = false;
-    public static boolean spikesSpawned;
-    public static boolean trapSpikesSpawned;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
     private int levelNumber = 3;
