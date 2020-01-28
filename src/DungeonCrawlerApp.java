@@ -45,7 +45,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean shopActive = false;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
-    private int levelNumber = 3;
+    private int levelNumber = 2;
     private int greatswordPrice = 100;
     private int healthPrice = 50;
     private int startingGold = 400;
@@ -1268,6 +1268,27 @@ public class DungeonCrawlerApp extends GameApplication {
                         weapon.setPosition(2560 + 48, 3008);
                     }
                     player.setPosition(2560, 3008);
+                    if (!weaponFacingRight) {
+                        player.setScaleX(1);
+                        weaponFacingRight = true;
+                    }
+                    freezeInput = false;
+                });
+            }
+        });
+
+        /** Adds unitCollision to player and hole unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.LADDER) {
+            @Override
+            protected void onCollision(Entity player, Entity ladder) {
+                freezeInput = true;
+                getGameScene().getViewport().fade(() -> {
+                    if (weapons.contains("greatsword")) {
+                        weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+                    } else {
+                        weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+                    }
+                    player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
                     if (!weaponFacingRight) {
                         player.setScaleX(1);
                         weaponFacingRight = true;

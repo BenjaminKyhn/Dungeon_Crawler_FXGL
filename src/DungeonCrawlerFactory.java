@@ -345,6 +345,16 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("ladder")
+    public Entity newLadder(SpawnData data) {
+        return entityBuilder()
+                .type(DungeonCrawlerType.LADDER)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("spikes")
     public Entity newSpikes(SpawnData data) {
         return entityBuilder()

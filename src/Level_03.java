@@ -180,9 +180,9 @@ public class Level_03 extends DungeonLevel {
     }
 
     public void spawnChests(){
-        chest1 = getGameWorld().spawn("chest", 128, 768);
-        chest2 = getGameWorld().spawn("chest", 2048, 1472);
-        chest3 = getGameWorld().spawn("chest", 1984, 192);
+        chest1 = getGameWorld().spawn("chest", 1280, 2752);
+        chest2 = getGameWorld().spawn("chest", 3392, 1664);
+        chest3 = getGameWorld().spawn("chest", 2560, 768);
         chestLoot.add(20);
     }
 
