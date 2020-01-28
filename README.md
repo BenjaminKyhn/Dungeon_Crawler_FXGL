@@ -17,4 +17,4 @@ Classic dungeon crawler game where you have to defeat enemies to advance to the 
 ## SOURCES
 Most of the sound assets are from Dungeon Keeper (1996)
 
-Sprites here: https://0x72.itch.io/dungeontileset-ii
+Sprites can be found here: https://0x72.itch.io/dungeontileset-ii
