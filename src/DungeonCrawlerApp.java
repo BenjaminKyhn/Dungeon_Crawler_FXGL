@@ -45,10 +45,10 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean shopActive = false;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
-    private int levelNumber = 1;
-    private int greatswordPrice = 50;
-    private int healthPrice = 40;
-    private int startingGold = 0;
+    private int levelNumber = 3;
+    private int greatswordPrice = 100;
+    private int healthPrice = 50;
+    private int startingGold = 400;
     private int maxHP = 30;
     private int currentHP;
     private Texture heart1;
