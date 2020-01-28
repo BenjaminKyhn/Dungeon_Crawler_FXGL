@@ -282,19 +282,8 @@ public class DungeonCrawlerApp extends GameApplication {
         FXGL.getInput().addAction(new UserAction("Use") {
             @Override
             protected void onActionBegin() {
-                getGameWorld().getEntitiesByType(DungeonCrawlerType.CHEST)
-                        .stream()
-                        .filter(btn -> player.isColliding(btn))
-                        .forEach(btn -> {
-                            getDisplay().showMessageBox("You find " + 10 + " gold.", () -> {
-                                inc("gold", +10);
-                                play("coins.wav");
-                                btn.removeFromWorld();
-                                if (getCurrentLevel().equals(levels.get(0))){
-                                    getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
-                                }
-                            });
-                        });
+                lootChest();
+
 
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
                         .stream()
@@ -1316,6 +1305,22 @@ public class DungeonCrawlerApp extends GameApplication {
 
     protected DungeonLevel getCurrentLevel() {
         return levels.get(levelNumber - 1); //right now we don't have level 1
+    }
+
+    private void lootChest(){
+        getGameWorld().getEntitiesByType(DungeonCrawlerType.CHEST)
+                .stream()
+                .filter(btn -> player.isColliding(btn))
+                .forEach(btn -> {
+                    getDisplay().showMessageBox("You find " + 10 + " gold.", () -> {
+                        inc("gold", +10);
+                        play("coins.wav");
+                        btn.removeFromWorld();
+                        if (getCurrentLevel().equals(levels.get(0))){
+                            getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
+                        }
+                    });
+                });
     }
 
     private void showStairs() {
