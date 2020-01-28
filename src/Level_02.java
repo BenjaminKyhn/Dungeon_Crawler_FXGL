@@ -85,15 +85,12 @@ public class Level_02 extends DungeonLevel {
                 getGameWorld().spawn("goblin", 1344 + (2*j), 1984 + (2*i));
             }
         }
-        runOnce(() ->{getGameWorld().spawn("goblin", 1216, 2176);}, Duration.seconds(0.5));
-        runOnce(() ->{getGameWorld().spawn("goblin", 1984, 2112);}, Duration.seconds(1));
-        runOnce(() ->{getGameWorld().spawn("goblin", 1280, 2544);}, Duration.seconds(1.5));
     }
 
     public void spawnChests(){
         chest1 = getGameWorld().spawn("chest", 832, 768);
         chest2 = getGameWorld().spawn("chest", 2112, 384);
-        chest3 = getGameWorld().spawn("chest", 1344, 194);
+        chest3 = getGameWorld().spawn("chest", 1344, 1984);
         chestLoot.add(10);
     }
 
