@@ -128,6 +128,18 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .build();
     }
 
+    @Spawns("healthpotion")
+    public Entity newHealthPotion(SpawnData data) {
+
+        return entityBuilder()
+                .type(DungeonCrawlerType.HEALTHPOTION)
+                .from(data)
+                .viewWithBBox( texture("healthpotion.png"))
+                .bbox(new HitBox(BoundingShape.box(12, 14)))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
     @Spawns("hpfountain")
     public Entity newHPFountain(SpawnData data) {
         return entityBuilder()

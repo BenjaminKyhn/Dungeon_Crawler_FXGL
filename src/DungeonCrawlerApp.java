@@ -49,6 +49,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private int greatswordPrice = 50;
     private int healthPrice = 40;
     private int startingGold = 400;
+    private int maxHP = 30;
     private int currentHP;
     private Texture heart1;
     private Texture heart2;
@@ -198,8 +199,10 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 9) && (player.getComponent(PlayerComponent.class).getHp() < 15)) {
+            heart1 = texture("heart.png", 44, 40);
             heart2 = texture("heart_empty.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
             if (heart4 != null) {
@@ -211,8 +214,10 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 14) && (player.getComponent(PlayerComponent.class).getHp() < 20)) {
+            heart1 = texture("heart.png", 44, 40);
             heart2 = texture("heart_half_full.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
             if (heart4 != null) {
@@ -224,7 +229,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 19) && (player.getComponent(PlayerComponent.class).getHp() < 25)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
             heart3 = texture("heart_empty.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
             if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
@@ -235,7 +244,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 24) && (player.getComponent(PlayerComponent.class).getHp() < 30)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
             heart3 = texture("heart_half_full.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
             if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
@@ -246,7 +259,11 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 29) && (player.getComponent(PlayerComponent.class).getHp() < 35)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
             heart3 = texture("heart.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
             if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
@@ -257,24 +274,52 @@ public class DungeonCrawlerApp extends GameApplication {
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 34) && (player.getComponent(PlayerComponent.class).getHp() < 40)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
             heart4 = texture("heart_half_full.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
             addUINode(heart4, 156, 15);
             if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 39) && (player.getComponent(PlayerComponent.class).getHp() < 45)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
             heart4 = texture("heart.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
             addUINode(heart4, 156, 15);
             if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 44) && (player.getComponent(PlayerComponent.class).getHp() < 50)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
+            heart4 = texture("heart.png", 44, 40);
             heart5 = texture("heart_half_full.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
+            addUINode(heart4, 156, 15);
             addUINode(heart5, 203, 15);
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 49)) {
+            heart1 = texture("heart.png", 44, 40);
+            heart2 = texture("heart.png", 44, 40);
+            heart3 = texture("heart.png", 44, 40);
+            heart4 = texture("heart.png", 44, 40);
             heart5 = texture("heart.png", 44, 40);
+            addUINode(heart1, 15, 15);
+            addUINode(heart2, 62, 15);
+            addUINode(heart3, 109, 15);
+            addUINode(heart4, 156, 15);
             addUINode(heart5, 203, 15);
         }
     }
@@ -1312,6 +1357,25 @@ public class DungeonCrawlerApp extends GameApplication {
                 inc("gold", +1);
                 play("coins.wav");
                 coin.removeFromWorld();
+            }
+        });
+
+        /** Adds unitCollision to player and health potion unit*/
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(DungeonCrawlerType.PLAYER, DungeonCrawlerType.HEALTHPOTION) {
+            @Override
+            protected void onCollision(Entity player, Entity healthpotion) {
+                if ((player.getComponent(PlayerComponent.class).getHp() < maxHP)){
+                    if ((player.getComponent(PlayerComponent.class).getHp() + 10) > maxHP){
+                        player.getComponent(PlayerComponent.class).setHp(maxHP);
+                        play("sp_heal.wav");
+                        healthpotion.removeFromWorld();
+                    }
+                    else {
+                        player.getComponent(PlayerComponent.class).setHp(player.getComponent(PlayerComponent.class).getHp()+10);
+                        play("sp_heal.wav");
+                        healthpotion.removeFromWorld();
+                    }
+                }
             }
         });
     }
