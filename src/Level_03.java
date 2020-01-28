@@ -83,8 +83,8 @@ public class Level_03 extends DungeonLevel {
         getGameWorld().spawn("ogre", 2112, 768);
         getGameWorld().spawn("ogre", 2560, 256);
         getGameWorld().spawn("ogre", 3008, 768);
-        getGameWorld().spawn("ogre", 2688, 1344);
-        getGameWorld().spawn("ogre", 3040, 1008);
+        getGameWorld().spawn("ogre", 2688, 1216);
+        getGameWorld().spawn("ogre", 2944, 1024);
         getGameWorld().spawn("ogre", 2816, 448);
         getGameWorld().spawn("goblin", 3904, 832);
         getGameWorld().spawn("goblin", 1600, 832);
