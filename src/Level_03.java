@@ -20,7 +20,11 @@ public class Level_03 extends DungeonLevel {
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
     private ArrayList<Entity> trollTrapEnemies = new ArrayList();
     private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
+    private ArrayList<Integer> chestLoot = new ArrayList<>();
     Entity boss;
+    private Entity chest1;
+    private Entity chest2;
+    private Entity chest3;
     private boolean doorOpened;
 
     public ArrayList<String> getEnemyNames(){
@@ -173,5 +177,16 @@ public class Level_03 extends DungeonLevel {
         play("gargroar.wav");
         runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(0));
         runOnce(() ->{getGameScene().getViewport().shakeRotational(1.0);}, Duration.seconds(1));
+    }
+
+    public void spawnChests(){
+        chest1 = getGameWorld().spawn("chest", 128, 768);
+        chest2 = getGameWorld().spawn("chest", 2048, 1472);
+        chest3 = getGameWorld().spawn("chest", 1984, 192);
+        chestLoot.add(20);
+    }
+
+    public ArrayList<Integer> getChestLoot() {
+        return chestLoot;
     }
 }

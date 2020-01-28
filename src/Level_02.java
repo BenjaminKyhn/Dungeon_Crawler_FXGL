@@ -1,3 +1,4 @@
+import com.almasb.fxgl.entity.Entity;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ public class Level_02 extends DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
+    private ArrayList<Integer> chestLoot = new ArrayList<>();
+    private Entity chest1;
+    private Entity chest2;
+    private Entity chest3;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -83,5 +88,16 @@ public class Level_02 extends DungeonLevel {
         runOnce(() ->{getGameWorld().spawn("goblin", 1216, 2176);}, Duration.seconds(0.5));
         runOnce(() ->{getGameWorld().spawn("goblin", 1984, 2112);}, Duration.seconds(1));
         runOnce(() ->{getGameWorld().spawn("goblin", 1280, 2544);}, Duration.seconds(1.5));
+    }
+
+    public void spawnChests(){
+        chest1 = getGameWorld().spawn("chest", 832, 768);
+        chest2 = getGameWorld().spawn("chest", 2112, 384);
+        chest3 = getGameWorld().spawn("chest", 1344, 194);
+        chestLoot.add(10);
+    }
+
+    public ArrayList<Integer> getChestLoot() {
+        return chestLoot;
     }
 }
