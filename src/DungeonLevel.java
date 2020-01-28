@@ -21,6 +21,7 @@ public abstract class DungeonLevel {
     private boolean doorOpened;
     private Entity chest1;
     private Entity chest2;
+    private Entity chest3;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -71,6 +72,10 @@ public abstract class DungeonLevel {
 
     public Entity getChest2() {
         return chest2;
+    }
+
+    public Entity getChest3() {
+        return chest3;
     }
 
     public boolean isTrapActivated() {
