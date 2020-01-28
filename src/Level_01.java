@@ -1,6 +1,10 @@
+import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
+
 import java.util.ArrayList;
 
-import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
+import static com.almasb.fxgl.dsl.FXGL.*;
+import static com.almasb.fxgl.dsl.FXGL.play;
 
 public class Level_01 extends DungeonLevel {
     private int playerX = 640;

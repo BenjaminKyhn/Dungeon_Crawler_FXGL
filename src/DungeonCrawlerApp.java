@@ -286,12 +286,14 @@ public class DungeonCrawlerApp extends GameApplication {
                         .stream()
                         .filter(btn -> player.isColliding(btn))
                         .forEach(btn -> {
-                            inc("gold", +10);
-                            play("coins.wav");
-                            btn.removeFromWorld();
-                            if (getCurrentLevel().equals(levels.get(0))){
-                                getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
-                            }
+                            getDisplay().showMessageBox("You find " + 10 + " gold.", () -> {
+                                inc("gold", +10);
+                                play("coins.wav");
+                                btn.removeFromWorld();
+                                if (getCurrentLevel().equals(levels.get(0))){
+                                    getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
+                                }
+                            });
                         });
 
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
