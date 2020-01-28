@@ -28,7 +28,7 @@ public class GoblinComponent extends Component{
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
     public GoblinComponent() {
-        Image image = image("goblin.png");
+        Image image = image("goblin3times.png");
 
         animIdle = new AnimationChannel(image, 8, 42, 68, Duration.seconds(0.5), 0, 3);
         animWalk = new AnimationChannel(image, 8, 42, 68, Duration.seconds(0.5), 4, 7);
