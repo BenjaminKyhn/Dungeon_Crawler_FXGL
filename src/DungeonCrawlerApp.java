@@ -1180,7 +1180,7 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (!getCurrentLevel().equals(levels.get(2))) {
                     freezeInput = true;
                     getGameScene().getViewport().fade(() -> {
-                        cleanupLevel();
+//                        cleanupLevel();
                         nextLevel();
                     });
                 }
@@ -1395,7 +1395,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
     private void cleanupLevel() {
         getGameWorld().getEntitiesByType(
-                DungeonCrawlerType.ENEMY,
+//                DungeonCrawlerType.ENEMY,
                 DungeonCrawlerType.STAIRS,
                 DungeonCrawlerType.DOOR,
                 DungeonCrawlerType.HOLE,
@@ -1426,20 +1426,35 @@ public class DungeonCrawlerApp extends GameApplication {
     }
 
     public void nextLevel() {
+        /** Clean up the previous level and increment level number */
+        doorOpened = false;
+        stairsDiscovered = false;
+        freezeInput = false;
+        player.removeFromWorld();
+        weapon.removeFromWorld();
         levelNumber += 1;
 
-        player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+        /** Load new .tmx file */
+        FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
+
+        /** Spawn the player */
+        player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
+
+        /** Spawn the weapon */
         if (weapons.contains("greatsword")) {
-            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+            weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
         } else {
-            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+            weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
         }
 
+        /** Set player and weapon correct on the Z-axis */
         player.setZ(1);
         weapon.setZ(1);
 
-        FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
+        /** Spawn other entities in the map */
         getCurrentLevel().spawnEnemies();
+        getCurrentLevel().spawnChests();
     }
 
     public Texture getHeart1() {

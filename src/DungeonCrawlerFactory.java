@@ -29,10 +29,9 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .type(DungeonCrawlerType.PLAYER)
                 .from(data)
                 //TODO: Fix hitboxes for players, weapon and enemies to match the sprites
-//                .bbox(new HitBox(BoundingShape.box(48,66)))
                 .bbox(new HitBox("main", new Point2D(9, 18), BoundingShape.box(30, 48)))
                 .with(new CollidableComponent(true))
-                .with(new IrremovableComponent())
+//                .with(new IrremovableComponent())
                 .with(new HPComponent(30))
                 .with(new PlayerComponent())
                 .build();
@@ -47,15 +46,13 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .viewWithBBox(texture("sword.png"))
                 .bbox(new HitBox(BoundingShape.box(48, 66))) //TODO fix the hitbox (it has 2?)
                 .with(new CollidableComponent(true))
-                .with(new IrremovableComponent())
+//                .with(new IrremovableComponent())
                 .with(new WeaponComponent())
                 .build();
     }
 
     @Spawns("greatsword")
     public Entity newGreatsword(SpawnData data) {
-        PhysicsComponent physics = new PhysicsComponent();
-        physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.WEAPON)
