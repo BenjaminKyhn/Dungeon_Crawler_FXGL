@@ -9,10 +9,10 @@ Classic dungeon crawler game where you have to defeat enemies to advance to the 
 ## CONTROLS:
 * W: up
 * A: left
-S: down
-D: right
-E: use
-Left mousebutton: attack/buy item from the shop
+* S: down
+* D: right
+* E: use
+* Left mousebutton: attack/buy item from the shop
 
 ## SOURCES
 Most of the sound assets are from Dungeon Keeper (1996)
