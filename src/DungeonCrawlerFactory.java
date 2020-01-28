@@ -51,7 +51,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .viewWithBBox(texture("sword.png"))
                 .bbox(new HitBox(BoundingShape.box(48, 66))) //TODO fix the hitbox (it has 2?)
                 .with(new CollidableComponent(true))
-                .with(new IrremovableComponent())
                 .with(new WeaponComponent())
                 .build();
     }
@@ -65,7 +64,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .type(DungeonCrawlerType.WEAPON)
                 .from(data)
                 .viewWithBBox(texture("greatsword.png"))
-                .bbox(new HitBox(BoundingShape.box(48, 66)))
+                .bbox(new HitBox("main", new Point2D(-30, 0), BoundingShape.box(30, 50)))
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
                 .with(new WeaponComponent())

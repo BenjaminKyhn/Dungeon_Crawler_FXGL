@@ -48,7 +48,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private int levelNumber = 1;
     private int greatswordPrice = 200;
     private int healthPrice = 150;
-    private int startingGold = 0;
+    private int startingGold = 400;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
@@ -67,7 +67,7 @@ public class DungeonCrawlerApp extends GameApplication {
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
-//        gameSettings.setDeveloperMenuEnabled(true);
+        gameSettings.setDeveloperMenuEnabled(true);
     }
 
     @Override
@@ -97,8 +97,9 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
-//        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
+//        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
+        weapons.add("greatsword");
         player.setZ(1);
         weapon.setZ(1);
 
@@ -284,7 +285,6 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onActionBegin() {
                 lootChest();
 
-
                 getGameWorld().getEntitiesByType(DungeonCrawlerType.BUTTON)
                         .stream()
                         .filter(btn -> player.isColliding(btn))
@@ -398,6 +398,8 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()) && (getInput().getMouseXUI() < getAppWidth() - (shopUI.getWidth() / 2)) && (getInput().getMouseYUI() < shopUI.getHeight())) {
                     if (!weapons.contains("greatsword") && getGameState().getInt("gold") >= greatswordPrice) {
                         weapons.add("greatsword");
+//                        weapon.removeFromWorld();
+//                        weapon = spawn("greatsword", player.getX()+48, player.getY()); //TODO fix the spawn location
                         inc("gold", -greatswordPrice);
                         play("coins.wav");
                     } else {
@@ -1431,6 +1433,10 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public void setHeart5(Texture heart5) {
         this.heart5 = heart5;
+    }
+
+    public ArrayList<String> getWeapons() {
+        return weapons;
     }
 
     public static void main(String[] args) {

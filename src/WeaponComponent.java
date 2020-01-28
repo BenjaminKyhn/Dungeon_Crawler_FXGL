@@ -1,3 +1,4 @@
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.component.Required;
@@ -54,23 +55,51 @@ public class WeaponComponent extends Component {
     }
 
     public void attackRight(){
-        entity.rotateBy(45);
-        entity.translateY(20);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            entity.rotateBy(90);
+            entity.translateX(20);
+            entity.translateY(40);
+        }
+        else {
+            entity.rotateBy(45);
+            entity.translateY(20);
+        }
     }
 
     public void undoAttackRight(){
-        entity.rotateBy(-45);
-        entity.translateY(-20);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            entity.rotateBy(-90);
+            entity.translateX(-20);
+            entity.translateY(-40);
+        }
+        else {
+            entity.rotateBy(-45);
+            entity.translateY(-20);
+        }
     }
 
     public void attackLeft(){
-        entity.rotateBy(-45);
-        entity.translateY(20);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            entity.rotateBy(-90);
+            entity.translateX(20);
+            entity.translateY(40);
+        }
+        else {
+            entity.rotateBy(-45);
+            entity.translateY(20);
+        }
     }
 
     public void undoAttackLeft(){
-        entity.rotateBy(45);
-        entity.translateY(-20);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            entity.rotateBy(90);
+            entity.translateX(-20);
+            entity.translateY(-40);
+        }
+        else {
+            entity.rotateBy(45);
+            entity.translateY(-20);
+        }
     }
 
     public void juggle(){
