@@ -48,7 +48,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private int levelNumber = 1;
     private int greatswordPrice = 50;
     private int healthPrice = 40;
-    private int startingGold = 400;
+    private int startingGold = 0;
     private int maxHP = 30;
     private int currentHP;
     private Texture heart1;
@@ -458,6 +458,7 @@ public class DungeonCrawlerApp extends GameApplication {
                         addUINode(heart5, 203, 15);
                         inc("gold", -healthPrice);
                         play("coins.wav");
+                        maxHP = 50;
                         player.getComponent(PlayerComponent.class).gainMoreHealth(10);
                     }
                     if (heart4 == null && getGameState().getInt("gold") >= healthPrice) {
@@ -465,6 +466,7 @@ public class DungeonCrawlerApp extends GameApplication {
                         addUINode(heart4, 156, 15);
                         inc("gold", -healthPrice);
                         play("coins.wav");
+                        maxHP = 40;
                         player.getComponent(PlayerComponent.class).gainMoreHealth(10);
                     } else {
                         return;
