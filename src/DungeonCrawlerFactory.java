@@ -24,8 +24,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
 
     @Spawns("player")
     public Entity newPlayer(SpawnData data) {
-        PhysicsComponent physics = new PhysicsComponent();
-        physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.PLAYER)
@@ -42,8 +40,6 @@ public class DungeonCrawlerFactory implements EntityFactory {
 
     @Spawns("sword")
     public Entity newWeapon(SpawnData data) {
-        PhysicsComponent physics = new PhysicsComponent();
-        physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder()
                 .type(DungeonCrawlerType.WEAPON)
@@ -51,6 +47,7 @@ public class DungeonCrawlerFactory implements EntityFactory {
                 .viewWithBBox(texture("sword.png"))
                 .bbox(new HitBox(BoundingShape.box(48, 66))) //TODO fix the hitbox (it has 2?)
                 .with(new CollidableComponent(true))
+                .with(new IrremovableComponent())
                 .with(new WeaponComponent())
                 .build();
     }

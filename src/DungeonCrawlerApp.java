@@ -1176,6 +1176,7 @@ public class DungeonCrawlerApp extends GameApplication {
                     });
                 }
 
+                //TODO fix the weapon disappearing and crashing the game when loading level 02
                 if (!getCurrentLevel().equals(levels.get(2))) {
                     freezeInput = true;
                     getGameScene().getViewport().fade(() -> {
@@ -1426,19 +1427,16 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public void nextLevel() {
         levelNumber += 1;
-        player.setZ(1);
-        weapon.setZ(1);
 
         player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-        weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+        if (weapons.contains("greatsword")) {
+            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+        } else {
+            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+        }
 
-//        player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-//        if (weapons.contains("greatsword")) {
-//            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
-//        } else {
-//            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
-//        }
-
+        player.setZ(1);
+        weapon.setZ(1);
 
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
         getCurrentLevel().spawnEnemies();
