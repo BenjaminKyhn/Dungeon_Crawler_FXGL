@@ -63,11 +63,11 @@ public class Level_01 extends DungeonLevel {
     }
 
     public void spawnEnemies(){
-        getGameWorld().spawn("demon", 1088, 448);
+        getGameWorld().spawn("demon", 1216, 320);
         getGameWorld().spawn("goblin", 704, 448);
         getGameWorld().spawn("demon", 1152, 896);
         getGameWorld().spawn("goblin", 832, 1024);
-        getGameWorld().spawn("demon", 1600, 960);
+        getGameWorld().spawn("demon", 1856, 768);
         getGameWorld().spawn("dragon", 192, 1216);
     }
 
