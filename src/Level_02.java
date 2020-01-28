@@ -1,10 +1,13 @@
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
+import static com.almasb.fxgl.dsl.FXGL.runOnce;
 
 public class Level_02 extends DungeonLevel {
-    private int playerX = 1600;
-    private int playerY = 1600;
+    private int playerX = 2358;
+    private int playerY = 2944;
     private String levelName = "dungeon2.tmx";
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
@@ -54,45 +57,31 @@ public class Level_02 extends DungeonLevel {
     }
 
     public void spawnEnemies(){
-        getGameWorld().spawn("demon", 256, 256);
-        getGameWorld().spawn("goblin", 320, 320);
-        getGameWorld().spawn("demon", 1472, 256);
-        getGameWorld().spawn("goblin", 1600, 256);
-        getGameWorld().spawn("demon", 256, 1600);
-        getGameWorld().spawn("goblin", 256, 1728);
-        getGameWorld().spawn("demon", 1472, 1600);
-        getGameWorld().spawn("goblin", 1600, 1728);
+        getGameWorld().spawn("demon", 2240, 2688);
+        getGameWorld().spawn("goblin", 2112, 2752);
+        getGameWorld().spawn("demon", 960, 2880);
+        getGameWorld().spawn("goblin", 768, 2816);
+        getGameWorld().spawn("demon", 896, 1600);
+        getGameWorld().spawn("goblin", 768, 1472);
+        getGameWorld().spawn("demon", 2112, 1600);
+        getGameWorld().spawn("goblin", 2304, 1472);
+
+        getGameWorld().spawn("troll", 2112, 448);
+        getGameWorld().spawn("ogre", 1536, 704);
+        getGameWorld().spawn("goblin", 192, 192);
+        getGameWorld().spawn("dragon", 192, 576);
+        getGameWorld().spawn("dragon", 896, 960);
+        getGameWorld().spawn("dragon", 768, 704);
     }
 
     public void spawnGoblins(){
-        getGameWorld().spawn("goblin", 768, 768);
-        getGameWorld().spawn("goblin", 896, 758);
-        getGameWorld().spawn("goblin", 1024, 768);
-        getGameWorld().spawn("goblin", 1152, 768);
-        getGameWorld().spawn("goblin", 768, 896);
-        getGameWorld().spawn("goblin", 896, 896);
-        getGameWorld().spawn("goblin", 1024, 896);
-        getGameWorld().spawn("goblin", 1152, 896);
-        getGameWorld().spawn("goblin", 768, 1024);
-        getGameWorld().spawn("goblin", 896, 1024);
-        getGameWorld().spawn("goblin", 1024, 1024);
-        getGameWorld().spawn("goblin", 1152, 1024);
-        getGameWorld().spawn("goblin", 768, 1152);
-        getGameWorld().spawn("goblin", 896, 1152);
-        getGameWorld().spawn("goblin", 1024, 1152);
-        getGameWorld().spawn("goblin", 1152, 1152);
-
-        getGameWorld().spawn("goblin", 832, 832);
-        getGameWorld().spawn("goblin", 964, 832);
-        getGameWorld().spawn("goblin", 1088, 832);
-        getGameWorld().spawn("goblin", 1216, 832);
-        getGameWorld().spawn("goblin", 832, 964);
-        getGameWorld().spawn("goblin", 964, 964);
-        getGameWorld().spawn("goblin", 1088, 964);
-        getGameWorld().spawn("goblin", 1216, 964);
-        getGameWorld().spawn("goblin", 832, 1088);
-        getGameWorld().spawn("goblin", 964, 1088);
-        getGameWorld().spawn("goblin", 1088, 1088);
-        getGameWorld().spawn("goblin", 1216, 1088);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                getGameWorld().spawn("goblin", 1344 + (2*j), 1984 + (2*i));
+            }
+        }
+        runOnce(() ->{getGameWorld().spawn("goblin", 1216, 2176);}, Duration.seconds(0.5));
+        runOnce(() ->{getGameWorld().spawn("goblin", 1984, 2112);}, Duration.seconds(1));
+        runOnce(() ->{getGameWorld().spawn("goblin", 1280, 2544);}, Duration.seconds(1.5));
     }
 }
