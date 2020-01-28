@@ -25,6 +25,7 @@ public class Level_03 extends DungeonLevel {
     private Entity chest1;
     private Entity chest2;
     private Entity chest3;
+    private Entity chest4;
     private boolean doorOpened;
 
     public ArrayList<String> getEnemyNames(){
@@ -183,6 +184,7 @@ public class Level_03 extends DungeonLevel {
         chest1 = getGameWorld().spawn("chest", 1280, 2752);
         chest2 = getGameWorld().spawn("chest", 3392, 1664);
         chest3 = getGameWorld().spawn("chest", 2560, 768);
+        chest4 = getGameWorld().spawn("chest", 1472, 1216);
         chestLoot.add(20);
     }
 

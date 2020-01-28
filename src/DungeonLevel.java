@@ -22,6 +22,7 @@ public abstract class DungeonLevel {
     private Entity chest1;
     private Entity chest2;
     private Entity chest3;
+    private Entity chest4;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
