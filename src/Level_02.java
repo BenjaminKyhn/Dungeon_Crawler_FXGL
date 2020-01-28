@@ -82,7 +82,7 @@ public class Level_02 extends DungeonLevel {
     public void spawnGoblins(){
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                getGameWorld().spawn("goblin", 1344 + (2*j), 1984 + (2*i));
+                getGameWorld().spawn("goblin", 1344 + (64*(j*2)), 1984 + (64*(i*2)));
             }
         }
     }
