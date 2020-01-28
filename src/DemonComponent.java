@@ -28,8 +28,8 @@ public class DemonComponent extends Component {
     public DemonComponent() {
         Image image = image("demon3times.png");
 
-        animIdle = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 0, 3);
-        animWalk = new AnimationChannel(image, 8, 96, 161, Duration.seconds(1), 4, 7);
+        animIdle = new AnimationChannel(image, 8, 78, 102, Duration.seconds(1), 0, 3);
+        animWalk = new AnimationChannel(image, 8, 78, 102, Duration.seconds(1), 4, 7);
 
         texture = new AnimatedTexture(animIdle);
         texture.loop();

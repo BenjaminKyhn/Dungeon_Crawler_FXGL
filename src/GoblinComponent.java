@@ -24,7 +24,7 @@ public class GoblinComponent extends Component{
     private boolean isBeingDamaged = false;
     private boolean dead = false;
     private LocalTimer moveTimer;
-    private double speed = 2;
+    private double speed = 4;
     private Entity player = FXGL.getGameWorld().getSingleton(DungeonCrawlerType.PLAYER);
 
     public GoblinComponent() {
