@@ -1440,6 +1440,11 @@ public class DungeonCrawlerApp extends GameApplication {
             doorOpened = true;
             Level_02 level_02 = new Level_02();
             level_02.spawnGoblins();
+            runOnce(() ->{play("imphapy.wav");}, Duration.seconds(0.5));
+            runOnce(() ->{play("imphapy.wav");}, Duration.seconds(1));
+            runOnce(() ->{play("imphapy.wav");}, Duration.seconds(1.5));
+            runOnce(() ->{play("imphapy.wav");}, Duration.seconds(2));
+            runOnce(() ->{play("imphapy.wav");}, Duration.seconds(2.5));
         }
     }
 
