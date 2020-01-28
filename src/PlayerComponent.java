@@ -11,7 +11,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 @Required(HPComponent.class)
 public class PlayerComponent extends Component {
-
     private HPComponent hp;
     private PhysicsComponent physics;
     private AnimatedTexture texture;
@@ -148,5 +147,9 @@ public class PlayerComponent extends Component {
 
     public int getHp() {
         return hp.getValue();
+    }
+
+    public void setHp(int currentHP) {
+        hp.setValue(currentHP);
     }
 }

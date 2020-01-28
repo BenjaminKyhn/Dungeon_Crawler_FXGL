@@ -49,6 +49,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private int greatswordPrice = 50;
     private int healthPrice = 40;
     private int startingGold = 400;
+    private int currentHP;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
@@ -1427,6 +1428,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
     public void nextLevel() {
         /** Clean up the previous level and increment level number */
+        currentHP = player.getComponent(PlayerComponent.class).getHp();
         doorOpened = false;
         stairsDiscovered = false;
         freezeInput = false;
@@ -1437,9 +1439,10 @@ public class DungeonCrawlerApp extends GameApplication {
         /** Load new .tmx file */
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
 
-        /** Spawn the player */
+        /** Spawn the player and give him the correct HP amount*/
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
+        player.getComponent(PlayerComponent.class).setHp(currentHP);
 
         /** Spawn the weapon */
         if (weapons.contains("greatsword")) {
