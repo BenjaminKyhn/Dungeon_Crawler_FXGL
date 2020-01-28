@@ -1,10 +1,8 @@
 # Dungeon Crawler FXGL
+Dungeon Crawler FXGL is a classic dungeon crawler game where you have to defeat enemies to advance to the next level. You can collect gold coins from your defeated enemies and upgrade your weapon and health by using the shop. The game features 3 different levels with a boss encounter at the end.
 
 ## SYSTEM REQUIREMENTS:
 SDK 11
-
-## DESCRIPTION:
-Classic dungeon crawler game where you have to defeat enemies to advance to the next level. You can collect gold coins from your defeated enemies and upgrade your weapon and health by using the shop. The game features 3 different levels with a boss encounter at the end.
 
 ## CONTROLS:
 * W: up
