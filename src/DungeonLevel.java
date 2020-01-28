@@ -11,6 +11,8 @@ public abstract class DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
+
+    private ArrayList<Integer> chestLoot = new ArrayList<>();
     private boolean trapActivated;
     private ArrayList<Entity> trollTrapEnemies = new ArrayList();
     private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
@@ -95,5 +97,11 @@ public abstract class DungeonLevel {
     }
 
     public void openDoor(){
+    }
+
+    public void spawnChests(){}
+
+    public ArrayList<Integer> getChestLoot() {
+        return chestLoot;
     }
 }

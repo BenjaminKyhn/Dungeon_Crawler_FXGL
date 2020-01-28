@@ -13,7 +13,9 @@ public class Level_01 extends DungeonLevel {
     private ArrayList<String> enemyNames = new ArrayList<String>();
     private ArrayList<Integer> enemyX = new ArrayList<Integer>();
     private ArrayList<Integer> enemyY = new ArrayList<Integer>();
-    private int chest1 = 10;
+    private ArrayList<Integer> chestLoot = new ArrayList<>();
+    private Entity chest1;
+    private Entity chest2;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -65,5 +67,12 @@ public class Level_01 extends DungeonLevel {
         getGameWorld().spawn("goblin", 832, 1024);
         getGameWorld().spawn("demon", 1600, 960);
         getGameWorld().spawn("dragon", 192, 1216);
+    }
+
+    public void spawnChests(){
+        chest1 = getGameWorld().spawn("chest", 128, 768);
+        chestLoot.add(5);
+        chest2 = getGameWorld().spawn("chest", 192, 768);
+        chestLoot.add(10);
     }
 }

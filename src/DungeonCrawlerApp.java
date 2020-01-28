@@ -103,6 +103,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Spawn initial enemies */
         getCurrentLevel().spawnEnemies();
+        getCurrentLevel().spawnChests();
 
         /** Add a camera that follows the player */
 //        getGameScene().getViewport().setBounds(-250, 0, 3000, getAppHeight()); //sets a boundary for the camera
