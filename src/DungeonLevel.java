@@ -14,10 +14,13 @@ public abstract class DungeonLevel {
 
     private ArrayList<Integer> chestLoot = new ArrayList<>();
     private boolean trapActivated;
+
+    private ArrayList<Entity> chests = new ArrayList();
     private ArrayList<Entity> trollTrapEnemies = new ArrayList();
     private ArrayList<Entity> dragonTrapEnemies = new ArrayList();
     private boolean doorOpened;
-    private int chest1;
+    private Entity chest1;
+    private Entity chest2;
 
     public ArrayList<String> getEnemyNames(){
         return enemyNames;
@@ -62,12 +65,24 @@ public abstract class DungeonLevel {
         return enemyY.get(index);
     }
 
+    public Entity getChest1() {
+        return chest1;
+    }
+
+    public Entity getChest2() {
+        return chest2;
+    }
+
     public boolean isTrapActivated() {
         return trapActivated;
     }
 
     public void setTrapActivated(boolean trapActivated) {
         this.trapActivated = trapActivated;
+    }
+
+    public ArrayList<Entity> getChests() {
+        return chests;
     }
 
     public ArrayList<Entity> getTrollTrapEnemies() {

@@ -41,6 +41,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean blueSwitchActivated;
     private boolean healing;
     private boolean bossActivated;
+    private boolean chestCollision;
     private boolean shopActive = false;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
@@ -171,11 +172,11 @@ public class DungeonCrawlerApp extends GameApplication {
             addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
@@ -186,11 +187,11 @@ public class DungeonCrawlerApp extends GameApplication {
             addUINode(heart1, 15, 15);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
@@ -199,11 +200,11 @@ public class DungeonCrawlerApp extends GameApplication {
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
@@ -212,67 +213,65 @@ public class DungeonCrawlerApp extends GameApplication {
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart2, 62, 15);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 19) && (player.getComponent(PlayerComponent.class).getHp() < 25)) {
             heart3 = texture("heart_empty.png", 44, 40);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
         } else if ((player.getComponent(PlayerComponent.class).getHp() > 24) && (player.getComponent(PlayerComponent.class).getHp() < 30)) {
             heart3 = texture("heart_half_full.png", 44, 40);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
-        } else if ((player.getComponent(PlayerComponent.class).getHp() > 29) && (player.getComponent(PlayerComponent.class).getHp() < 35)){
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 29) && (player.getComponent(PlayerComponent.class).getHp() < 35)) {
             heart3 = texture("heart.png", 44, 40);
             addUINode(heart3, 109, 15);
-            if (heart4 != null){
+            if (heart4 != null) {
                 heart4 = texture("heart_empty.png", 44, 40);
                 addUINode(heart4, 156, 15);
             }
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
-        } else if ((player.getComponent(PlayerComponent.class).getHp() > 34) && (player.getComponent(PlayerComponent.class).getHp() < 40)){
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 34) && (player.getComponent(PlayerComponent.class).getHp() < 40)) {
             heart4 = texture("heart_half_full.png", 44, 40);
             addUINode(heart4, 156, 15);
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
-        } else if ((player.getComponent(PlayerComponent.class).getHp() > 39) && (player.getComponent(PlayerComponent.class).getHp() < 45)){
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 39) && (player.getComponent(PlayerComponent.class).getHp() < 45)) {
             heart4 = texture("heart.png", 44, 40);
             addUINode(heart4, 156, 15);
-            if (heart5 != null){
+            if (heart5 != null) {
                 heart5 = texture("heart_empty.png", 44, 40);
                 addUINode(heart5, 203, 15);
             }
-        }
-        else if ((player.getComponent(PlayerComponent.class).getHp() > 44) && (player.getComponent(PlayerComponent.class).getHp() < 50)){
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 44) && (player.getComponent(PlayerComponent.class).getHp() < 50)) {
             heart5 = texture("heart_half_full.png", 44, 40);
             addUINode(heart5, 203, 15);
-        }
-        else if ((player.getComponent(PlayerComponent.class).getHp() > 49)){
+        } else if ((player.getComponent(PlayerComponent.class).getHp() > 49)) {
             heart5 = texture("heart.png", 44, 40);
             addUINode(heart5, 203, 15);
         }
@@ -1264,12 +1263,20 @@ public class DungeonCrawlerApp extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity btn) {
                 Entity keyEntity = btn.getObject("keyEntity");
-
                 if (!keyEntity.isActive()) {
                     getGameWorld().addEntity(keyEntity);
                 }
-
                 keyEntity.getViewComponent().opacityProperty().setValue(1);
+                chestCollision = true;
+            }
+
+            @Override
+            protected void onCollisionEnd(Entity player, Entity btn) {
+                if (chestCollision) {
+                    Entity keyEntity = btn.getObject("keyEntity");
+                    keyEntity.getViewComponent().opacityProperty().setValue(0);
+                    chestCollision = false;
+                }
             }
         });
 
@@ -1308,20 +1315,44 @@ public class DungeonCrawlerApp extends GameApplication {
         return levels.get(levelNumber - 1); //right now we don't have level 1
     }
 
-    private void lootChest(){
+    private void lootChest() {
         getGameWorld().getEntitiesByType(DungeonCrawlerType.CHEST)
                 .stream()
                 .filter(btn -> player.isColliding(btn))
                 .forEach(btn -> {
-                    getDisplay().showMessageBox("You find " + 10 + " gold.", () -> {
-                        inc("gold", +10);
+//                    inc("gold", +10);
+//                    play("coins.wav");
+//                    Entity keyEntity = btn.getObject("keyEntity");
+//                    keyEntity.getViewComponent().opacityProperty().setValue(0);
+//                    btn.removeFromWorld();
+//                    chestCollision = false;
+
+                    getDisplay().showMessageBox("You find " + getCurrentLevel().getChestLoot().get(0) + " gold.", () -> {
+                        inc("gold", +getCurrentLevel().getChestLoot().get(0));
                         play("coins.wav");
+                        Entity keyEntity = btn.getObject("keyEntity");
+                        keyEntity.getViewComponent().opacityProperty().setValue(0);
                         btn.removeFromWorld();
-                        if (getCurrentLevel().equals(levels.get(0))){
-                            getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
-                        }
+                        chestCollision = false;
+//                        if (getCurrentLevel().equals(levels.get(0))){
+//                            getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
+//                        }
                     });
                 });
+
+//        getCurrentLevel().getChests()
+//                .stream()
+//                .filter(btn -> player.isColliding(btn))
+//                .forEach(btn -> {
+//                    getDisplay().showMessageBox("You find " + getCurrentLevel().getChestLoot().get(0) + " gold.", () -> {
+//                        inc("gold", +getCurrentLevel().getChestLoot().get(0));
+//                        play("coins.wav");
+//                        btn.removeFromWorld();
+//                        if (getCurrentLevel().equals(levels.get(0))){
+//                            getGameWorld().getEntitiesByType(DungeonCrawlerType.KEYCODE).forEach(Entity::removeFromWorld);
+//                        }
+//                    });
+//                });
     }
 
     private void showStairs() {
