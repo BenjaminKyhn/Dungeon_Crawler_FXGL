@@ -45,20 +45,32 @@ public class WeaponComponent extends Component {
     }
 
     public void faceLeft(){
-        getEntity().setScaleX(-1); //Changes the direction of the sprite
-        entity.translateX(-114);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            getEntity().setScaleX(-1);
+            entity.translateX(-132);
+        }
+        else {
+            getEntity().setScaleX(-1); //Changes the direction of the sprite
+            entity.translateX(-114);
+        }
     }
 
     public void faceRight(){
-        getEntity().setScaleX(1); //Changes the direction of the sprite
-        entity.translateX(114);
+        if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
+            getEntity().setScaleX(1);
+            entity.translateX(132);
+        }
+        else {
+            getEntity().setScaleX(1); //Changes the direction of the sprite
+            entity.translateX(114);
+        }
     }
 
     public void attackRight(){
         if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
             entity.rotateBy(90);
             entity.translateX(20);
-            entity.translateY(40);
+            entity.translateY(50);
         }
         else {
             entity.rotateBy(45);
@@ -70,7 +82,7 @@ public class WeaponComponent extends Component {
         if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
             entity.rotateBy(-90);
             entity.translateX(-20);
-            entity.translateY(-40);
+            entity.translateY(-50);
         }
         else {
             entity.rotateBy(-45);
@@ -81,8 +93,8 @@ public class WeaponComponent extends Component {
     public void attackLeft(){
         if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
             entity.rotateBy(-90);
-            entity.translateX(20);
-            entity.translateY(40);
+            entity.translateX(-20);
+            entity.translateY(50);
         }
         else {
             entity.rotateBy(-45);
@@ -93,8 +105,8 @@ public class WeaponComponent extends Component {
     public void undoAttackLeft(){
         if (FXGL.<DungeonCrawlerApp>getAppCast().getWeapons().contains("greatsword")){
             entity.rotateBy(90);
-            entity.translateX(-20);
-            entity.translateY(-40);
+            entity.translateX(20);
+            entity.translateY(-50);
         }
         else {
             entity.rotateBy(45);
