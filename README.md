@@ -7,8 +7,8 @@ SDK 11
 Classic dungeon crawler game where you have to defeat enemies to advance to the next level. You can collect gold coins from your defeated enemies and upgrade your weapon and health by using the shop. The game features 3 different levels with a boss encounter at the end.
 
 ## CONTROLS:
-W: up
-A: left
+* W: up
+* A: left
 S: down
 D: right
 E: use
