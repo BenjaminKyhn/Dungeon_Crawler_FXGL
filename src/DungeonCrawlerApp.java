@@ -45,10 +45,10 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean shopActive = false;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
-    private int levelNumber = 3;
-    private int greatswordPrice = 200;
-    private int healthPrice = 150;
-    private int startingGold = 400;
+    private int levelNumber = 1;
+    private int greatswordPrice = 50;
+    private int healthPrice = 40;
+    private int startingGold = 0;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
@@ -60,12 +60,12 @@ public class DungeonCrawlerApp extends GameApplication {
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setWidth(1280);
         gameSettings.setHeight(720);
-        gameSettings.setWidth(15 * 64);
-        gameSettings.setHeight(10 * 64);
+//        gameSettings.setWidth(15 * 64);
+//        gameSettings.setHeight(10 * 64);
         gameSettings.setTitle("Dungeon Crawler");
         gameSettings.setVersion("0.1");
-//        gameSettings.setFullScreenAllowed(true);
-//        gameSettings.setFullScreenFromStart(true);
+        gameSettings.setFullScreenAllowed(true);
+        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
 //        gameSettings.setDeveloperMenuEnabled(true);
     }
@@ -292,7 +292,7 @@ public class DungeonCrawlerApp extends GameApplication {
                             if (!healing) {
                                 healing = true;
                                 player.getComponent(PlayerComponent.class).restoreHP();
-                                play("SP_HEAL.wav");
+                                play("sp_heal.wav");
                                 runOnce(() -> {
                                     healing = false;
                                 }, Duration.seconds(1));
@@ -431,10 +431,10 @@ public class DungeonCrawlerApp extends GameApplication {
                         int randomSwingSound = (int) (Math.random() * 2);
                         switch (randomSwingSound) {
                             case 0:
-                                play("SWIPE1.wav");
+                                play("swipe1.wav");
                                 break;
                             case 1:
-                                play("SWIPE2.wav");
+                                play("swipe2.wav");
                                 break;
                         }
                     } else {

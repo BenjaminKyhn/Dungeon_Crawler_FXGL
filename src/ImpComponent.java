@@ -197,9 +197,9 @@ public class ImpComponent extends Component{
         if (hp.getValue() > 0){
             int randomHitSound = (int)(Math.random()*3);
             switch (randomHitSound){
-                case 0: play("IMPHIT1.wav"); break;
-                case 1: play("IMPHIT2.wav"); break;
-                case 2: play("IMPHIT3.wav"); break;
+                case 0: play("imphit1.wav"); break;
+                case 1: play("imphit2.wav"); break;
+                case 2: play("imphit3.wav"); break;
             }
 
             double zeroOpacity = 0.1;
@@ -227,7 +227,7 @@ public class ImpComponent extends Component{
         if (hp.getValue() <= 0) {
             setDead(true);
             entity.removeFromWorld();
-            play("IMPDIE2.wav");
+            play("impdie2.wav");
         }
     }
 

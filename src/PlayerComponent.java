@@ -82,13 +82,13 @@ public class PlayerComponent extends Component {
             int randomHitSound = (int) (Math.random() * 3);
             switch (randomHitSound) {
                 case 0:
-                    play("MAN2HIT1.wav");
+                    play("man2hit1.wav");
                     break;
                 case 1:
-                    play("MAN2HIT2.wav");
+                    play("man2hit2.wav");
                     break;
                 case 2:
-                    play("MAN2HIT3.wav");
+                    play("man2hit3.wav");
                     break;
             }
 
