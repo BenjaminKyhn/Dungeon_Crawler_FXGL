@@ -48,7 +48,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private int levelNumber = 1;
     private int greatswordPrice = 50;
     private int healthPrice = 40;
-    private int startingGold = 0;
+    private int startingGold = 400;
     private Texture heart1;
     private Texture heart2;
     private Texture heart3;
@@ -64,8 +64,8 @@ public class DungeonCrawlerApp extends GameApplication {
 //        gameSettings.setHeight(10 * 64);
         gameSettings.setTitle("Dungeon Crawler");
         gameSettings.setVersion("0.1");
-        gameSettings.setFullScreenAllowed(true);
-        gameSettings.setFullScreenFromStart(true);
+//        gameSettings.setFullScreenAllowed(true);
+//        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
 //        gameSettings.setDeveloperMenuEnabled(true);
     }
@@ -1397,12 +1397,26 @@ public class DungeonCrawlerApp extends GameApplication {
                 DungeonCrawlerType.ENEMY,
                 DungeonCrawlerType.STAIRS,
                 DungeonCrawlerType.DOOR,
+                DungeonCrawlerType.HOLE,
+                DungeonCrawlerType.SPIKES,
+                DungeonCrawlerType.RIGHTTRAPWALL,
                 DungeonCrawlerType.RIGHTWALL,
                 DungeonCrawlerType.LEFTWALL,
                 DungeonCrawlerType.TOPWALL,
                 DungeonCrawlerType.BOTTOMWALL,
+                DungeonCrawlerType.RIGHTVOID,
+                DungeonCrawlerType.LEFTVOID,
+                DungeonCrawlerType.TOPVOID,
+                DungeonCrawlerType.BOTTOMWALL,
+                DungeonCrawlerType.REDSWITCH,
+                DungeonCrawlerType.BLUESWITCH,
                 DungeonCrawlerType.HPFOUNTAIN,
-                DungeonCrawlerType.MPFOUNTAIN)
+                DungeonCrawlerType.MPFOUNTAIN,
+                DungeonCrawlerType.SHOP,
+                DungeonCrawlerType.COIN,
+                DungeonCrawlerType.BUTTON,
+                DungeonCrawlerType.TRAP,
+                DungeonCrawlerType.CHEST)
                 .forEach(Entity::removeFromWorld);
 
         doorOpened = false;
@@ -1414,8 +1428,18 @@ public class DungeonCrawlerApp extends GameApplication {
         levelNumber += 1;
         player.setZ(1);
         weapon.setZ(1);
+
         player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
         weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+
+//        player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+//        if (weapons.contains("greatsword")) {
+//            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+//        } else {
+//            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+//        }
+
+
         FXGL.setLevelFromMap(getCurrentLevel().getLevelName());
         getCurrentLevel().spawnEnemies();
     }
