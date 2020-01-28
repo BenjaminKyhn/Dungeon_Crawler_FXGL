@@ -45,7 +45,7 @@ public class DungeonCrawlerApp extends GameApplication {
     private boolean shopActive = false;
     private ArrayList<String> weapons = new ArrayList<>();
     private List<DungeonLevel> levels = new ArrayList<>();
-    private int levelNumber = 1;
+    private int levelNumber = 3;
     private int greatswordPrice = 200;
     private int healthPrice = 150;
     private int startingGold = 400;
@@ -67,7 +67,7 @@ public class DungeonCrawlerApp extends GameApplication {
 //        gameSettings.setFullScreenAllowed(true);
 //        gameSettings.setFullScreenFromStart(true);
 //        gameSettings.setMenuEnabled(true);
-        gameSettings.setDeveloperMenuEnabled(true);
+//        gameSettings.setDeveloperMenuEnabled(true);
     }
 
     @Override
@@ -97,9 +97,9 @@ public class DungeonCrawlerApp extends GameApplication {
 
         /** Spawn the player */
         player = getGameWorld().spawn("player", getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-//        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
-        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
-        weapons.add("greatsword");
+        weapon = getGameWorld().spawn("sword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+//        weapon = getGameWorld().spawn("greatsword", getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY()-25);
+//        weapons.add("greatsword");
         player.setZ(1);
         weapon.setZ(1);
 
@@ -398,8 +398,8 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (shopActive && (getInput().getMouseXUI() > getAppWidth() - shopUI.getWidth()) && (getInput().getMouseXUI() < getAppWidth() - (shopUI.getWidth() / 2)) && (getInput().getMouseYUI() < shopUI.getHeight())) {
                     if (!weapons.contains("greatsword") && getGameState().getInt("gold") >= greatswordPrice) {
                         weapons.add("greatsword");
-//                        weapon.removeFromWorld();
-//                        weapon = spawn("greatsword", player.getX()+48, player.getY()); //TODO fix the spawn location
+                        weapon.removeFromWorld();
+                        weapon = spawn("greatsword", player.getX() + 48, player.getY() - 25);
                         inc("gold", -greatswordPrice);
                         play("coins.wav");
                     } else {
@@ -427,18 +427,31 @@ public class DungeonCrawlerApp extends GameApplication {
 
                 if (!freezeInput) {
                     /** Switch for handling random swing sounds */
-                    int randomSwingSound = (int) (Math.random() * 3);
-                    switch (randomSwingSound) {
-                        case 0:
-                            play("swing.wav");
-                            break;
-                        case 1:
-                            play("swing2.wav");
-                            break;
-                        case 2:
-                            play("swing3.wav");
-                            break;
+                    if (weapons.contains("greatsword")) {
+                        int randomSwingSound = (int) (Math.random() * 2);
+                        switch (randomSwingSound) {
+                            case 0:
+                                play("SWIPE1.wav");
+                                break;
+                            case 1:
+                                play("SWIPE2.wav");
+                                break;
+                        }
+                    } else {
+                        int randomSwingSound = (int) (Math.random() * 3);
+                        switch (randomSwingSound) {
+                            case 0:
+                                play("swing.wav");
+                                break;
+                            case 1:
+                                play("swing2.wav");
+                                break;
+                            case 2:
+                                play("swing3.wav");
+                                break;
+                        }
                     }
+
 
                     /** Directional attacking */
                     if (weaponFacingRight && !isAttacking) {
@@ -1149,8 +1162,12 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity stairs) {
                 if (getCurrentLevel().equals(levels.get(2))) {
                     getDisplay().showMessageBox("You've completed the game. You can continue to play around in Level 03 if you'd like.", () -> {
-                        player.setPosition(128, 3008);
-                        weapon.setPosition(128 + 48, 3008);
+                        player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
+                        if (weapons.contains("greatsword")) {
+                            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+                        } else {
+                            weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+                        }
                         if (!weaponFacingRight) {
                             player.setScaleX(1);
                             weapon.setScaleX(1);
@@ -1196,8 +1213,12 @@ public class DungeonCrawlerApp extends GameApplication {
             protected void onCollision(Entity player, Entity hole) {
                 freezeInput = true;
                 getGameScene().getViewport().fade(() -> {
+                    if (weapons.contains("greatsword")) {
+                        weapon.setPosition(2560 + 48, 3008 - 25);
+                    } else {
+                        weapon.setPosition(2560 + 48, 3008);
+                    }
                     player.setPosition(2560, 3008);
-                    weapon.setPosition(2560 + 48, 3008);
                     if (!weaponFacingRight) {
                         player.setScaleX(1);
                         weaponFacingRight = true;
@@ -1303,7 +1324,11 @@ public class DungeonCrawlerApp extends GameApplication {
     private void respawn() {
         if (player != null) {
             player.setPosition(getCurrentLevel().getPlayerX(), getCurrentLevel().getPlayerY());
-            weapon.setPosition(getCurrentLevel().getPlayerX() + 48, getCurrentLevel().getPlayerY());
+            if (weapons.contains("greatsword")) {
+                weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY()-25);
+            } else {
+                weapon.setPosition(getCurrentLevel().getPlayerX()+48, getCurrentLevel().getPlayerY());
+            }
             player.getComponent(PlayerComponent.class).restoreHP();
         }
         if (!weaponFacingRight) {
