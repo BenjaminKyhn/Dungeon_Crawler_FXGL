@@ -1269,7 +1269,7 @@ public class DungeonCrawlerApp extends GameApplication {
                 if (!getCurrentLevel().equals(levels.get(2))) {
                     freezeInput = true;
                     getGameScene().getViewport().fade(() -> {
-//                        cleanupLevel();
+                        cleanupLevel();
                         nextLevel();
                     });
                 }
@@ -1556,7 +1556,7 @@ public class DungeonCrawlerApp extends GameApplication {
 
     private void cleanupLevel() {
         getGameWorld().getEntitiesByType(
-//                DungeonCrawlerType.ENEMY,
+                DungeonCrawlerType.ENEMY,
                 DungeonCrawlerType.STAIRS,
                 DungeonCrawlerType.DOOR,
                 DungeonCrawlerType.HOLE,
