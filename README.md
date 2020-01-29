@@ -12,6 +12,9 @@ SDK 11
 * E: use
 * Left mousebutton: attack/buy item from the shop
 
+## JAR
+Download the JAR file at https://mega.nz/#!UMxiESoA!P6zZM66FUrZPUM7jtUfn581B73hb09loxFseZcgcoTA
+
 ## SOURCES
 Most of the sound assets are from Dungeon Keeper (1996)
 
