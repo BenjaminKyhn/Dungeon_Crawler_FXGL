@@ -20,3 +20,5 @@ Download the JAR file at https://mega.nz/#!AJwAWKwQ!jgSFNqsOPwDHsLGOwYu0NMDc1rFC
 Most of the sound assets are from Dungeon Keeper (1996)
 
 Sprites can be found here: https://0x72.itch.io/dungeontileset-ii
+
+![alt text](https://i.imgur.com/sn8b6NR.jpg "Logo Title Text 1")
